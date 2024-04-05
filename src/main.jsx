@@ -13,6 +13,8 @@ import CategoryPage from './Components/Home/CategoryPage';
 import SignIn from './Configs/SignIn';
 import AuthProvider from './Configs/AuthContext';
 import ShopProfile from './Components/Shop/ShopProfile';
+import ProductDetails from './Components/Home/ProductDetails';
+import FlashSale from './Pages/FlashSale/FlashSale';
 
 
 const router = createBrowserRouter([
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: '/shopDetail/:shopName',
         element: <ShopProfile></ShopProfile>
+      },
+      {
+        path: '/productDetails/:id',
+        element: <ProductDetails></ProductDetails>
+      },
+      {
+        path: '/flashSale',
+        element: <FlashSale></FlashSale>
       }
     ]
   },

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
 
 
 
@@ -35,61 +36,39 @@ const Shop = () => {
                 <h1 className="text-2xl font-semibold text-gray-800 mt-4">
                    {pro.shopName}
                 </h1>
-                <p className="text-xl text-gray-400 mt-2 leading-relaxed">
-                    Located in Rajshahi Division, Bogra is one of the oldest and most fascinating towns in Bangladesh
+                <p className="text-xl text-gray-700 mt-2 leading-relaxed">
+                    One of the biggest online shopping Platform in Bangladesh
                 </p>
             </div>
             <div className="bg-blue-50 p-5">
                 <div className="sm:flex sm:justify-between">
                     <div>
                         <div className="text-lg text-gray-700">
-                            <span className="text-gray-900 font-bold">196 km</span> from Dhaka
+                            <span className="text-gray-900 font-bold">Varified</span> from BazarBD
                         </div>
                         <div className="flex items-center">
                             <div className="flex">
-                                <svg className="w-4 h-4 mx-px fill-current text-green-600"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-                                    <path
-                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                    </path>
-                                </svg>
-                                <svg className="w-4 h-4 mx-px fill-current text-green-600"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-                                    <path
-                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                    </path>
-                                </svg>
-                                <svg className="w-4 h-4 mx-px fill-current text-green-600"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-                                    <path
-                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                    </path>
-                                </svg>
-                                <svg className="w-4 h-4 mx-px fill-current text-green-600"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-                                    <path
-                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                    </path>
-                                </svg>
-                                <svg className="w-4 h-4 mx-px fill-current text-green-600"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
-                                    <path
-                                        d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                    </path>
-                                </svg>
+                            <FaStar className="text-orange-500"/>
+
+                            <FaStar className="text-orange-500"/>
+
+                            <FaStar className="text-orange-500"/>
+
+                            <FaStar className="text-orange-500"/>
+
+                            <FaStar className="text-orange-500"/>
+
                             </div>
                             <div className="text-gray-600 ml-2 text-sm md:text-base mt-1">
-                                16 reviews
+                                <p>16 reviews</p>
                             </div>
                         </div>
                     </div>
-                    <button className="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-purple-700 hover:bg-purple-600 font-bold text-white md:text-lg rounded-lg shadow-md">
-              Book Ticket
-            </button>
+                    <button className="relative h-12 w-40 overflow-hidden border border-orange-600 text-orange-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-orange-600 before:duration-300 before:ease-out hover:text-white hover:shadow-orange-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80">
+      <span className="relative z-10">Visit</span>
+    </button>
                 </div>
-                <div className="mt-3 text-gray-600 text-sm md:text-sm">
-                    *Places to visit: Mahasthangarh, Vasu Bihar &amp; Momo Inn
-                </div>
+                
             </div>
         </div>
     </article>

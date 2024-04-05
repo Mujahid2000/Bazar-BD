@@ -1,0 +1,35 @@
+[
+    {
+      "shopId": 1,
+      "category": "Home Appliance",
+      "category_Picture": "https://i.ibb.co/hRV4FJf/home.jpg",
+      "color": "#3498db",
+      "shopName": "Tech Solutions",
+      "productName": "Smart Refrigerator",
+      "shopPicture": "https://i.ibb.co/cgFd8FP/h1.jpg",
+      "price": 799.99,
+      "rating": 2.5,
+      "description": "A smart refrigerator with advanced features for modern homes.",
+      "product_image": "https://i.ibb.co/3zycg0n/refrigerator.jpg",
+      "flashSale": false,
+      "discountPrice": 640,
+      "discountPercentage": "20%"
+    },
+    {
+      "shopId": 1,
+      "category": "Home Appliance",
+      "category_Picture": "https://i.ibb.co/hRV4FJf/home.jpg",
+      "color": "#3498db",
+      "shopName": "Tech Solutions",
+      "productName": "Robot Vacuum Cleaner",
+      "shopPicture": "https://i.ibb.co/cgFd8FP/h1.jpg",
+      "price": 349.99,
+      "rating": 2.7,
+      "description": "Effortlessly keep your home clean with our smart vacuum cleaner.",
+      "product_image": "https://i.ibb.co/fxTg6kM/veccum-cleaner.jpg",
+      "flashSale": true,
+      "discountPrice": 276.49,
+      "discountPercentage": "21%"
+    }
+  ]
+  
