@@ -91,6 +91,7 @@ const Navbar = () => {
     </p>
   </button>
   
+  <Link to={'/dashboard'}>
   <button
     tabIndex="-1"
     role="menuitem"
@@ -102,6 +103,7 @@ const Navbar = () => {
       Dashboard
     </p>
   </button>
+    </Link>
   
   <hr className="my-2 border-blue-gray-50"  role="menuitem" />
   <button onClick={handleLogOut}

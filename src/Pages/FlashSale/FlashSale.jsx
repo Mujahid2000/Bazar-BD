@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useLocation  } from 'react-router-dom';
+import { Toaster, toast } from "sonner";
+import { AuthContext } from "../../Configs/AuthContext";
 
 const FlashSale = () => {
         const [timerDays, setTimerDays] = useState('00');
@@ -9,6 +13,11 @@ const FlashSale = () => {
         const [timerMinutes, setTimerMinutes] = useState('00');
         const [timerSecond, setTimerSecond] = useState('00');
         const [products, setProducts] = useState([]);
+        const location = useLocation();
+        const { user } = useContext(AuthContext);
+        const email = user?.email;
+        console.log(email);
+       
         
 
         let interval = useRef();
@@ -51,6 +60,14 @@ const FlashSale = () => {
                 .then(res => setProducts(res.data))
                 .catch(error => console.error(error));
         }, []);
+
+
+        const handleAddCart = (data) => {
+          axios
+            .post(`http://localhost:5000/addCart`, { data, email })
+            .then((response) => console.log(response));
+          toast.success("Item added to cart!").catch(console.log("error"));
+        };
 
     return (
         <div className="mt-16">
@@ -160,48 +177,44 @@ const FlashSale = () => {
             </div>
             
             <div className="mt-5 mx-w-[1440px] mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
-            {
-                products.map(myData => (
-                    <div key={myData._id} className="rounded w-80 overflow-hidden shadow-lg">
-            <div className="relative">
-        <img className="w-full h-72"
-            src={myData.product_image}
-            alt="Sunset in the mountains"/>
-        <div
-            className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
-        </div>
-   
-        <div
-            className="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+  {products.map((myData) => (
+    <div key={myData._id} className="rounded w-80 overflow-hidden shadow-lg">
+      <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>
+        <div className="relative">
+          <img className="w-full h-72" src={myData.product_image} alt="Sunset in the mountains" />
+          <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
+          <div className="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
             Photos
-        </div>
-   
-        <div
-            className="text-sm absolute top-0 right-0 bg-indigo-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          </div>
+          <div className="text-sm absolute top-0 right-0 bg-indigo-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
             <span className="font-bold">{myData.discountPercentage}</span>
-            
+          </div>
         </div>
-    
-</div>
-<div className="px-6 py-4">
-
-    <h3 href=""
-        className="font-semibold text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out">{myData.productName}</h3>
-    <p className="text-gray-500 text-sm">
-        {myData.description}
-    </p>
-</div>
-<div className="px-6 py-4 flex flex-row items-center">
-    <span href="" className="py-1 text-sm font-regular text-gray-900 mr-1 flex flex-row items-center">
-    
-
-       <button className="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 py-2 rounded-md px-3 text-white">Add to cart</button>
+        <div className="px-6 py-4">
+          <h3 className="font-semibold text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out">{myData.productName}</h3>
+          <p className="text-gray-500 text-sm">{myData.description}</p>
+        </div>
+      </Link>
+      <div className="px-6 py-4 flex flex-row items-center">
+        <span className="py-1 text-sm font-regular text-gray-900 mr-1 flex flex-row items-center">
+          <button onClick={() => {
+                handleAddCart(myData); // Call handleAddCart after successful toast display
+              }} className="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 py-2 rounded-md px-3 text-white">Add to cart</button>
         </span>
+      </div>
+    </div>
+  ))}
 </div>
-            </div>
-                ))
-            }
-            </div>
+
+<Toaster
+        position="top-right"
+        toastOptions={{
+          classNames: {
+            success: "text-green-400",
+          },
+        }}
+      />
+
         </div>
     );
 };

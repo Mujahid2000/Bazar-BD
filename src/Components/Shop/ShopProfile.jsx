@@ -1,16 +1,19 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../../Pages/Result/Rating";
 import { MdOutlineRateReview } from "react-icons/md";
 import { Toaster, toast } from "sonner";
+import { AuthContext } from "../../Configs/AuthContext";
 
 const ShopProfile = ({ shop }) => {
   const { shopName } = useParams();
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState([]);
   const [name, setName] = useState([]);
+  const { user } = useContext(AuthContext);
+  const email = user?.email;
 
   const [userData] = useState({
     totalOrders: 52,
@@ -55,7 +58,7 @@ const ShopProfile = ({ shop }) => {
 
   const handleAddCart = (data) => {
     axios
-      .post(`http://localhost:5000/addCart`, { data })
+      .post(`http://localhost:5000/addCart`, { data, email })
       .then((response) => console.log(response));
     toast.success("Item added to cart!").catch(console.log("error"));
   };

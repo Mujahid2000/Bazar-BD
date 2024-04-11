@@ -1,13 +1,21 @@
 import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useLocation  } from 'react-router-dom';
 
 
 const ProductDetails = () => {
     const { id } = useParams();
-    
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const fromFlashSale = searchParams.get('fromFlashSale');
+    // console.log('From Flash Sale:', fromFlashSale);
     const [products, setProducts] = useState({}); 
     const [allProduct, setAllProducts] = useState()
+    const [discount, setDiscount] = useState({})
+
+    
     
     
     useEffect(() => {
@@ -30,45 +38,60 @@ const ProductDetails = () => {
     }, []);
 
 
+
+    useEffect(() =>{
+        // Use a separate variable to store the id obtained from useParams()
+        const productId = id;
+        axios.get(`http://localhost:5000/productDiscount/${productId}`)
+            .then((response) => setDiscount(response.data))
+            .catch((error) => console.error(error));
+    }, [id, ]);
+
+    const isFromFlashSalePage = fromFlashSale === '/flashSale';
+    
+    
+
+
     return (
         <div className="max-w-[1440px] mx-auto">
-            {Object.keys(products).length > 0 && (
-            <div className="min-w-screen min-h-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
-            <div className="min-w-screen min-h-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
-    <div className="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
-        <div className="md:flex items-center -mx-10">
-            <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
-                <div className="relative">
-                    <img src={products.product_image} className="w-full relative z-10" alt="Waterproof Jacket"/>
-                    <div className="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
-                </div>
-            </div>
-            <div className="w-full md:w-1/2 px-10">
-                <div className="mb-10">
-                    <h1 className="font-bold uppercase text-2xl mb-5">{products.productName}</h1>
-                    <p className="text-base">{products.description} <a href="#" className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i className="mdi mdi-arrow-right"></i></a></p>
-                </div>
-                <div>
-                    <div className="inline-block align-bottom mr-5">
-                        <span className="text-2xl leading-none align-baseline">$</span>
-                        <span className="font-bold text-5xl leading-none align-baseline">{products.price.toString().slice(0,3)}</span>
-                        <span className="text-2xl leading-none align-baseline">{products.price.toString().slice(3,6)}</span>
+            {(Object.keys(products || discount).length > 0) && (
+    <div className="min-w-screen min-h-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
+        <div className="min-w-screen min-h-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
+            <div className="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
+                <div className="md:flex items-center -mx-10">
+                    <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
+                        <div className="relative">
+                            <img src={isFromFlashSalePage ? discount.product_image : products.product_image} className="w-full relative z-10" alt={isFromFlashSalePage ? discount.productName : products.productName} />
+                            <div className="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
+                        </div>
                     </div>
-                    <div className="inline-block sm:mt-3 align-bottom">
-                    <div className="flex items-center mt-6">
-                        <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700">Order Now</button>
-                        <button className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
-                            <svg className="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        </button>
-                    </div>
+                    <div className="w-full md:w-1/2 px-10">
+                        <div className="mb-10">
+                            <h1 className="font-bold uppercase text-2xl mb-5">{isFromFlashSalePage ? discount.productName : products.productName}</h1>
+                            <p className="text-base">{isFromFlashSalePage ? discount.description : products.description} <a href="#" className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i className="mdi mdi-arrow-right"></i></a></p>
+                        </div>
+                        <div>
+                            <div className="inline-block align-bottom mr-5">
+                                <span className="text-2xl leading-none align-baseline">$</span>
+                                <span className="font-bold text-5xl leading-none align-baseline">{isFromFlashSalePage ? discount?.price?.toString().slice(0, 3) : products?.price?.toString().slice(0, 3)}</span>
+                                <span className="text-2xl leading-none align-baseline">{isFromFlashSalePage ? discount?.price?.toString().slice(3, 6) : products?.price?.toString().slice(3, 6)}</span>
+                            </div>
+                            <div className="inline-block sm:mt-3 align-bottom">
+                                <div className="flex items-center mt-6">
+                                    <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700">Order Now</button>
+                                    <button className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
+                                        <svg className="h-5 w-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
-            </div>
-        )}
+)}
+
 
          <div className=" px-3 mb-9">
         <h3 className="text-gray-600 text-2xl font-medium mb-2">More Products</h3>
