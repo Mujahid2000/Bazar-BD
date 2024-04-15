@@ -6,10 +6,10 @@ import { Link, useParams } from "react-router-dom";
 const Payment = () => {
     const { payment } = useParams();
     const [cart, setCart] = useState(null);
-    
+    console.log(cart);
     const {user} = useContext(AuthContext);
     const email = user?.email;
-    const name = user?.disPlayName;
+    const name = user?.displayName;
     const currentDate = new Date();
 
 
@@ -31,13 +31,15 @@ const Payment = () => {
     },[email])
 
     const handlePayment = async (payment, email, currentDate, name, cart) =>{
+        console.log(payment, email, currentDate, name, cart);
         try{
         axios.post(`http://localhost:5000/payment`, {payment, email, currentDate, name, cart})
         .then((response) => {console.log(response.data.url)
     window.location.replace(response.data.url)});
     } catch(error){
         console.error('the error', error);
-    }}
+    }
+}
 
 
 

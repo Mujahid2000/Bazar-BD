@@ -1,13 +1,15 @@
 import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
+import { Toaster, toast } from "sonner";
+import axios from "axios";
 
 
 const SignIn = () => {
-    const { googleLogin, user } = useContext(AuthContext);
-   
-    
+    const { googleLogin, user , signIn, setLoading} = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
 const handleLogin = (e) => {
     e.preventDefault();
@@ -15,23 +17,31 @@ const handleLogin = (e) => {
     const email = form.get('email');
     const password = form.get('password');
     console.log({ email, password });
+    signIn(email, password)
+        .then(result => {
+            const user = result.user;
+            
+            console.log(user);
+            toast.success('User has been created')
+            setLoading(false)
+            navigate(from , {replace: true});
+        })
 };
 
 const handleGoogleLogin = () => {
-    googleLogin()
-        .then((result) => {
-            // Assuming googleLogin returns some result
-            console.log(result);
-            return result; // Return the result to the next then block
-        })
-        .then((res) => {
-            // Assuming res contains the data you need
-            console.log(res.data);
-            navigate('/');
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    googleLogin().then((result) => {
+    console.log(result.user);
+    const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+        admin: false
+    };
+    axios.post("http://localhost:5000/user", userInfo)
+    .then((res) => {
+        console.log(res.data);
+        navigate('/')
+    });
+    });
 };
 
 
@@ -40,6 +50,8 @@ useEffect(() => {
         navigate(location.state || '/');
     }
 });
+
+
 
     return (
        
@@ -119,11 +131,11 @@ useEffect(() => {
                         </button>
                         <p className="mt-6 text-xs text-gray-600 text-center">
                             I agree to abide by Cartesian Kinetics
-                            <a href="#" className="border-b border-gray-500 border-dotted">
+                            <a href="" className="border-b border-gray-500 border-dotted">
                                 Terms of Service
                             </a>
                             and its
-                            <a href="#" className="border-b border-gray-500 border-dotted">
+                            <a href="" className="border-b border-gray-500 border-dotted">
                                 Privacy Policy
                             </a>
                         </p>
@@ -139,6 +151,7 @@ useEffect(() => {
 </div>
 
     </div>
+    <Toaster position="bottom-right" />
 </div>
     );
 };

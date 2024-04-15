@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
+import axios from "axios";
+import { Toaster, toast } from "sonner";
 
 
 const SignUp = () => {
+    const { createUser, user, handleUpdateProfile, setLoading } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() =>{
+        if(user)
+        location.state ? location.state : '/'
+    },[user, location.state])
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -9,23 +21,52 @@ const SignUp = () => {
         const name = form.get('name');
         const email = form.get('email');
         const password = form.get('password');
-        console.log({name, email, password});
+        const PhotoURL = form.get('PhotoURL');
+        console.log({name, email, password, PhotoURL});
+        
+        createUser(email, password)
+        .then(() =>{
+            handleUpdateProfile(name, PhotoURL)
+            .then(() =>{
+                const userInfo ={
+                    name: name,
+                    email: email,
+                    password: password,
+                    admin: false
+                }
+                axios.post('http://localhost:5000/user', userInfo)
+                .then(res => {
+                    if(res.data.insertedId){
+                        toast.success('User has been created')
+                        setLoading(false)
+                    }
+                    navigate('/')
+                })
+            })
+        }).catch(error => {
+            setLoading(false)
+            console.error(error);
+            if(error.code === 'auth/email-already-in-use'){
+                toast.error('Email has already used')
+            }
+        })
+    
     };
     
 
 	return (
-<div className="min-h-[90vh] text-gray-900 flex justify-center">
+<div className="min-h-[90vh] text-gray-900 flex justify-center items-center">
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
         <div className="lg:w-1/2 xl:w-5/12 p-4 sm:p-12">
             <div>
                 <img src="https://i.ibb.co/y4gyTw0/Untitled-1.jpg"
-                    className="w-32 mx-auto" />
+                    className="w-32  mx-auto" />
             </div>
             <div className="mt-2 flex flex-col items-center">
                 <h1 className="text-2xl xl:text-3xl font-extrabold">
                     Sign up
                 </h1>
-                <div className="w-full flex-1 mt-5">
+                <div className="w-full mt-4 flex-1 ">
                     <div className="flex flex-col items-center">
                         <button
                             className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
@@ -81,6 +122,9 @@ const SignUp = () => {
                         <input
                             className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                             type="password" placeholder="Password" name="password"/>
+                        <input
+                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                            type="text" placeholder="Photo URL" name="PhotoURL"/>
                         <button
                             className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                             <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
@@ -111,7 +155,7 @@ const SignUp = () => {
         <div className="flex-1 bg-indigo-100 text-center hidden lg:flex"
 			style={{ backgroundImage: "url('https://i.ibb.co/dbVTGkm/background.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "center" }}>
 		</div>
-
+        <Toaster position="bottom-right" />
     </div>
 </div>
 		

@@ -56,7 +56,7 @@ const Cart = () => {
 
     return (
     
-        <div className="max-w-7xl xl:mx-96 2xl:mx-96">
+        <div className="max-w-7xl ml-16 xl:mx-96 2xl:mx-96">
             <section className="py-24 relative">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
 
@@ -108,7 +108,7 @@ const Cart = () => {
                     </div>
                     <h6
                         className="text-indigo-600 font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
-                        ${myData.data.price}</h6>
+                        ${myData.data.price?.toFixed(2)}</h6>
                 </div>
             </div>
             )))
@@ -132,17 +132,19 @@ const Cart = () => {
                     className="rounded-full py-4 w-full max-w-[280px]  flex items-center bg-indigo-50 justify-center transition-all duration-500 hover:bg-indigo-100">
                     <span className="px-2 font-semibold text-lg leading-8 text-indigo-600">Add Coupon Code</span>
                     <IoIosArrowForward className="text-indigo-600"/>
-
                 </button>
-                <Link to={`/dashboard/payment/${payment}`}>
-                <button
+                {
+                    payment !==  0 ?  <Link to={`/dashboard/payment/${payment}`}>
+                    <button
        
-        className="rounded-full px-8 w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700"
-      >
-        Continue to Payment
-        <IoIosArrowForward />
-      </button>
-                </Link>
+       className="rounded-full px-8 w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700"
+     >
+       Continue to Payment
+       <IoIosArrowForward />
+     </button>
+                    </Link> : ''
+                }
+                
                 
             </div>
         </div>

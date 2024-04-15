@@ -14,8 +14,15 @@ const AuthProvider = ({children}) => {
     
     const createUser = (email, password) =>{
         setLoading(true);
+        console.log("Email:", email); // Check if email is received correctly
+        console.log("Password:", password); // Check if password is received correctly
         return createUserWithEmailAndPassword(auth, email, password)
+            .catch(error => {
+                console.error("Error creating user:", error); // Log any errors
+                throw error; // Rethrow the error to be caught by the caller
+            });
     }
+    
 
     const signIn = (email, password) =>{
         setLoading(true);
@@ -52,7 +59,8 @@ const AuthProvider = ({children}) => {
             return unSubscribe()
         }
     },[])
-    const authInfo = { user,
+    const authInfo = { 
+        user,
         loading,
         createUser,
         signIn,

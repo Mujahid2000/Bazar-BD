@@ -13,7 +13,8 @@
       "product_image": "https://i.ibb.co/3zycg0n/refrigerator.jpg",
       "flashSale": false,
       "discountPrice": 640,
-      "discountPercentage": "20%"
+      "discountPercentage": "20%",
+      "stock" : 5
     },
     {
       "shopId": 1,
@@ -29,7 +30,8 @@
       "product_image": "https://i.ibb.co/fxTg6kM/veccum-cleaner.jpg",
       "flashSale": true,
       "discountPrice": 276.49,
-      "discountPercentage": "21%"
+      "discountPercentage": "21%",
+      "stock" : 7
     }
   ]
   

@@ -25,6 +25,11 @@ import Payment from './Pages/Dashboard/UserDashboard/Payment';
 import Success from './Pages/Dashboard/UserDashboard/Payment/Success';
 import Failed from './Pages/Dashboard/UserDashboard/Payment/Failed';
 import Cancel from './Pages/Dashboard/UserDashboard/Payment/Cancel';
+import PrivateRoutes from './Configs/PrivateRoutes';
+import User from './Pages/Dashboard/AdminDashboard/User';
+import TotalOrder from './Pages/Dashboard/AdminDashboard/TotalOrder';
+import Products from './Pages/Dashboard/AdminDashboard/Products';
+import ProductUpolad from './Pages/Dashboard/AdminDashboard/ProductUpolad';
 
 
 
@@ -82,39 +87,54 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'order',
-        element: <Order/>
+        element:<PrivateRoutes> <Order/> </PrivateRoutes> 
       },
       {
         path: 'cart',
-        element: <Cart/>
+        element: <PrivateRoutes> <Cart/> </PrivateRoutes> 
       },
       {
         path: 'delivery',
-        element: <Deliveried/>
+        element: <PrivateRoutes> <Deliveried/> </PrivateRoutes> 
       },
       {
         path: 'dasboard',
-        element: <Dasboard/>
+        element: <PrivateRoutes> <Dasboard/> </PrivateRoutes> 
       },
       {
         path: 'wishlist',
-        element: <Wishlist/>
+        element: <PrivateRoutes> <Wishlist/> </PrivateRoutes> 
       },
       {
         path:'/dashboard/payment/:payment',
-        element: <Payment/>
+        element:<PrivateRoutes> <Payment/> </PrivateRoutes> 
       },
       {
-        path:'/dashboard/success/:tranId',
-        element: <Success/>
+        path:'/dashboard/paid/:tranId',
+        element:<PrivateRoutes> <Success/> </PrivateRoutes> 
       },
       {
-        path: 'failed',
-        element: <Failed/>
-      },
+        path: '/dashboard/failed/:tranId',
+        element: <PrivateRoutes><Failed/> </PrivateRoutes>      },
       {
         path: 'payment/cancel',
-        element: <Cancel/>
+        element:<PrivateRoutes><Cancel/> </PrivateRoutes> 
+      },
+      {
+        path: 'user',
+        element: <User></User>
+      },
+      {
+        path: 'adminOrder',
+        element: <TotalOrder></TotalOrder>
+      },
+      {
+        path: 'products',
+        element:<PrivateRoutes><Products/> </PrivateRoutes> 
+      },
+      {
+        path: 'addProduct',
+        element: <ProductUpolad/>
       }
 
     ]

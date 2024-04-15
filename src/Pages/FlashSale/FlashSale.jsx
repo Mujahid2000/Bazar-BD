@@ -16,7 +16,7 @@ const FlashSale = () => {
         const location = useLocation();
         const { user } = useContext(AuthContext);
         const email = user?.email;
-        console.log(email);
+        
        
         
 
@@ -71,12 +71,16 @@ const FlashSale = () => {
 
     return (
         <div className="mt-16">
+          <div>
+
             <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[90vh] ">
-                <div className="flex justify-evenly items-center">
+                <div className="flex sm:flex-col md:flex-row lg:flex-row justify-evenly items-center">
                 <div className="mt-16">
-                    <h2 className="text-white text-6xl font-serif font-bold">Huge Discount Up <br /> to 50% Off</h2>
-                    <div className="flex justify-center items-center mt-10  bg-[#254E58]">
-      <div className="mx-3 sm:p-10 p-4 rounded-md flex justify-center flex-col gap-6 shadow-[5px_5px_50px_rgba(47,46,60,1)]">
+                  <div className="flex flex-col md:flex-row lg:flex-row justify-evenly items-center gap-9">
+                    <div>
+                    <h2 className="text-white text-3xl md:text-4xl lg:text-6xl font-serif font-bold ml-4 md:ml-2 lg:ml-0">Huge Discount Up <br /> to 50% Off</h2>
+                    <div className="flex justify-center items-center mt-10  bg-[#254E58] mx-3">
+                    <div className="mx-3 sm:p-10 p-4 rounded-md flex justify-center flex-col gap-6 shadow-[5px_5px_50px_rgba(47,46,60,1)]">
         <div className="flex flex-col gap-2">
           <h1 className="text-center sm:text-3xl text-xl font-semibold leading-8 text-[#FBFAF8]">
             Hurry, Limited Availability
@@ -120,72 +124,36 @@ const FlashSale = () => {
             </span>
           </div>
         </div>
-      </div>
-    </div>
-                </div>
-                <div className="mt-16">
-                    <img src="https://i.ibb.co/L8yjpxY/33760185-8055402.png" alt="" className="w-full h-[500px]"/>
-                </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 place-item-center max-w-[1440px] mx-auto mt-10">
-                    <div>
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-sky-500">
-  
-  <div className="px-6 py-4">
-    <div className="flex justify-between items-center">
-        <h2 className="font-medium text-3xl mt-3 mb-2 text-white ">Fashion</h2>
-    <p className="text-4xl font-bold font-mono text-white">30%</p></div>
-    <p className="text-white text-xl mt-9">
-      save up to $300
-    </p>
-   
-  </div>
-  
-</div>
                     </div>
-                    <div>
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-amber-500">
-  
-                    <div className="px-6 py-4">
-    <div className="flex justify-between items-center">
-        <h2 className="font-medium text-3xl mt-3 mb-2 text-white">Electronic Gadgets</h2>
-    <p className="text-4xl font-bold font-mono text-white">40%</p></div>
-    <p className="text-white text-xl mt-9">
-      save up to $100
-    </p>
-   
-  </div>
-  
-</div>
+    
+                  </div>
                     </div>
-                    <div>
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg bg-green-600">
-  
-                    <div className="px-6 py-4">
-    <div className="flex justify-between items-center">
-        <h2 className="font-medium text-3xl mt-3 mb-2 text-white">Home Appliance</h2>
-    <p className="text-4xl font-bold font-mono text-white">20%</p></div>
-    <p className="text-white text-xl mt-9">
-      save up to $300
-    </p>
-   
-  </div>
-  
-</div>
-                    </div>
+
+                <div className="mt-0 md:mt-5 lg:mt-16">
+                    <img src="https://i.ibb.co/L8yjpxY/33760185-8055402.png" alt="" className="w-full max-h-[500px]"/>
                 </div>
+
+                  </div>
+                  
+                  <div>
+      
+              </div>
+              </div>
+                </div>
+                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 place-item-center max-w-[1440px] mx-auto mt-10">
+                    
+                </div> 
             </div>
+          </div>
             
             <div className="mt-5 mx-w-[1440px] mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
   {products.map((myData) => (
-    <div key={myData._id} className="rounded w-80 overflow-hidden shadow-lg">
+    <div key={myData._id} className="rounded w-80  shadow-lg">
       <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>
         <div className="relative">
           <img className="w-full h-72" src={myData.product_image} alt="Sunset in the mountains" />
           <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
-          <div className="absolute bottom-0 left-0 bg-indigo-600 px-4 py-2 text-white text-sm hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-            Photos
-          </div>
+          
           <div className="text-sm absolute top-0 right-0 bg-indigo-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
             <span className="font-bold">{myData.discountPercentage}</span>
           </div>
@@ -204,7 +172,7 @@ const FlashSale = () => {
       </div>
     </div>
   ))}
-</div>
+          </div>
 
 <Toaster
         position="top-right"

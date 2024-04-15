@@ -58,12 +58,12 @@ const Result = () => {
     };
 
     return (
-        <div className="flex">
+        <div className="flex flex-col-reverse md:flex-row lg:flex-row">
             <div>
             <div className=" mx-2 mt-20">
         <h2 className="text-black ml-14 text-xl">Search Results:{searchResults.length}</h2>
         <div >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-8 place-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-y-8 place-items-center">
             {searchResults.map((product) => (
                                 <div key={product._id} className="w-72 cursor-pointer shadow-lg rounded-lg h-96 border mt-8 ml-4" >
                                     <img className="h-60 mx-auto border-b transform hover:scale-110 transition-transform duration-300" src={product?.product_image} alt="" />
@@ -79,7 +79,7 @@ const Result = () => {
         </div>
         </div>
             </div>
-            <div className="w-80 rounded-md border min-h-[90vh] mt-[140px] text-center shadow-md">
+            <div className="w-80 mx-10 md:mx-1 lg:mx-0 rounded-md border min-h-[90vh] mt-[140px] text-center shadow-md">
             <h3>Price Range</h3>
                 <div className="flex w-72 mx-auto gap-2">
                     <div>
