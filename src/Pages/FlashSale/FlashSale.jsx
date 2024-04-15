@@ -73,9 +73,9 @@ const FlashSale = () => {
         <div className="mt-16">
           <div>
 
-            <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[90vh] ">
+            <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[95vh] ">
                 <div className="flex sm:flex-col md:flex-row lg:flex-row justify-evenly items-center">
-                <div className="mt-16">
+                <div className="mt-10">
                   <div className="flex flex-col md:flex-row lg:flex-row justify-evenly items-center gap-9">
                     <div>
                     <h2 className="text-white text-3xl md:text-4xl lg:text-6xl font-serif font-bold ml-4 md:ml-2 lg:ml-0">Huge Discount Up <br /> to 50% Off</h2>
@@ -129,8 +129,8 @@ const FlashSale = () => {
                   </div>
                     </div>
 
-                <div className="mt-0 md:mt-5 lg:mt-16">
-                    <img src="https://i.ibb.co/L8yjpxY/33760185-8055402.png" alt="" className="w-full max-h-[500px]"/>
+                <div className="-mt-7 md:mt-5 lg:mt-16">
+                    <img src="https://i.ibb.co/L8yjpxY/33760185-8055402.png" alt="" className="w-full max-h-[35rem]"/>
                 </div>
 
                   </div>

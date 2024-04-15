@@ -20,7 +20,7 @@ const Shop = () => {
     
 
     return (
-        <div className="mt-20 grid grid-cols-2">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
 
       {
         products.map(pro => (
@@ -30,7 +30,7 @@ const Shop = () => {
             <section  className="container mx-auto p-10 md:p-20 antialiased ">
     <article
         className=" flex flex-wrap md:flex-nowrap shadow-lg mx-auto max-w-3xl group cursor-pointer transform duration-500 hover:-translate-y-1">
-        <img className="w-60 max-h-[400px] object-cover md:w-52" src={pro.shopPicture} alt=""/>
+        <img className="w-full max-h-[400px] object-cover md:w-52" src={pro.shopPicture} alt=""/>
         <div className="">
             <div className="p-5 pb-10">
                 <h1 className="text-2xl font-semibold text-gray-800 mt-4">
