@@ -19,7 +19,7 @@ const Payment = () => {
 
                 if(email){
         
-                    axios.get(`http://localhost:5000/addCart/${email}`)
+                    axios.get(`https://bazar-bd-server.vercel.app/addCart/${email}`)
                     .then(res => setCart(res.data))
                     .catch((error) => console.log(error))
                 }
@@ -33,7 +33,7 @@ const Payment = () => {
     const handlePayment = async (payment, email, currentDate, name, cart) =>{
         console.log(payment, email, currentDate, name, cart);
         try{
-        axios.post(`http://localhost:5000/payment`, {payment, email, currentDate, name, cart})
+        axios.post(`https://bazar-bd-server.vercel.app/payment`, {payment, email, currentDate, name, cart})
         .then((response) => {console.log(response.data.url)
     window.location.replace(response.data.url)});
     } catch(error){

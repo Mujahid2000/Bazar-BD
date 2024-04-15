@@ -20,7 +20,7 @@ const ProductDetails = () => {
     
     useEffect(() => {
         axios
-          .get(`http://localhost:5000/addProducts/${id}`)
+          .get(`https://bazar-bd-server.vercel.app/addProducts/${id}`)
           .then((res) => setProducts(res.data))
           .catch((error) => console.error(error));
       }, [id]);
@@ -28,7 +28,7 @@ const ProductDetails = () => {
 
 
       useEffect(() => {
-        axios.get('http://localhost:5000/addProducts')
+        axios.get('https://bazar-bd-server.vercel.app/addProducts')
             .then(res =>  res.data)
             .then(data => {
                 const shuffledArray = data.sort(() => 0.5 - Math.random());
@@ -42,7 +42,7 @@ const ProductDetails = () => {
     useEffect(() =>{
         // Use a separate variable to store the id obtained from useParams()
         const productId = id;
-        axios.get(`http://localhost:5000/productDiscount/${productId}`)
+        axios.get(`https://bazar-bd-server.vercel.app/productDiscount/${productId}`)
             .then((response) => setDiscount(response.data))
             .catch((error) => console.error(error));
     }, [id, ]);

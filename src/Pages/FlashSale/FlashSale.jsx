@@ -56,7 +56,7 @@ const FlashSale = () => {
 
 
         useEffect(() => {
-            axios.get('http://localhost:5000/productDiscount')
+            axios.get('https://bazar-bd-server.vercel.app/productDiscount')
                 .then(res => setProducts(res.data))
                 .catch(error => console.error(error));
         }, []);
@@ -64,7 +64,7 @@ const FlashSale = () => {
 
         const handleAddCart = (data) => {
           axios
-            .post(`http://localhost:5000/addCart`, { data, email })
+            .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
             .then((response) => console.log(response));
           toast.success("Item added to cart!").catch(console.log("error"));
         };

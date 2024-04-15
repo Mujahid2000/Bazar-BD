@@ -14,7 +14,7 @@ const Order = () => {
     const fetchData = async () => {
       try {
         if (email) {
-          const response = await axios.get(`http://localhost:5000/order/${email}`);
+          const response = await axios.get(`https://bazar-bd-server.vercel.app/order/${email}`);
           setOrder(response.data);
         }
       } catch (error) {

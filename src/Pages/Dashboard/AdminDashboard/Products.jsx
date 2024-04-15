@@ -10,7 +10,7 @@ const Products = () => {
 	
 
 	useEffect(() =>{
-		axios.get('http://localhost:5000/addProducts')
+		axios.get('https://bazar-bd-server.vercel.app/addProducts')
 		.then(res => setMyProducts(res.data)
 		)
 		.catch((error) => console.error(error))

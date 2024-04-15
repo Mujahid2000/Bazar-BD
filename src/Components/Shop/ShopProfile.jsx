@@ -23,7 +23,7 @@ const ShopProfile = ({ shop }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/addProducts")
+      .get("https://bazar-bd-server.vercel.app/addProducts")
       .then((res) => setProducts(res.data))
       .catch((error) => console.error(error));
   }, []);
@@ -58,7 +58,7 @@ const ShopProfile = ({ shop }) => {
 
   const handleAddCart = (data) => {
     axios
-      .post(`http://localhost:5000/addCart`, { data, email })
+      .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
       .then((response) => console.log(response));
     toast.success("Item added to cart!").catch(console.log("error"));
   };

@@ -13,7 +13,7 @@ const CheckAdmin = () => {
                 setIsAdminLoading(true);
                 try {
                     
-                    const res = await axios.get(`http://localhost:5000/user/${user.email}`);
+                    const res = await axios.get(`https://bazar-bd-server.vercel.app/user/${user.email}`);
                     
                     setIsAdmin(res.data.admin);
                 } catch (error) {

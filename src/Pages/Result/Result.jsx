@@ -32,7 +32,7 @@ const Result = () => {
     const minDistance = 10;
 
     useEffect(() => {
-        axios.get('http://localhost:5000/addProducts')
+        axios.get('https://bazar-bd-server.vercel.app/addProducts')
             .then(res => {
                 setProducts(res.data);
                 filterProducts(searchQuery, res.data, value1); // Apply filtering initially with default value

@@ -7,7 +7,7 @@ const User = () => {
     
     console.log(allUser);
     useEffect(() => {
-        axios.get('http://localhost:5000/users')
+        axios.get('https://bazar-bd-server.vercel.app/users')
             .then(res => setAllUser(res.data))
             .catch(error => console.error(error));
     }, []);
