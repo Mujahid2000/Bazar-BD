@@ -7,7 +7,7 @@ const NewArrivals = () => {
             <h2 className="ml-32 mb-4 underline text-2xl md:text-2xl lg:text-3xl xl:text-5xl 2xl:text-5xl font-bold">New Arrival</h2>
            <div className='flex flex-col md:flex-row lg:flex-row gap-9 justify-evenly items-center'>
            <div className="relative">
-            <img src="https://i.ibb.co/D5wGq6F/playstation5-copy.jpg" alt="" className='w-full max-h-[48rem] border shadow-md'/>
+            <img src="https://i.ibb.co/D5wGq6F/playstation5-copy.jpg" alt="" className='w-full h-[48rem] border shadow-md'/>
             <div className="absolute top-[40rem] left-2 p-4  text-black">
     <h2 className="text-xl font-bold text-black">Speakers</h2>
     <p className="text-sm text-black">Beautiful Branded Speaker</p>
@@ -23,7 +23,7 @@ const NewArrivals = () => {
             <div>
             <div className="relative">
   <img src="https://i.ibb.co/Qv4f2yD/women.jpg" alt="" className="h-96 w-full mt-3 border shadow-md" />
-  <div className="absolute top-[16rem] left-2 p-4 text-white">
+  <div className="absolute top-[15rem] left-2 p-4 text-white">
     <h2 className="text-xl font-bold">Women Collection 5</h2>
     <p className="text-sm">Black and White version of the PS5 coming out on scale</p>
     <button  className="flex items-center text-white border border-white  active:bg-orange-600 py-1 mt-2 px-4 gap-2 rounded  ">
