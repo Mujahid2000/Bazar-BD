@@ -6,7 +6,7 @@ const Products = () => {
 	const [myProduct, setMyProducts] = useState(null);
 	const [open, setOpen] = useState(false);
 	const [selectedProduct , setSelectedProducts] = useState(null)
-	console.log(myProduct);
+	
 	
 
 	useEffect(() =>{
@@ -30,10 +30,25 @@ const Products = () => {
 			const stock = form.get('stockItem')
 			console.log({productName,price, discountPrice, stock});
 		} 
+
+
+		const handleSelectChange = async (event, data) => {
+			const selectedValue = event.target.value;
+			
+			  const response = await axios.put(
+				`http://localhost:5000/addProductsUpdate/${data._id}`,{ stock: selectedValue }
+			  ); console.log(response.data); // Handle success response if needed
+		
+			} 
+			
+		
+
+
+
     return (
         <div>
 
-<div className="max-w-7xl lg:mx-96">
+<div className="max-w-7xl ">
 
 	<div className="relative overflow-x-auto bg-gray-950 shadow-md sm:rounded-lg">
 		<div className="p-4">
@@ -104,9 +119,8 @@ const Products = () => {
 							${data?.price}
 						</td>
 						<td className="px-6 py-4">
-							<select className='bg-white rounded-md'>
-								<option value="Select">Select</option>
-								<option value="Stock Out"> Stock Out</option>
+							<select onChange={(event) => handleSelectChange(event, data)} className='bg-white rounded-md'>
+								<option value="In Stock"> In Stock</option>
 								<option value="Stock Out"> Stock Out</option>
 							</select>
 						</td>

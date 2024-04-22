@@ -27,9 +27,6 @@ const Order = () => {
 
   
 
-  
-  
-
 
     return (
 <div className="bg-white h-screen ml-12 md:ml-12 lg:ml-7 lg:mx-96 rounded-md w-80  md:w-full lg:w-full">
@@ -66,9 +63,9 @@ const Order = () => {
               </div>
             </div>
             <div className="flex justify-between space-x-8 items-start w-full">
-              <p className="text-base dark:text-black xl:text-lg leading-6">$36.00</p>
+              <p className="text-base dark:text-black xl:text-lg leading-6">${orderItem.data.price}</p>
               <p className="text-base dark:text-black xl:text-lg leading-6 text-gray-800">01</p>
-              <p className="text-base dark:text-black xl:text-lg font-semibold leading-6 text-gray-800">$36.00</p>
+              <p className="text-base dark:text-black xl:text-lg font-semibold leading-6 text-gray-800">${orderItem.data.price}</p>
             </div>
           </div>
         </div>

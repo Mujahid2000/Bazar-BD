@@ -115,7 +115,7 @@ const Dashboard = () => {
     </div>
    
   </div>
-  <div className='z-10 bg-white'>
+  <div className='z-10 mx-auto  bg-white'>
         <Outlet/>
     </div>
 </div>

@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 const User = () => {
     const [allUser, setAllUser] = useState(null);
     
-    console.log(allUser);
     useEffect(() => {
         axios.get('https://bazar-bd-server.vercel.app/users')
             .then(res => setAllUser(res.data))
@@ -13,7 +12,7 @@ const User = () => {
     }, []);
     return (
         <div>
-            <div className="bg-white p-9 ml-6 md:ml-12 lg:ml-7 mt-9 fixed rounded-md w-full">
+            <div className="bg-white p-9 ml-6 md:ml-12 lg:ml-7 min-w-[90rem] mt-9 rounded-md w-full">
 	<div className=" flex items-center justify-evenly pb-6">
 		<div>
 			<h2 className="text-gray-600 text-center font-semibold">Total User</h2>

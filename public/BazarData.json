@@ -10,7 +10,8 @@
     "price": 799.99,
     "rating": 2.5,
     "description": "A smart refrigerator with advanced features for modern homes.",
-    "product_image": "https://i.ibb.co/3zycg0n/refrigerator.jpg"
+    "product_image": "https://i.ibb.co/3zycg0n/refrigerator.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 1,
@@ -23,7 +24,8 @@
     "price": 349.99,
     "rating": 2.7,
     "description": "Effortlessly keep your home clean with our smart vacuum cleaner.",
-    "product_image": "https://i.ibb.co/fxTg6kM/veccum-cleaner.jpg"
+    "product_image": "https://i.ibb.co/fxTg6kM/veccum-cleaner.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 2,
@@ -36,7 +38,8 @@
     "price": 129.99,
     "rating": 2.3,
     "description": "Cook healthier meals with our versatile multi-function air fryer.",
-    "product_image": "https://i.ibb.co/1MC9S6P/Multi-Function-Air-Fryer.jpg"
+    "product_image": "https://i.ibb.co/1MC9S6P/Multi-Function-Air-Fryer.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 1,
@@ -49,7 +52,8 @@
     "price": 89.99,
     "rating": 4.5,
     "description": "Control your home's temperature with our advanced smart thermostat.",
-    "product_image": "https://i.ibb.co/KqLxTZK/Smart-Thermostat.jpg"
+    "product_image": "https://i.ibb.co/KqLxTZK/Smart-Thermostat.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 2,
@@ -62,7 +66,8 @@
     "price": 699.99,
     "rating": 4.5,
     "description": "Make laundry day easier with our high-tech smart washing machine.",
-    "product_image": "https://i.ibb.co/ZVkvDqY/Smart-Washing-Machine.jpg"
+    "product_image": "https://i.ibb.co/ZVkvDqY/Smart-Washing-Machine.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 3,
@@ -75,7 +80,8 @@
     "price": 249.99,
     "rating": 3.5,
     "description": "Create the perfect ambiance with our automated home lighting system.",
-    "product_image": "https://i.ibb.co/fkzQm1v/Automated-Home-Lighting-System.jpg"
+    "product_image": "https://i.ibb.co/fkzQm1v/Automated-Home-Lighting-System.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 3,
@@ -88,7 +94,8 @@
     "price": 79.99,
     "rating": 4,
     "description": "Enjoy your favorite brew with our convenient smart coffee maker.",
-    "product_image": "https://i.ibb.co/qDwFt7w/Smart-Coffee-Maker.jpg"
+    "product_image": "https://i.ibb.co/qDwFt7w/Smart-Coffee-Maker.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 2,
@@ -101,7 +108,8 @@
     "price": 549.99,
     "rating": 3,
     "description": "Simplify dish washing with our cutting-edge smart dishwasher.",
-    "product_image": "https://i.ibb.co/r5CHwN5/Smart-Dishwasher.jpg"
+    "product_image": "https://i.ibb.co/r5CHwN5/Smart-Dishwasher.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 3,
@@ -114,7 +122,8 @@
     "price": 399.99,
     "rating": 2,
     "description": "Maintain a pristine lawn effortlessly with our robotic lawn mower.",
-    "product_image": "https://i.ibb.co/Dbrvjjf/Robotic-Lawn-Mower.jpg"
+    "product_image": "https://i.ibb.co/Dbrvjjf/Robotic-Lawn-Mower.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 3,
@@ -127,7 +136,8 @@
     "price": 149.99,
     "rating": 2,
     "description": "Breathe clean air with our advanced smart air purifier.",
-    "product_image": "https://i.ibb.co/jyC3V76/Smart-Air-Purifier.jpg"
+    "product_image": "https://i.ibb.co/jyC3V76/Smart-Air-Purifier.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 4,
@@ -140,7 +150,8 @@
     "price": 69.99,
     "rating": 2.5,
     "description": "Achieve a radiant complexion with our skin-renewing serum, enriched with natural extracts for glowing skin.",
-    "product_image": "https://i.ibb.co/Ptf8Wh3/Radiant-Skin-Serum.jpg"
+    "product_image": "https://i.ibb.co/Ptf8Wh3/Radiant-Skin-Serum.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 4,
@@ -153,7 +164,8 @@
     "price": 19.99,
     "rating": 3.7,
     "description": "Experience luxurious sleep with our silk sleep mask, designed for comfort and relaxation throughout the night.",
-    "product_image": "https://i.ibb.co/RcDtQM9/Silk-Sleep-Mask.jpg"
+    "product_image": "https://i.ibb.co/RcDtQM9/Silk-Sleep-Mask.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 4,
@@ -166,7 +178,8 @@
     "price": 29.99,
     "rating": 4.7,
     "description": "Define your lips with our matte lipstick set, featuring rich, long-lasting colors for a glamorous look.",
-    "product_image": "https://i.ibb.co/BGs5hwD/Matte-Lipstick-Set.jpg"
+    "product_image": "https://i.ibb.co/BGs5hwD/Matte-Lipstick-Set.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 5,
@@ -179,7 +192,8 @@
     "price": 14.99,
     "rating": 3.3,
     "description": "Indulge in a relaxing bath experience with our rose-infused bath salts, promoting tranquility and skin nourishment.",
-    "product_image": "https://i.ibb.co/Vwrn8TJ/Rose-Infused-Bath-Salts.jpg"
+    "product_image": "https://i.ibb.co/Vwrn8TJ/Rose-Infused-Bath-Salts.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 5,
@@ -192,7 +206,8 @@
     "price": 24.99,
     "rating": 4.3,
     "description": "Illuminate your features with our versatile Serene Skincare, perfect for creating a luminous complexion.",
-    "product_image": "https://i.ibb.co/frLDgpH/Serene-Skincare.jpg"
+    "product_image": "https://i.ibb.co/frLDgpH/Serene-Skincare.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 5,
@@ -205,7 +220,8 @@
     "price": 3.99,
     "rating": 4.9,
     "description": "Revitalize your skin with our hydrating sheet mask, infused with nourishing ingredients for a spa-like treatment at home.",
-    "product_image": "https://i.ibb.co/fC65N4p/Hydrating-Sheet-Mask.jpg"
+    "product_image": "https://i.ibb.co/fC65N4p/Hydrating-Sheet-Mask.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 6,
@@ -218,7 +234,8 @@
     "price": 39.99,
     "rating": 4,
     "description": "Boost your skin's radiance with our vitamin C serum, formulated to brighten and even out skin tone.",
-    "product_image": "https://i.ibb.co/bgzpcNL/Vitamin-C-Serum.jpg"
+    "product_image": "https://i.ibb.co/bgzpcNL/Vitamin-C-Serum.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 6,
@@ -231,7 +248,8 @@
     "price": 29.99,
     "rating": 4.1,
     "description": "Hydrate your skin with our hyaluronic acid moisturizer, providing deep hydration for a plump and supple complexion.",
-    "product_image": "https://i.ibb.co/kDF6ybP/Hyaluronic-Acid-Moisturizer.jpg"
+    "product_image": "https://i.ibb.co/kDF6ybP/Hyaluronic-Acid-Moisturizer.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 6,
@@ -244,7 +262,8 @@
     "price": 49.99,
     "rating": 3.1,
     "description": "Create a soothing atmosphere with our aromatherapy diffuser, perfect for relaxation and stress relief.",
-    "product_image": "https://i.ibb.co/T4w1khc/Aromatherapy-Diffuser.jpg"
+    "product_image": "https://i.ibb.co/T4w1khc/Aromatherapy-Diffuser.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 7,
@@ -257,7 +276,8 @@
     "price": 59.99,
     "rating": 3.9,
     "description": "Indulge in luxury with our fragrance gift set, featuring a collection of exquisite scents for any occasion.",
-    "product_image": "https://i.ibb.co/F6QKYrb/Fragrance-Gift-Set.png"
+    "product_image": "https://i.ibb.co/F6QKYrb/Fragrance-Gift-Set.png",
+    "stock": "In Stock"
   },
   {
     "shopId": 8,
@@ -270,7 +290,8 @@
     "price": 29.99,
     "rating": 4.2,
     "description": "Indulge in the finest selection of gourmet chocolates.",
-    "product_image": "https://i.ibb.co/hmJkvXj/Gourmet-Chocolate-Box.jpg"
+    "product_image": "https://i.ibb.co/hmJkvXj/Gourmet-Chocolate-Box.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 9,
@@ -283,7 +304,8 @@
     "price": 19.99,
     "rating": 3.2,
     "description": "Experience the authentic flavors of handmade artisanal pasta.",
-    "product_image": "https://i.ibb.co/R4HrTqf/Artisanal-Pasta-Sampler.jpg"
+    "product_image": "https://i.ibb.co/R4HrTqf/Artisanal-Pasta-Sampler.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 10,
@@ -296,7 +318,8 @@
     "price": 14.99,
     "rating": 4.4,
     "description": "Elevate your culinary creations with our exotic spice collection.",
-    "product_image": "https://i.ibb.co/C8FCVdV/Exotic-Spice-Collection.jpg"
+    "product_image": "https://i.ibb.co/C8FCVdV/Exotic-Spice-Collection.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 9,
@@ -309,7 +332,8 @@
     "price": 39.99,
     "rating": 2.9,
     "description": "Savor the sweetness of our handpicked organic fruit basket.",
-    "product_image": "https://i.ibb.co/WnLx7m0/Organic-Fruit-Basket.jpg"
+    "product_image": "https://i.ibb.co/WnLx7m0/Organic-Fruit-Basket.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 10,
@@ -322,7 +346,8 @@
     "price": 24.99,
     "rating": 2.5,
     "description": "Enjoy the aroma and taste of our freshly baked artisan bread assortment.",
-    "product_image": "https://i.ibb.co/nC0bgqj/Artisan-Bread-Assortment.jpg"
+    "product_image": "https://i.ibb.co/nC0bgqj/Artisan-Bread-Assortment.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 10,
@@ -335,7 +360,8 @@
     "price": 17.99,
     "rating": 2.6,
     "description": "Infuse your dishes with rich flavors using our gourmet spice rubs set.",
-    "product_image": "https://i.ibb.co/g3rx4S8/Gourmet-Spice-Rubs-Set.jpg"
+    "product_image": "https://i.ibb.co/g3rx4S8/Gourmet-Spice-Rubs-Set.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 9,
@@ -348,7 +374,8 @@
     "price": 29.99,
     "rating": 2.5,
     "description": "Relax and unwind with our curated luxury tea collection.",
-    "product_image": "https://i.ibb.co/sj2F8vT/Luxury-Tea-Collection.jpg"
+    "product_image": "https://i.ibb.co/sj2F8vT/Luxury-Tea-Collection.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 11,
@@ -361,7 +388,8 @@
     "price": 22.99,
     "rating": 2.5,
     "description": "Indulge in a variety of delectable desserts with our assorted dessert box.",
-    "product_image": "https://i.ibb.co/yd5ynJ1/Assorted-Dessert-Box.jpg"
+    "product_image": "https://i.ibb.co/yd5ynJ1/Assorted-Dessert-Box.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 9,
@@ -374,7 +402,8 @@
     "price": 34.99,
     "rating": 2.9,
     "description": "Experience farm-fresh goodness with our bountiful vegetable crate.",
-    "product_image": "https://i.ibb.co/vC5rZB8/Farm-Fresh-Vegetable-Crate.jpg"
+    "product_image": "https://i.ibb.co/vC5rZB8/Farm-Fresh-Vegetable-Crate.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 9,
@@ -387,7 +416,8 @@
     "price": 15.99,
     "rating": 2.7,
     "description": "Enjoy a nutritious blend of quinoa and farro with our gourmet grains medley.",
-    "product_image": "https://i.ibb.co/zxkjFZZ/Quinoa-and-Farro-Medley.jpg"
+    "product_image": "https://i.ibb.co/zxkjFZZ/Quinoa-and-Farro-Medley.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 12,
@@ -400,7 +430,8 @@
     "price": 899.99,
     "rating": 2.5,
     "description": "Upgrade your living space with this stylish mid-century sofa, blending comfort and elegance.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 13,
@@ -413,7 +444,8 @@
     "price": 349.99,
     "rating": 4.5,
     "description": "Add an industrial touch to your space with this sturdy and chic coffee table.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 14,
@@ -426,7 +458,8 @@
     "price": 299.99,
     "rating": 2.5,
     "description": "Create a cozy dining area with this charming farmhouse dining set, perfect for family gatherings.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 15,
@@ -439,7 +472,8 @@
     "price": 199.99,
     "rating": 4.5,
     "description": "Organize your space with this sleek and minimalist bookshelf, blending functionality and aesthetics.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 16,
@@ -452,7 +486,8 @@
     "price": 599.99,
     "rating": 3.5,
     "description": "Add a touch of nostalgia with this antique chest of drawers, showcasing intricate craftsmanship.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 16,
@@ -465,7 +500,8 @@
     "price": 799.99,
     "rating": 3.5,
     "description": "Elevate your dining area with this contemporary glass top dining table, creating a modern focal point.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 17,
@@ -478,7 +514,8 @@
     "price": 449.99,
     "rating": 4.5,
     "description": "Unwind in style with this plush velvet armchair, offering both comfort and sophistication.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 17,
@@ -491,7 +528,8 @@
     "price": 699.99,
     "rating": 3,
     "description": "Transform your bedroom with this timeless wooden bed frame, blending elegance and durability.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 18,
@@ -504,7 +542,8 @@
     "price": 129.99,
     "rating": 2,
     "description": "Add a pop of color to your space with this vibrant bohemian area rug, showcasing eclectic patterns.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 18,
@@ -517,7 +556,8 @@
     "price": 549.99,
     "rating": 3.7,
     "description": "Maximize your space with this versatile convertible sofa bed, perfect for urban living.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 19,
@@ -530,7 +570,8 @@
     "price": 79.99,
     "rating": 2.5,
     "description": "Experience freedom with these wireless in-ear earbuds, delivering high-quality sound and comfort.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 19,
@@ -543,7 +584,8 @@
     "price": 129.99,
     "rating": 2.5,
     "description": "Immerse yourself in pure audio bliss with these noise-canceling over-ear headphones, perfect for any environment.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 20,
@@ -556,7 +598,8 @@
     "price": 49.99,
     "rating": 2.5,
     "description": "Stay active with these sporty Bluetooth ear clips, providing a secure fit and sweat-resistant design.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 20,
@@ -569,7 +612,8 @@
     "price": 39.99,
     "rating": 2.5,
     "description": "Feel the deep beats with these in-ear bass-enhanced earphones, delivering a powerful audio experience.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 21,
@@ -582,7 +626,8 @@
     "price": 99.99,
     "rating": 2.5,
     "description": "Indulge in luxury with these gold-plated earbuds, combining style and premium audio quality.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 21,
@@ -595,7 +640,8 @@
     "price": 89.99,
     "rating": 2.5,
     "description": "Experience true freedom with these wireless stereo ear pods, delivering crisp sound and minimalistic design.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 22,
@@ -608,7 +654,8 @@
     "price": 69.99,
     "rating": 2.5,
     "description": "Unleash your inner DJ with these foldable on-ear headphones, offering dynamic sound and style on the go.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 22,
@@ -621,7 +668,8 @@
     "price": 59.99,
     "rating": 2.5,
     "description": "Embrace wireless convenience with these AirPods style earbuds, delivering seamless connectivity and modern design.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 23,
@@ -634,7 +682,8 @@
     "price": 79.99,
     "rating": 2.5,
     "description": "Elevate your gaming experience with these RGB LED gaming earphones, offering immersive sound and vibrant lighting.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 23,
@@ -647,7 +696,8 @@
     "price": 69.99,
     "rating": 2.5,
     "description": "Stay active with these waterproof sports ear hook earphones, providing a secure fit during intense workouts.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 24,
@@ -660,7 +710,8 @@
     "price": 29.99,
     "rating": 2.5,
     "description": "Inspire creativity with this vibrant set of colorful building blocks, perfect for imaginative play.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 24,
@@ -673,7 +724,8 @@
     "price": 39.99,
     "rating": 2.5,
     "description": "Encourage learning with this interactive educational tablet designed for kids, featuring engaging games and activities.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 25,
@@ -686,7 +738,8 @@
     "price": 19.99,
     "rating": 2.5,
     "description": "Cuddle up with these adorable plush stuffed animals, creating a cozy and comforting atmosphere for little ones.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 25,
@@ -699,7 +752,8 @@
     "price": 49.99,
     "rating": 2.5,
     "description": "Fuel the spirit of adventure with this outdoor exploration kit, featuring tools for young explorers to discover the world around them.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 25,
@@ -712,7 +766,8 @@
     "price": 29.99,
     "rating": 2.5,
     "description": "Let the magic begin with this enchanting princess dress-up costume set, perfect for imaginative play and dress-up parties.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 26,
@@ -725,7 +780,8 @@
     "price": 14.99,
     "rating": 2.5,
     "description": "Bring favorite characters to life with these animated character plush pillows, adding a touch of whimsy to bedtime.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 26,
@@ -738,7 +794,8 @@
     "price": 24.99,
     "rating": 2.5,
     "description": "Inspire budding artists with this complete art supplies set, providing everything needed for creative expression.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 26,
@@ -751,7 +808,8 @@
     "price": 34.99,
     "rating": 2.5,
     "description": "Foster a love for construction with this exciting construction vehicle play set, featuring realistic vehicles and accessories.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 27,
@@ -764,7 +822,8 @@
     "price": 19.99,
     "rating": 2.5,
     "description": "Introduce the joy of music with this musical instrument set for kids, allowing them to explore different sounds and rhythms.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 27,
@@ -777,7 +836,8 @@
     "price": 44.99,
     "rating": 2.5,
     "description": "Encourage outdoor play and camping adventures with this kids camping adventure kit, complete with essential gear for the great outdoors.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 28,
@@ -790,7 +850,8 @@
     "price": 149.99,
     "rating": 2.5,
     "description": "Stay stylish and warm with this classic leather jacket, featuring a timeless design and quality craftsmanship.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 28,
@@ -803,7 +864,8 @@
     "price": 69.99,
     "rating": 2.5,
     "description": "Achieve a laid-back look with these slim-fit denim jeans, perfect for casual outings and weekend adventures.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 28,
@@ -816,7 +878,8 @@
     "price": 249.99,
     "rating": 2.5,
     "description": "Elevate your formal attire with this tailored suit set, exuding sophistication and timeless elegance.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 29,
@@ -829,7 +892,8 @@
     "price": 89.99,
     "rating": 2.5,
     "description": "Enhance your athletic style with this performance hoodie, designed for comfort and flexibility during workouts.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 30,
@@ -842,7 +906,8 @@
     "price": 29.99,
     "rating": 2.5,
     "description": "Add a touch of sophistication to your outfit with this patterned silk tie, featuring dapper details and vibrant colors.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 30,
@@ -855,7 +920,8 @@
     "price": 19.99,
     "rating": 2.5,
     "description": "Stay relaxed and stylish on weekends with this comfortable cotton t-shirt, a wardrobe essential for casual days.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 31,
@@ -868,7 +934,8 @@
     "price": 49.99,
     "rating": 2.5,
     "description": "Step out in style with these canvas sneakers, perfect for a street-smart and urban look.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 31,
@@ -881,7 +948,8 @@
     "price": 129.99,
     "rating": 2.5,
     "description": "Carry your essentials in style with this leather briefcase, combining functionality and professional appeal.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 32,
@@ -894,7 +962,8 @@
     "price": 109.99,
     "rating": 2.5,
     "description": "Embrace the outdoors with this water-resistant outdoor jacket, blending modern style and practicality for the adventurous man.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 32,
@@ -907,7 +976,8 @@
     "price": 39.99,
     "rating": 2.5,
     "description": "Achieve a timeless look with these classic aviator sunglasses, adding a touch of vintage style to your ensemble.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 33,
@@ -920,7 +990,8 @@
     "price": 89.99,
     "rating": 2.5,
     "description": "Embrace the floral trend with this flowy maxi dress, featuring an elegant design for a chic and feminine look.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 33,
@@ -933,7 +1004,8 @@
     "price": 49.99,
     "rating": 2.5,
     "description": "Stay cozy and stylish with this comfy knit sweater, perfect for casual outings and chilly days.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 34,
@@ -946,7 +1018,8 @@
     "price": 129.99,
     "rating": 2.5,
     "description": "Make a statement at parties with this sequined party dress, designed to add glamour and sophistication to your evening.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 34,
@@ -959,7 +1032,8 @@
     "price": 59.99,
     "rating": 2.5,
     "description": "Stay active in style with these high-rise yoga leggings, providing comfort and flexibility for your fitness routine.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 35,
@@ -972,7 +1046,8 @@
     "price": 39.99,
     "rating": 2.5,
     "description": "Complete your look with this classic pearl necklace, adding an elegant touch to any outfit or occasion.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 35,
@@ -985,7 +1060,8 @@
     "price": 69.99,
     "rating": 2.5,
     "description": "Enjoy laid-back weekends with this striped oversized sweater, offering a cozy and stylish look for relaxed days.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 36,
@@ -998,7 +1074,8 @@
     "price": 79.99,
     "rating": 2.5,
     "description": "Channel bohemian vibes with this printed maxi skirt, featuring a free-spirited and boho-inspired design.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 36,
@@ -1011,7 +1088,8 @@
     "price": 149.99,
     "rating": 2.5,
     "description": "Achieve a polished and professional look with this tailored blazer and pants set, perfect for the modern working woman.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 37,
@@ -1024,7 +1102,8 @@
     "price": 79.99,
     "rating": 2.5,
     "description": "Showcase your street style with this denim jacket featuring trendy embroidery, adding a cool and edgy vibe to your wardrobe.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 37,
@@ -1037,7 +1116,8 @@
     "price": 34.99,
     "rating": 2.5,
     "description": "Infuse your wardrobe with feminine flair with this lace-trimmed camisole, perfect for layering and adding a touch of romance.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 38,
@@ -1050,7 +1130,8 @@
     "price": 699.99,
     "rating": 2.5,
     "description": "Experience the latest technology with Smartphone X, featuring a powerful processor, high-resolution camera, and sleek design.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 38,
@@ -1063,7 +1144,8 @@
     "price": 549.99,
     "rating": 2.5,
     "description": "Slim and powerful, UltraSlim Android is your go-to smartphone for seamless performance and a stunning display.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 39,
@@ -1076,7 +1158,8 @@
     "price": 499.99,
     "rating": 2.5,
     "description": "Make a sustainable choice with Eco-Friendly Mobile Plus, featuring eco-conscious materials and advanced technology.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 39,
@@ -1089,7 +1172,8 @@
     "price": 799.99,
     "rating": 2.5,
     "description": "Stay ahead with 5G Powerhouse Pro, a mobile device designed for high-speed connectivity and exceptional performance.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 40,
@@ -1102,7 +1186,8 @@
     "price": 899.99,
     "rating": 2.5,
     "description": "Capture every moment in stunning detail with Camera Master Elite, equipped with advanced camera technology for photography enthusiasts.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 40,
@@ -1115,7 +1200,8 @@
     "price": 99.99,
     "rating": 2.5,
     "description": "Experience the future of smartphones with Foldable Tech Wonder, a cutting-edge foldable device with a flexible display.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 41,
@@ -1128,7 +1214,8 @@
     "price": 299.99,
     "rating": 2.5,
     "description": "Get the most value for your money with Budget-Friendly Android, delivering essential features at an affordable price.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 41,
@@ -1141,7 +1228,8 @@
     "price": 749.99,
     "rating": 2.5,
     "description": "Embrace the future of AI with SmartPhone Pro, utilizing artificial intelligence for enhanced user experiences and smart functionality.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 41,
@@ -1154,7 +1242,8 @@
     "price": 899.99,
     "rating": 2.5,
     "description": "Boost your productivity with Dual-Screen Marvel, offering a dual-display experience for multitasking and efficiency.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   },
   {
     "shopId": 41,
@@ -1167,6 +1256,7 @@
     "price": 649.99,
     "rating": 2.5,
     "description": "Stay connected in any environment with Waterproof Adventure Phone, designed for durability and water-resistant performance.",
-    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg"
+    "product_image": "https://i.ibb.co/BtXW1kn/h3.jpg",
+    "stock": "In Stock"
   }
 ]

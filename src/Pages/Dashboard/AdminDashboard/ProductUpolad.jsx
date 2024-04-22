@@ -37,7 +37,7 @@ const ProductUpolad = () => {
 
 
     return (
-        <div className="ml-96 mt-9">
+        <div className=" mt-9">
             <div className="bg-white rounded-md px-5 dark:bg-gray-900">
   <div className="max-w-5xl px-4 py-8 mx-auto lg:py-16">
       <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update product</h2>
