@@ -44,7 +44,10 @@ const ProductCard = () => {
         <button onClick={() => handleWishlist(product)} className="absolute bg-fixed z-40 text-red-700 mb-96 ml-[16.6rem] mt-1"><FaHeart></FaHeart></button>
       <Link to={`/productDetails/${product._id}`}>
         <img className="h-60 z-10 mx-auto border-b transform hover:scale-110 transition-transform duration-300" src={product?.product_image} alt="" />
-        <h1 className="text-center text-xl font-semibold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product?.productName}</h1>
+        <div className="flex gap-3 justify-center items-center">
+        <h1 className="text-center text-xl font-semibold">{product.productName.length > 20 ? product.productName.slice(0, 10) + "..." : product?.productName}</h1>
+        <p className="text-right underline text-red-600 text-sm">{product.stock}</p>
+        </div>
         <p className="text-center text-lg font-bold">$<span className="text-orange-600">{product.price}</span></p>
         <p className="text-center w-48 mx-auto">{product.description.slice(0, 30)}</p>
       </Link>

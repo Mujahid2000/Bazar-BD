@@ -8,11 +8,20 @@ import Slider from '@mui/material/Slider';
 
 const Result = () => {
     const [products, setProducts] = useState([]);
+    // const [isChecked, setIsChecked] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const location = useLocation();
     const searchQuery = new URLSearchParams(location.search).get("q");
     const [value1, setValue1] = useState([0, 500]);
-   
+    const [isChecked1 , setIsChecked1] = useState(false);
+    const [isChecked2 , setIsChecked2] = useState(false);
+    const [isChecked3 , setIsChecked3] = useState(false);
+    const [rating, setRating] = useState(0);
+    // console.log(rating);
+    // console.log(isChecked1);
+    // console.log(isChecked2);
+    // console.log(isChecked3);
+
     const handleChange1 = (event, newValue, activeThumb) => {
         if (!Array.isArray(newValue)) {
             return;
@@ -31,14 +40,41 @@ const Result = () => {
 
     const minDistance = 10;
 
+
+    const handleChange11 = (data) => {
+        setIsChecked1(!isChecked1);
+        filterProducts(searchQuery, products, value1);
+        // console.log('hello', event.target.checked);
+    }
+    
+    const handleChange2 = (data) => {
+        if(event.target.checked === true){
+            setIsChecked2(!isChecked2);
+            filterProducts(searchQuery, products, value1);
+            // console.log('in stock 1', event.target.checked);
+        }
+    }
+    
+    const handleChange3 = (data) => {
+        setIsChecked3(!isChecked3);
+        filterProducts(searchQuery, products, value1);
+        // console.log( event.target.checked);
+    }
+    
+    
+    const handleValue = (value) => {
+        // console.log(value);
+        setRating(value)
+    };
+
     useEffect(() => {
         axios.get('https://bazar-bd-server.vercel.app/addProducts')
             .then(res => {
                 setProducts(res.data);
-                filterProducts(searchQuery, res.data, value1); // Apply filtering initially with default value
+                filterProducts(searchQuery, res.data, value1,); 
             })
             .catch(error => console.error(error));
-    }, [searchQuery,location, value1]); 
+    }, [searchQuery,location, value1,isChecked2, isChecked1, isChecked3, rating]); 
 
     const filterProducts = (query, products, range) => {
         let filteredProducts = [...products];
@@ -50,12 +86,25 @@ const Result = () => {
         // Filter based on price range
         filteredProducts = filteredProducts.filter(product => product.price >= range[0] && product.price <= range[1]);
 
+        if (isChecked1 === true) {
+            // console.log('Filtering for products in stock All');
+            filteredProducts = filteredProducts.filter(product => product.stock !== undefined);
+        }
+        if (isChecked2 === true) {
+            // console.log('Filtering for products in stock');
+            filteredProducts = filteredProducts.filter(product => product.stock === 'In Stock');
+        }
+        if (isChecked3 === true) {
+            // console.log('Filtering for products in stock out ');
+            filteredProducts = filteredProducts.filter(product => product.stock === 'Stock Out');
+        }
+        
+        if(rating){
+            filteredProducts = filteredProducts.filter(products => products.rating <= rating)
+        }
         setSearchResults(filteredProducts);
     };
 
-    const handleValue = (value) => {
-        console.log(value);
-    };
 
     return (
         <div className="flex flex-col-reverse md:flex-row lg:flex-row">
@@ -103,14 +152,14 @@ const Result = () => {
                     />
                 </div>
                 <h2 className="mt-3">Availability</h2>
-            <div className="flex gap-6 ml-5 mt-3">  <input type="checkbox" />
+            <div className="flex gap-6 ml-5 mt-3">  <input onChange={() => handleChange11("All")}  type="checkbox" />
             <h3>All</h3> 
             </div>
-            <div className="flex gap-6 ml-5 mt-3">  <input type="checkbox" />
+            <div className="flex gap-6 ml-5 mt-3">  <input onChange={() => handleChange2("In Stock")}  type="checkbox" />
             <h3>In Stock</h3> 
             </div>
-            <div className="flex gap-6 ml-5 mt-3">  <input type="checkbox" />
-            <h3>StockOut</h3> 
+            <div className="flex gap-6 ml-5 mt-3">  <input onChange={() => handleChange3("Stock Out")} type="checkbox" />
+            <h3>Stock Out</h3> 
             </div>
             <h2 className="text-left ml-5 mt-5 mb-3">Ratings</h2>
             <hr />

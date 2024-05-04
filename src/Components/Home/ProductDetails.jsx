@@ -61,14 +61,14 @@ const ProductDetails = () => {
                 <div className="md:flex items-center -mx-10">
                     <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
                         <div className="relative">
-                            <img src={isFromFlashSalePage ? discount.product_image : products.product_image} className="w-full relative z-10" alt={isFromFlashSalePage ? discount.productName : products.productName} />
+                            <img src={isFromFlashSalePage ? discount?.productData?.product_image : products.product_image} className="w-full relative z-10" alt={isFromFlashSalePage ? discount.productName : products.productName} />
                             <div className="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 px-10">
                         <div className="mb-10">
                             <h1 className="font-bold uppercase text-2xl mb-5">{isFromFlashSalePage ? discount.productName : products.productName}</h1>
-                            <p className="text-base">{isFromFlashSalePage ? discount.description : products.description} <a href="#" className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i className="mdi mdi-arrow-right"></i></a></p>
+                            <p className="text-base">{isFromFlashSalePage ? discount?.productData?.description : products.description} <a href="#" className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i className="mdi mdi-arrow-right"></i></a></p>
                         </div>
                         <div>
                             <div className="inline-block align-bottom mr-5">

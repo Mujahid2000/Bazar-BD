@@ -6,7 +6,7 @@ const Products = () => {
 	const [myProduct, setMyProducts] = useState(null);
 	const [open, setOpen] = useState(false);
 	const [selectedProduct , setSelectedProducts] = useState(null)
-	
+	const data = selectedProduct;
 	
 
 	useEffect(() =>{
@@ -27,22 +27,22 @@ const Products = () => {
 			const productName = form.get('productName')
 			const price 	  = form.get('Price')
 			const discountPrice = form.get('discountPrice')
-			const stock = form.get('stockItem')
-			console.log({productName,price, discountPrice, stock});
+			const discountPercentage = form.get('discountPercentage')
+			const stock = form.get('newStockItem')
+			const productData = data;
+			console.log({productName,price, discountPrice, stock, productData, discountPercentage});
+			axios.post('http://localhost:5000/productDiscount', {productName,price, discountPrice, stock, productData, discountPercentage})
 		} 
 
 
 		const handleSelectChange = async (event, data) => {
 			const selectedValue = event.target.value;
-			
-			  const response = await axios.put(
-				`http://localhost:5000/addProductsUpdate/${data._id}`,{ stock: selectedValue }
+			const response = await axios.put(
+				`https://bazar-bd-server.vercel.app/addProductsUpdate/${data._id}`,{ stock: selectedValue }
 			  ); console.log(response.data); // Handle success response if needed
 		
 			} 
 			
-		
-
 
 
     return (
@@ -174,16 +174,22 @@ const Products = () => {
                 </div>
             </div>
 
-          
+          <div className='grid grid-cols-2 gap-4'>
             <div className="mt-4">
                 <label  className="block text-sm font-medium text-gray-700">Discount Price</label>
-                <input type="number" id="discountPrice" placeholder={selectedProduct.discountPrice} name="discountPrice" className="mt-1 p-2 w-full border rounded-md"/>
+                <input type="text" id="discountPrice" placeholder='Type discount price' name="discountPrice" className="mt-1 p-2 w-full border rounded-md"/>
             </div>
+            <div className="mt-4">
+                <label  className="block text-sm font-medium text-gray-700">Discount Percentage</label>
+                <input type="text" id="discountPercentage" placeholder='Type percentage' name="discountPercentage" className="mt-1 p-2 w-full border rounded-md"/>
+            </div>
+
+		  </div>
 
             
             <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700">Stock Item</label>
-                <input type="number" id="stockItem" placeholder={selectedProduct.stockItem} name="stockItem" className="mt-1 p-2 w-full border rounded-md"/>
+                <input type="number" id="stockItem" placeholder='Stock Item' name="newStockItem" className="mt-1 p-2 w-full border rounded-md"/>
             </div>
 
             

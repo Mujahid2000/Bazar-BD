@@ -10,7 +10,7 @@ const TopProducts = () => {
     const { user } = useContext(AuthContext);
     const [loadProducts, setLoadProducts] = useState(5)
     const email = user?.email;
-    console.log(products);
+    // console.log(products);
     useEffect(() => {
         axios.get('https://bazar-bd-server.vercel.app/addProducts')
             .then(res => {
