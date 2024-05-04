@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Rating from "./Rating";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import Slider from '@mui/material/Slider';
@@ -115,12 +115,16 @@ const Result = () => {
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-y-8 place-items-center">
             {searchResults.map((product) => (
                                 <div key={product._id} className="w-72 cursor-pointer shadow-lg rounded-lg h-96 border mt-8 ml-4" >
+                                    <Link to={`/productDetails/${product._id}`}>
+                                    
                                     <img className="h-60 mx-auto border-b transform hover:scale-110 transition-transform duration-300" src={product?.product_image} alt="" />
                                     <h1 className="text-center hover:text-orange-600 text-xl font-semibold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product?.productName}</h1>
                                     <p className="text-center text-lg font-bold ">$<span className="text-orange-600">{product.price} </span></p>
                                     <p className="text-center w-60 mx-auto">{product.description.slice(0, 30)}</p>
                                     <Rating stars={product.rating} />
                                     <p><button className="border-none hover:bg-slate-500 outline-none px-3 py-2 rounded-b-lg text-white bg-orange-600 text-center cursor-pointer w-full text-lg">Add to Cart</button></p>
+                                
+                                    </Link>
                                 </div>
                             ))}
         </div>
