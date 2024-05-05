@@ -63,10 +63,12 @@ const FlashSale = () => {
 
 
         const handleAddCart = (data) => {
-          axios
-            .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
-            .then((response) => console.log(response));
-          toast.success("Item added to cart!").catch(console.log("error"));
+          if(user){
+            axios
+              .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+              .then((response) => console.log(response));
+            toast.success("Item added to cart!").catch(console.log("error"));
+          }
         };
 
     return (

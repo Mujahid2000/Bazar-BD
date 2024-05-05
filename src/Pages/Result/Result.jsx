@@ -100,7 +100,7 @@ const Result = () => {
         }
         
         if(rating){
-            filteredProducts = filteredProducts.filter(products => products.rating <= rating)
+            filteredProducts = filteredProducts.filter(products => products.rating >= rating)
         }
         setSearchResults(filteredProducts);
     };
@@ -167,7 +167,7 @@ const Result = () => {
             </div>
             <h2 className="text-left ml-5 mt-5 mb-3">Ratings</h2>
             <hr />
-            <button className="flex hover:bg-slate-100 py-2 px-4 rounded-md gap-6 ml-1 mt-5" value={5} onClick={() => handleValue(5)}>
+            <button className="flex hover:bg-slate-100 py-2 px-4 rounded-md gap-6 ml-1 mt-5" value={4.5} onClick={() => handleValue(4.5)}>
             <FaStar className="text-orange-500"/>
             <FaStar className="text-orange-500"/>
             <FaStar className="text-orange-500"/>

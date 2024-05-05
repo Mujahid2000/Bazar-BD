@@ -21,10 +21,12 @@ const TopProducts = () => {
     }, []);
 
     const handleAddCart = (data) => {
-      axios
-        .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
-        .then((response) => console.log(response));
-      toast.success("Item added to cart!").catch(console.log("error"));
+        if(user){
+            axios
+              .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+              .then((response) => console.log(response));
+            toast.success("Item added to cart!").catch(console.log("error"));
+        }
     };
 
     const loadMore= () =>{
@@ -33,9 +35,11 @@ const TopProducts = () => {
 
 
     const handleWishlist = (product) =>{
-         axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
-         .then(res => console.log(res));
-         toast.success("Added Favourite !").catch(console.log("error"));
+        if(user){
+            axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+            .then(res => console.log(res));
+            toast.success("Added Favourite !").catch(console.log("error"));
+        }
     }
 
 
