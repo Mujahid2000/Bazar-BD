@@ -7,9 +7,9 @@ import { IoIosArrowForward } from "react-icons/io";
 const Banner = () => {
     const [sliderIndex, setSliderIndex] = useState(0);
     const images = [
-        'https://i.ibb.co/R73SvS6/Banner-1.jpg',
-        'https://i.ibb.co/kBqr5jK/Banner2.jpg',
-        'https://i.ibb.co/XYjCGWB/Banner3.jpg',
+        'https://i.ibb.co/jZ7WtLc/Banner-1.jpg',
+        'https://i.ibb.co/hWn7Gy3/Banner2.jpg',
+        'https://i.ibb.co/tJkDmrP/Banner3.jpg',
     ];
 
     const pervSlide = () => {

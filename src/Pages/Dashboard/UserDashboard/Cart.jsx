@@ -20,6 +20,7 @@ const Cart = () => {
     const currentDate = new Date();
     
     
+    
     useEffect(() =>{
         const fetchData = async () =>{
             try {
@@ -38,6 +39,7 @@ const Cart = () => {
     },[email])
 
     const delivery= 15.00 * item;
+    console.log(typeof(delivery));
 
   let totalPrice = 0;
     // const totalPrice = cart?.reduce((total, item) => total + item?.data?.price, 0);
@@ -47,11 +49,11 @@ const Cart = () => {
             totalPrice += item?.data?.price
         });
     }
-
+    console.log(totalPrice);
 
     let payment = delivery + totalPrice;
    
-    
+    console.log(payment);
 
 
     return (
@@ -108,7 +110,7 @@ const Cart = () => {
                     </div>
                     <h6
                         className="text-indigo-600 font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
-                        ${myData.data.price?.toFixed(2)}</h6>
+                        ${typeof(myData.data.price)}</h6>
                 </div>
             </div>
             )))

@@ -140,12 +140,12 @@ const FlashSale = () => {
               </div>
               </div>
                 </div>
-                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 place-item-center max-w-[1440px] mx-auto mt-10">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 place-item-center max-w-[1440px] mx-auto mt-10">
                     
                 </div> 
             </div>
           </div>
-            
+          
             <div className="mt-5 mx-w-[1440px] mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
   {products.map((myData) => (
     <div key={myData._id} className="rounded w-80  shadow-lg">
@@ -155,14 +155,14 @@ const FlashSale = () => {
           <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
           
           <div className="text-sm absolute top-0 right-0 bg-indigo-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-            <span className="font-bold">{myData?.discountPercentage}</span>
+            <span className="font-bold">{myData?.discountPercentage}%</span>
           </div>
         </div>
         <div className="px-6 py-4">
           <h3 className="font-semibold text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out">{myData.productData?.productName}</h3>
           <p className="text-gray-500 text-sm">{myData.productData?.description}</p>
           <div  className="flex justify-between">
-          <p className="text-black text-sm font-bold">${myData.productData?.price}</p>
+          <p className="text-black text-sm font-bold">${myData.productData?.price - myData?.discountPrice}</p>
           <p className="text-black text-sm font-bold line-through">${myData?.discountPrice}</p>
 
           </div>

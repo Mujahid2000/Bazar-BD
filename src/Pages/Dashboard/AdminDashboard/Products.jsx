@@ -1,6 +1,7 @@
 import { data } from 'autoprefixer';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const Products = () => {
 	const [myProduct, setMyProducts] = useState(null);
@@ -26,12 +27,20 @@ const Products = () => {
 			const form = new FormData(e.currentTarget)
 			const productName = form.get('productName')
 			const price 	  = form.get('Price')
-			const discountPrice = form.get('discountPrice')
-			const discountPercentage = form.get('discountPercentage')
+			const discountPriceString = form.get('discountPrice');
+			const discountPrice = parseFloat(discountPriceString);
+			const discountPercentageString = form.get('discountPercentage');
+			const discountPercentage = parseFloat(discountPercentageString);
 			const stock = form.get('newStockItem')
 			const productData = data;
 			console.log({productName,price, discountPrice, stock, productData, discountPercentage});
-			axios.post('http://localhost:5000/productDiscount', {productName,price, discountPrice, stock, productData, discountPercentage})
+			axios.post('https://bazar-bd-server.vercel.app/productDiscount', {productName,price, discountPrice, stock, productData, discountPercentage});
+			setOpen(false)
+			Swal.fire({
+				title: "Good job!",
+				text: "You Successfully Added Discount Program",
+				icon: "success"
+			});
 		} 
 
 
@@ -39,7 +48,7 @@ const Products = () => {
 			const selectedValue = event.target.value;
 			const response = await axios.put(
 				`https://bazar-bd-server.vercel.app/addProductsUpdate/${data._id}`,{ stock: selectedValue }
-			  ); console.log(response.data); // Handle success response if needed
+		); console.log(response.data); // Handle success response if needed
 		
 			} 
 			
