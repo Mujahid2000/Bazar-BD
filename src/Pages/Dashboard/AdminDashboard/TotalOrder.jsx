@@ -37,9 +37,9 @@ const TotalOrder = () => {
 
 
     return (
-  <div className="flex flex-col justify-center bg-gray-100 mx-auto mt-20 ">
-<div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 gap-y-5">
-<div className="container mx-auto pr-4">
+  <div className="flex flex-col  bg-gray-100 mx-auto mt-20 ">
+<div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 gap-5">
+<div className="container mx-auto ">
     <div className="w-72 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
       <div className="h-20 bg-red-400 flex items-center justify-between">
         <p className="mr-0 text-white text-lg pl-5">Total Order Items</p>
@@ -52,7 +52,7 @@ const TotalOrder = () => {
     </div>
   </div>
    
-  <div className="container mx-auto pr-4">
+  <div className="container mx-auto ">
     <div className="w-72 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
       <div className="h-20 bg-blue-500 flex items-center justify-between">
         <p className="mr-0 text-white text-lg pl-5">Today Total Customer</p>
@@ -65,7 +65,7 @@ const TotalOrder = () => {
     </div>
   </div>
 
-  <div className="container mx-auto pr-4">
+  <div className="container mx-auto ">
     <div className="w-72 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
       <div className="h-20 bg-purple-400 flex items-center justify-between">
         <p className="mr-0 text-white text-lg pl-5">Total Sell</p>
@@ -114,7 +114,7 @@ const TotalOrder = () => {
 			</div>
 		</div>
 		<div>
-			<div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+			<div className="  overflow-x-auto">
         <div className="h-80 scroll-m-0"> 
 
 				<div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
