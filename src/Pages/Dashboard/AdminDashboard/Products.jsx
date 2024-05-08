@@ -7,6 +7,8 @@ const Products = () => {
 	const [myProduct, setMyProducts] = useState(null);
 	const [open, setOpen] = useState(false);
 	const [selectedProduct , setSelectedProducts] = useState(null)
+	const [search, setSearch] = useState( '');
+	
 	const data = selectedProduct;
 	
 
@@ -52,6 +54,13 @@ const Products = () => {
 		
 			} 
 			
+		const handleProductSearch = (event) =>{
+			// console.log(event.target.value);
+			setSearch(event.target.value)
+		}
+		const filteredProducts = myProduct && myProduct.filter(product => {
+			return product?.productName.toLowerCase().includes(search.toLowerCase());
+		});
 
 
     return (
@@ -71,7 +80,7 @@ const Products = () => {
 							clip-rule="evenodd"></path>
 					</svg>
 				</div>
-				<input type="text" id="table-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items"/>
+				<input onChange={ handleProductSearch} type="text" id="table-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items"/>
         </div>
 			</div>
 			<table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
@@ -106,7 +115,7 @@ const Products = () => {
 				</thead>
 				<tbody>
 					{
-					myProduct &&	myProduct.map(data => (
+					filteredProducts &&	filteredProducts.map(data => (
 							<tr key={data._id}
 						className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 						<td className="w-4 p-4">

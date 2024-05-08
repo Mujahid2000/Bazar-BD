@@ -37,14 +37,16 @@ const Dashboard = () => {
                    <FaBell/>
                 </button>
                 <button>
-
+                <Link to={'/'}>
+                
                 <img className='w-6 h-6 rounded-full' src={user?.photoURL} alt="" />
+                </Link>
                 </button>
             </div>
         </div>
     </nav>
 
-    <div id="sideNav" className={`lg:block ${menuVisible ? '' : 'hidden'} bg-white border-black w-64 min-h-screen fixed  rounded-none border-none z-50 mt-[4.5rem]` }>
+    <div id="sideNav" className={`lg:block xl:block 2xl:block ${menuVisible ? '' : 'hidden'} bg-white border-black w-64 min-h-screen fixed  rounded-none border-none z-50 mt-[4.5rem]` }>
         <div className="p-4 border h-screen space-y-4">
         <ul className="mt-6 space-y-2 tracking-wide">
           {isAdmin &&
