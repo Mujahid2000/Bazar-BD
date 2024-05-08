@@ -30,6 +30,7 @@ import User from './Pages/Dashboard/AdminDashboard/User';
 import TotalOrder from './Pages/Dashboard/AdminDashboard/TotalOrder';
 import Products from './Pages/Dashboard/AdminDashboard/Products';
 import ProductUpolad from './Pages/Dashboard/AdminDashboard/ProductUpolad';
+import DetailPayment from './Components/Home/Payment/DetailPayment';
 
 
 
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: '/flashSale',
         element: <FlashSale></FlashSale>
+      },
+      {
+        path: '/myPayment/:payment',
+        element: <DetailPayment/>
       }
     ],
   },

@@ -31,7 +31,7 @@ const Payment = () => {
     },[email])
 
     const handlePayment = async (payment, email, currentDate, name, cart) =>{
-        console.log(payment, email, currentDate, name, cart);
+        // console.log(payment, email, currentDate, name, cart);
         try{
         axios.post(`https://bazar-bd-server.vercel.app/payment`, {payment, email, currentDate, name, cart})
         .then((response) => {console.log(response.data.url)
@@ -44,7 +44,7 @@ const Payment = () => {
 
 
     return (
-        <div  className='mx-40 mt-9'>
+        <div  className='mx-40 mt-20'>
         
 <div className="max-w-2xl flex justify-center items-center mx-auto">
 

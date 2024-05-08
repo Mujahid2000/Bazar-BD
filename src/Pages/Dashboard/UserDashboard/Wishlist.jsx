@@ -26,7 +26,7 @@ const Wishlist = () => {
 
     return (
        
-            <div className="ml-14 mt-20 mb-5 md:mx-64 lg:mx-80">
+            <div className=" mt-20 mb-5 md:mx-64 lg:mx-80">
             {wishlist?.map(({ _id, product }) => (
                 <div key={_id} className="flex flex-col justify-center mt-4">
                     <div className="relative flex flex-col md:flex-row rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">

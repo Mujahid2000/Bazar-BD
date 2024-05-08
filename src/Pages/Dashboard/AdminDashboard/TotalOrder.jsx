@@ -37,7 +37,7 @@ const TotalOrder = () => {
 
 
     return (
-  <div className="flex flex-col justify-center bg-gray-100 mx-60 mt-9 py-10 p-14">
+  <div className="flex flex-col justify-center bg-gray-100 mx-auto mt-20 py-10 p-14">
 <div className="flex">
 <div className="container mx-auto pr-4">
     <div className="w-72 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">

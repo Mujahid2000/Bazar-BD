@@ -57,9 +57,9 @@ const Products = () => {
     return (
         <div>
 
-<div className="max-w-7xl ">
+<div className="max-w-7xl mt-20">
 
-	<div className="relative overflow-x-auto bg-gray-950 shadow-md sm:rounded-lg">
+	<div className="relative  bg-gray-950 shadow-md sm:rounded-lg">
 		<div className="p-4">
 			<label for="table-search" className="sr-only">Search</label>
 			<div className="relative mt-1">
