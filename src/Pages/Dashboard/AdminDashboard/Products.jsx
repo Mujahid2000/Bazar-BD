@@ -137,7 +137,7 @@ const Products = () => {
 							${data?.price}
 						</td>
 						<td className="px-6 py-4">
-							<select onChange={(event) => handleSelectChange(event, data)} className='bg-white rounded-md'>
+							<select  onChange={(event) => handleSelectChange(event, data)} className='bg-white rounded-md'>
 								<option value="In Stock"> In Stock</option>
 								<option value="Stock Out"> Stock Out</option>
 							</select>

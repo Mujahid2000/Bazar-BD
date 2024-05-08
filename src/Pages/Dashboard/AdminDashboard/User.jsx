@@ -4,12 +4,20 @@ import { useEffect, useState } from "react";
 
 const User = () => {
     const [allUser, setAllUser] = useState(null);
+	const [search, setSearch] = useState('')
+	console.log(search);
     
     useEffect(() => {
         axios.get('https://bazar-bd-server.vercel.app/users')
             .then(res => setAllUser(res.data))
             .catch(error => console.error(error));
     }, []);
+
+	const filterUser = allUser && allUser.filter(user => {
+		return user?.name.toLowerCase().includes(search.toLowerCase())
+	})
+
+
     return (
         <div>
             <div className="bg-white p-9 ml-6 md:ml-12 lg:ml-7 min-w-[90rem] mt-9 rounded-md w-full">
@@ -26,7 +34,7 @@ const User = () => {
 						d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
 						clip-rule="evenodd" />
 				</svg>
-				<input className="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search..."/>
+				<input onChange={(e) => setSearch(e.target.value)} className="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search..."/>
           </div>
 				
 			</div>
@@ -65,7 +73,7 @@ const User = () => {
 						</thead>
 						<tbody>
 							{
-                              allUser &&   allUser.map(data => (
+                              filterUser &&   filterUser.map(data => (
                                     <tr key={data._id}>
 								<td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<div className="flex items-center">
