@@ -7,6 +7,7 @@ import axios from "axios";
 const Order = () => {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState(null);
+ 
   const photo = user?.photoURL;
   const email = user?.email;
 
@@ -29,7 +30,7 @@ const Order = () => {
 
 
     return (
-<div className="bg-white h-screen  mt-20  lg:mx-96 rounded-md w-80  md:w-full lg:w-full">
+<div className="bg-white h-screen  mt-20  lg:mx-auto rounded-md w-80  md:w-full lg:w-full">
 <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
   <div className="flex justify-start item-start space-y-2 flex-col">
     <h1 className="text-3xl ml-4 dark:text-black lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Order #13432</h1>

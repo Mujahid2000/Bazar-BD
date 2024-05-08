@@ -81,7 +81,7 @@ const router = createBrowserRouter([
         element: <FlashSale></FlashSale>
       },
       {
-        path: '/myPayment/:payment',
+        path: '/myPayment/:payment/:id',
         element: <DetailPayment/>
       }
     ],

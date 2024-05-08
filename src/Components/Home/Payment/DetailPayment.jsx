@@ -1,24 +1,33 @@
 import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../../Configs/AuthContext';
 
 
 const DetailPayment = () => {
 
-    const { payment } = useParams();
-    const [cart, setCart] = useState(null);
+    const { payment, id } = useParams();
+    const [cart, setProducts] = useState(null);
     console.log(cart);
+   
     const {user} = useContext(AuthContext);
     const email = user?.email;
     const name = user?.displayName;
     const currentDate = new Date();
 
+    useEffect(() => {
+        axios
+          .get(`https://bazar-bd-server.vercel.app/addProducts/${id}`)
+          .then((res) => setProducts(res.data))
+          .catch((error) => console.error(error));
+      }, [id]);
+
+
 
     const handlePayment = async (payment, email, currentDate, name, cart) =>{
         // console.log(payment, email, currentDate, name, cart);
         try{
-        axios.post(`https://bazar-bd-server.vercel.app/myPayment`, {payment, email, currentDate, name, cart})
+        axios.post(`http://localhost:5000/myPayment`, {payment, email, currentDate, name, cart})
         .then((response) => {console.log(response.data.url)
     window.location.replace(response.data.url)});
     } catch(error){

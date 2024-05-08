@@ -23,7 +23,10 @@ const Dashboard = () => {
                 <BiMenu className='w-6 h-6'/>
             </button>
             <div className="ml-1">
+              <Link to={'/'}>
+              
                 <h2 className='text-4xl font-bold py-4'>BazarBD</h2>
+              </Link>
             </div>
             <div className="space-x-4">
                 <button>

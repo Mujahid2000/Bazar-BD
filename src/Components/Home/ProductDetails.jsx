@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import { useLocation  } from 'react-router-dom';
 import { AuthContext } from "../../Configs/AuthContext";
 import { Toaster, toast } from "sonner";
+import { FaHeart } from "react-icons/fa";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 
 
@@ -63,6 +65,14 @@ const ProductDetails = () => {
          }
         };
 
+        const handleWishlist = (product) =>{
+            if(user){
+              axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+              .then(res => console.log(res));
+              toast.success("Added Favourite !").catch(console.log("error"));
+            }
+          }
+
 
     return (
         <div className="max-w-[1440px] mx-auto">
@@ -90,20 +100,24 @@ const ProductDetails = () => {
                             </div>
                             <div className="inline-block sm:mt-3 align-bottom">
                                 <div className="flex items-center mt-6">
-                                {isFromFlashSalePage ? (
-                                <Link to={`/myPayment/${discount.price.toFixed(2)}`}>
-                                    <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700">Order Now</button>
+                                {/* {isFromFlashSalePage ? (
+                                <Link to={`/myPayment/${discount.price.toFixed(2)}/${discount._id}`}>
+                                    <button className="px-3 py-3 flex justify-between gap-2 items-center bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700"><FaHeart /> WishList</button>
                                 </Link>
                                 ) : (
                                 products.price.toFixed(2) !== '0' && (
-                                    <Link to={`/myPayment/${products.price.toFixed(2)}`}>
-                                    <button className="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700">Order Now</button>
+                                    <Link to={`/myPayment/${products.price.toFixed(2)}/${products._id}`}>
+                                    <button className="px-3 flex justify-between gap-2 items-center py-3 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700"><FaHeart /> WishList</button>
                                     </Link>
                                 )
-                                )}
+                                )} */}
 
-                                    <button onClick={() => {handleAddCart(isFromFlashSalePage ? discount : products)}} className="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
-                                        <svg className="h-5 w-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <button onClick={() => handleWishlist(isFromFlashSalePage ? discount?.productData : products)} className="px-3 flex justify-between gap-2 items-center py-3 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700"><FaHeart /> WishList</button>
+
+                                    <button onClick={() => {handleAddCart(isFromFlashSalePage ? discount : products)}} className="mx-2 flex justify-between  items-center text-gray-600 border rounded-md px-3 py-3 text-sm hover:bg-gray-200 focus:outline-none">
+                                    <MdOutlineShoppingCart />
+
+                                    Add To Cart
                                     </button>
                                 </div>
                             </div>
