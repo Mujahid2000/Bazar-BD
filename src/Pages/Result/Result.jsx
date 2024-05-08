@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Rating from "./Rating";
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaCartArrowDown, FaHeart, FaRegStar, FaStar } from "react-icons/fa";
 import Slider from '@mui/material/Slider';
+import { AuthContext } from "../../Configs/AuthContext";
+import { Toaster, toast } from "sonner";
 
 
 const Result = () => {
@@ -17,6 +19,8 @@ const Result = () => {
     const [isChecked2 , setIsChecked2] = useState(false);
     const [isChecked3 , setIsChecked3] = useState(false);
     const [rating, setRating] = useState(0);
+    const { user } = useContext(AuthContext);
+    const email = user?.email;
     // console.log(rating);
     // console.log(isChecked1);
     // console.log(isChecked2);
@@ -106,26 +110,50 @@ const Result = () => {
     };
 
 
+    const handleAddCart = (data) => {
+        if(user){
+          axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+          .then((response) => console.log(response));
+        toast.success("Item added to cart!").catch(console.log("error"));
+        }
+        };
+  
+  
+        const handleWishlist = (product) =>{
+          if(user){
+            axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+            .then(res => console.log(res));
+            toast.success("Added Favourite !").catch(console.log("error"));
+          }
+        }
+
+
     return (
         <div className="flex flex-col-reverse md:flex-row lg:flex-row">
             <div>
             <div className=" mx-2 mt-20">
         <h2 className="text-black ml-14 text-xl">Search Results:{searchResults.length}</h2>
         <div >
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-y-8 place-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-7 gap-y-8 place-items-center">
             {searchResults.map((product) => (
-                                <div key={product._id} className="w-72 cursor-pointer shadow-lg rounded-lg h-96 border mt-8 ml-4" >
-                                    <Link to={`/productDetails/${product._id}`}>
-                                    
-                                    <img className="h-60 mx-auto border-b transform hover:scale-110 transition-transform duration-300" src={product?.product_image} alt="" />
-                                    <h1 className="text-center hover:text-orange-600 text-xl font-semibold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product?.productName}</h1>
-                                    <p className="text-center text-lg font-bold ">$<span className="text-orange-600">{product.price} </span></p>
-                                    <p className="text-center w-60 mx-auto">{product.description.slice(0, 30)}</p>
-                                    <Rating stars={product.rating} />
-                                    <p><button className="border-none hover:bg-slate-500 outline-none px-3 py-2 rounded-b-lg text-white bg-orange-600 text-center cursor-pointer w-full text-lg">Add to Cart</button></p>
-                                
-                                    </Link>
+                                <div className="max-w-xs mx-auto relative shadow-lg bg-[#1A2238] spacing" key={product._id}>
+                                <div className="absolute left-0 top-10 text-uppercase text-xs font-semibold bg-gray-600 text-green-500 px-2 py-1">New Product</div>
+                                <div className="flex items-center justify-center h-72 bg-white">
+                                    <img src={product.product_image} className="max-w-full max-h-64"/>
                                 </div>
+                                <div className="p-7">
+                                    <span className="block text-xs font-semibold uppercase text-blue-300 ">{product.category}</span>
+                                    <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${product._id}`}>{product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link></h4>
+                                    <p className="text-base leading-6 mb-4 text-blue-200">{product.description.slice(0, 40)}</p>
+                                    <div className="overflow-hidden border-t border-blue-200 ">
+                                        <div className="text-lg font-semibold text-red-600">${product?.price}</div>
+                                        <div className="justify-end flex gap-4">
+                                            <button onClick={() => handleWishlist(product)}><FaHeart  className="text-white"/></button>
+                                            <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-white"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             ))}
         </div>
             
@@ -205,6 +233,14 @@ const Result = () => {
             <FaRegStar  className="text-orange-500"/>
             </button>
             </div>
+            <Toaster
+        position="bottom-right"
+        toastOptions={{
+          classNames: {
+            success: "text-green-400",
+          },
+        }}
+      />
         </div>
     );
 };

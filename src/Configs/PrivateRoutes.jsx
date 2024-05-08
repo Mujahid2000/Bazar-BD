@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }) => {
     console.log(user);
 
     if (loading)
-        return<Loading></Loading>
+        return<Loading ></Loading>
 
 
     if (user) {

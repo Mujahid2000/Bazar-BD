@@ -37,8 +37,8 @@ const TotalOrder = () => {
 
 
     return (
-  <div className="flex flex-col justify-center bg-gray-100 mx-auto mt-20 py-10 p-14">
-<div className="flex">
+  <div className="flex flex-col justify-center bg-gray-100 mx-auto mt-20 ">
+<div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-4 gap-y-5">
 <div className="container mx-auto pr-4">
     <div className="w-72 bg-white max-w-xs mx-auto rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-100 cursor-pointer">
       <div className="h-20 bg-red-400 flex items-center justify-between">
@@ -144,7 +144,7 @@ const TotalOrder = () => {
 								</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody className="">
          
 
 						{
@@ -203,99 +203,9 @@ const TotalOrder = () => {
 			</div>
 		</div>
 	</div>
-  <div className="container mr-5  mx-auto bg-white shadow-xl">
-    <div className="w-11/12 mx-auto">
-      <div className="bg-white my-6">
-        <table className="text-left w-full border-collapse"> 
-          <thead>
-            <tr>
-              <th className="py-4 px-6 bg-purple-400 font-bold uppercase text-sm text-white border-b border-grey-light">KEYWORDS</th>
-              <th className="py-4 px-6 text-center bg-purple-400 font-bold uppercase text-sm text-white border-b border-grey-light">TOTAL ENTERIES</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="hover:bg-grey-lighter">
-              <td className="py-4 px-6 border-b border-grey-light">Bible</td>
-              <td className="py-4 px-6 text-center border-b border-grey-light">
-                11980
-              </td>
-            </tr>
-            <tr className="hover:bg-grey-lighter">
-              <td className="py-4 px-6 border-b border-grey-light">Blah</td>
-              <td className="py-4 px-6 text-center border-b border-grey-light">
-                340
-              </td>
-            </tr>
-            <tr className="hover:bg-grey-lighter">
-              <td className="py-4 px-6 border-b border-grey-light">Blah</td>
-              <td className="py-4 px-6 text-center border-b border-grey-light">
-                901
-              </td>
-            </tr>
-            <tr className="hover:bg-grey-lighter">
-              <td className="py-4 px-6 border-b border-grey-light">Blah</td>
-              <td className="py-4 px-6 text-center border-b border-grey-light">
-                11950
-              </td>
-            </tr>
-            <tr className="hover:bg-grey-lighter">
-              <td className="py-4 px-6 border-b border-grey-light">Blah</td>
-              <td className="py-4 px-6 text-center border-b border-grey-light">
-                459
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      </div>
-        </div>
+  
 
-    <div className="container  mx-auto bg-white shadow-xl">
-      <div className="w-11/12 mx-auto">
-        <div className="bg-white my-6">
-          <table className="text-left w-full border-collapse"> 
-            <thead>
-              <tr>
-                <th className="py-4 px-6 bg-purple-400 font-bold uppercase text-sm text-white border-b border-grey-light">MSISDN</th>
-                <th className="py-4 px-6 text-center bg-purple-400 font-bold uppercase text-sm text-white border-b border-grey-light">ENTRIES</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="hover:bg-grey-lighter">
-                <td className="py-4 px-6 border-b border-grey-light">26809304030</td>
-                <td className="py-4 px-6 text-center border-b border-grey-light">
-                  495,455
-                </td>
-              </tr>
-              <tr className="hover:bg-grey-lighter">
-                <td className="py-4 px-6 border-b border-grey-light">26809304030</td>
-                <td className="py-4 px-6 text-center border-b border-grey-light">
-                  495,455
-                </td>
-              </tr>
-              <tr className="hover:bg-grey-lighter">
-                <td className="py-4 px-6 border-b border-grey-light">26809304030</td>
-                <td className="py-4 px-6 text-center border-b border-grey-light">
-                  495,455
-                </td>
-              </tr>
-              <tr className="hover:bg-grey-lighter">
-                <td className="py-4 px-6 border-b border-grey-light">26809304030</td>
-                <td className="py-4 px-6 text-center border-b border-grey-light">
-                  32,333
-                </td>
-              </tr>
-              <tr className="hover:bg-grey-lighter">
-                <td className="py-4 px-6 border-b border-grey-light">26809304030</td>
-                <td className="py-4 px-6 text-center border-b border-grey-light">
-                  31,199
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        </div>
-          </div>
+   
    
     
       

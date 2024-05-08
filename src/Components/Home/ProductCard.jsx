@@ -3,7 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../../Configs/AuthContext";
-import { FaHeart } from "react-icons/fa";
+import { FaCartArrowDown, FaHeart } from "react-icons/fa";
+// import './ProductCard.css';
+
 
 const ProductCard = () => {
     const [products, setProducts] = useState([]);
@@ -40,26 +42,29 @@ const ProductCard = () => {
       }
 
     return (
-        <div className="mx-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-8 place-items-center">
+        <div className="mx-2 mt-7">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-7 gap-y-8 place-items-center">
   {products.slice(0, loadProducts).map((product) => (
-    <div key={product._id} className="w-72 cursor-pointer shadow-lg rounded-lg h-96 border mt-8 ml-4">
-        <button onClick={() => handleWishlist(product)} className="absolute bg-fixed z-40 text-red-700 mb-96 ml-[16.6rem] mt-1"><FaHeart></FaHeart></button>
-      <Link to={`/productDetails/${product._id}`}>
-        <img className="h-60 z-10 mx-auto border-b transform hover:scale-110 transition-transform duration-300" src={product?.product_image} alt="" />
-        <div className="flex gap-3 justify-center items-center">
-        <h1 className="text-center text-xl font-semibold">{product.productName.length > 20 ? product.productName.slice(0, 10) + "..." : product?.productName}</h1>
-        <p className="text-right underline text-red-600 text-sm">{product.stock}</p>
+   
+    <div className="max-w-xs mx-auto relative shadow-lg bg-[#1A2238] spacing" key={product._id}>
+        <div className="absolute left-0 top-10 text-uppercase text-xs font-semibold bg-gray-600 text-green-500 px-2 py-1">New Product</div>
+        <div className="flex items-center justify-center h-72 bg-white">
+            <img src={product.product_image} className="max-w-full max-h-64"/>
         </div>
-        <p className="text-center text-lg font-bold">$<span className="text-orange-600">{product.price}</span></p>
-        <p className="text-center w-48 mx-auto">{product.description.slice(0, 30)}</p>
-      </Link>
-      <p>
-        <button onClick={() => {handleAddCart(product)}} className="border-none hover:bg-slate-500 outline-none px-3 py-2 rounded-b-lg text-white bg-orange-600 text-center cursor-pointer w-full text-lg">
-          Add to Cart
-        </button>
-      </p>
+        <div className="p-7">
+            <span className="block text-xs font-semibold uppercase text-blue-300 ">{product.category}</span>
+            <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${product._id}`}>{product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link></h4>
+            <p className="text-base leading-6 mb-4 text-blue-200">{product.description.slice(0, 40)}</p>
+            <div className="overflow-hidden border-t border-blue-200 ">
+                <div className="text-lg font-semibold text-red-600">${product?.price}</div>
+                <div className="justify-end flex gap-4">
+                    <button onClick={() => handleWishlist(product)}><FaHeart  className="text-white"/></button>
+                    <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-white"/></button>
+                </div>
+            </div>
+        </div>
     </div>
+
   ))}
 </div>
 

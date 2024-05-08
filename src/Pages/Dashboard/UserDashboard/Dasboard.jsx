@@ -45,7 +45,7 @@ const Dasboard = () => {
   
     
     return (
-        <div className='lg:min-w-[90rem] mt-16 '>
+        <div className='lg:min-w-[90rem] lg:ml-16 px-5 mt-24 mx-auto '>
       
 
 <div className="flex flex-wrap bg-pink-500 ">
