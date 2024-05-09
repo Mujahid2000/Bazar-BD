@@ -120,7 +120,7 @@ const Products = () => {
                         </div>
 
 					<input onChange={ handleProductSearch} type="text" id="table-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Products"/>
-					<h2 className='text-white'>length: {filteredProducts.length}</h2>
+					<h2 className='text-white text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl'>Total Products: {filteredProducts.length}</h2>
                         <div className='ml-[500px]'>
                             <button onClick={handleDeleteSelectedProducts} className={`${selectedProducts.length === 0 ? 'hidden' : 'middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'}`} data-ripple-light="true">Delete</button>
                         </div>
