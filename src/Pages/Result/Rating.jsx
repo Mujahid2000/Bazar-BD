@@ -15,7 +15,7 @@ const Rating = ({ stars }) => {
     };
 
     return (
-        <div className="grid grid-cols-5 mb-1 w-24 mx-auto">
+        <div className="grid grid-cols-5 mb-1 w-24 ">
             {[...Array(5)].map((_, index) => renderStar(index))}
         </div>
     );

@@ -129,12 +129,12 @@ const Result = () => {
 
 
     return (
-        <div className="flex flex-col-reverse md:flex-row lg:flex-row">
+        <div className="flex flex-col-reverse md:flex-row lg:flex-row mx-auto justify-evenly">
             <div>
             <div className=" mx-2 mt-20">
         <h2 className="text-black ml-14 text-xl">Search Results:{searchResults.length}</h2>
         <div >
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-7 gap-y-8 place-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-7 mt-9 gap-y-8 place-items-center">
             {searchResults.map((product) => (
                                 <div className="max-w-xs mx-auto relative shadow-lg bg-[#1A2238] spacing" key={product._id}>
                                 <div className="absolute left-0 top-10 text-uppercase text-xs font-semibold bg-gray-600 text-green-500 px-2 py-1">New Product</div>
@@ -147,10 +147,15 @@ const Result = () => {
                                     <p className="text-base leading-6 mb-4 text-blue-200">{product.description.slice(0, 40)}</p>
                                     <div className="overflow-hidden border-t border-blue-200 ">
                                         <div className="text-lg font-semibold text-red-600">${product?.price}</div>
-                                        <div className="justify-end flex gap-4">
-                                            <button onClick={() => handleWishlist(product)}><FaHeart  className="text-white"/></button>
-                                            <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-white"/></button>
+                                        <div className=" flex justify-between items-start gap-4">
+                                        <div>
+                                        <Rating stars={product.rating}/>
                                         </div>
+                                        <div className="flex gap-2">
+                                        <button onClick={() => handleWishlist(product)}><FaHeart  className="text-white active:text-red-600"/></button>
+                                        <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-white active:text-red-600"/></button>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

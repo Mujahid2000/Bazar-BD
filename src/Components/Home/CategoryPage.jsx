@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Rating from "../../Pages/Result/Rating";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../../Configs/AuthContext";
+import { FaCartArrowDown, FaHeart } from "react-icons/fa";
 
 const CategoryPage = ({ categories }) => {
     const { categoryName } = useParams();
@@ -29,30 +30,49 @@ const CategoryPage = ({ categories }) => {
         toast.success("Item added to cart!").catch(console.log("error"));
       }
       };
+
+      const handleWishlist = (product) =>{
+        if(user){
+          axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+          .then(res => console.log(res));
+          toast.success("Added Favourite !").catch(console.log("error"));
+        }
+      }
     
     return (
         <div>
            <h2 className=" mt-20 text-xl text-center font-medium">Find Result: {filterData.length}</h2>
-        <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 place-items-center">
+        <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 place-items-center">
             {
-                filterData.map(filter => (
-                    <div key={filter._id} className="w-72 cursor-pointer shadow-lg rounded-lg h-96 border mt-8 ml-4" >
-                        <Link  to={`/productDetails/${filter._id}`}>                 
-                    <img className="h-60 mx-auto border-b transform hover:scale-110 transition-transform duration-300" src={filter?.product_image} alt="" />
-                    <h1 className="text-center hover:text-orange-600 text-xl font-semibold">{filter.productName.length > 20 ? filter.productName.slice(0, 20) + "..." : filter?.productName}</h1>
-                    <p className="text-center text-lg font-bold ">$<span className="text-orange-600">{filter.price} </span></p>
-                    <p className="text-center w-60 mx-auto">{filter.description.slice(0, 30)}</p>
-                    <Rating stars={filter.rating} />
-                    </Link>
-                    <p><button onClick={() => {
-                handleAddCart(filter); // Call handleAddCart after successful toast display
-              }} className="border-none hover:bg-slate-500 outline-none px-3 py-2 rounded-b-lg text-white bg-orange-600 text-center cursor-pointer w-full text-lg">Add to Cart</button></p>
-                </div>
+                filterData.map(product => (
+                  <div className="max-w-xs mx-auto  relative shadow-lg bg-[#1A2238] spacing" key={product._id}>
+                  <div className="absolute left-0 top-10 text-uppercase text-xs font-semibold bg-gray-600 text-green-500 px-2 py-1">New Product</div>
+                  <div className="flex items-center justify-center h-72 bg-white">
+                      <img src={product.product_image} className="max-w-full max-h-64"/>
+                  </div>
+                  <div className="p-7">
+                      <span className="block text-xs font-semibold uppercase text-blue-300 ">{product.category}</span>
+                      <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${product._id}`}>{product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link></h4>
+                      <p className="text-base leading-6 mb-4 text-blue-200">{product.description.slice(0, 40)}</p>
+                      <div className="overflow-hidden border-t border-blue-200 ">
+                          <div className="text-lg font-semibold text-red-600">${product?.price}</div>
+                          <div className=" flex justify-between items-start gap-4">
+                            <div>
+                            <Rating stars={product.rating}/>
+                            </div>
+                            <div className="flex gap-2">
+                              <button onClick={() => handleWishlist(product)}><FaHeart  className="text-white active:text-red-600"/></button>
+                              <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-white active:text-red-600"/></button>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
                 ))
             }
         </div>
         <Toaster
-        position="top-right"
+        position="bottom-right"
         toastOptions={{
           classNames: {
             success: "text-green-400",
