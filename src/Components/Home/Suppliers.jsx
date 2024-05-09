@@ -7,7 +7,7 @@ const Suppliers = () => {
             <div className="z-20 relative flex justify-between gap-96 text-white p-8">
                 <div>
                     <h1 className="text-xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold leading-10 md:leading-12 lg:leading-14 xl:leading-16 tracking-tighter md:tracking-normal lg:tracking-normal xl:tracking-normal ">An easy way to send <br /> requests to all suppliers</h1>
-                    <p className="text-lg mt-6 leading-6 font-normal tracking-tighter mb-5">We are committed to deliver your products on time.</p>
+                    <p className="text-xl mt-6 leading-6 font-normal tracking-tighter mb-5">We are committed to deliver your products on time.</p>
                 </div>
                 <div className="hidden lg:block items-center justify-end w-1/4 mt-4">
                     <div className="bg-white shadow-md rounded-lg px-8 py-6 min-w-96">
