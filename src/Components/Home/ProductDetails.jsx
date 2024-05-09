@@ -70,7 +70,9 @@ const ProductDetails = () => {
               axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
               .then(res => console.log(res));
               toast.success("Added Favourite !").catch(console.log("error"));
-            }
+            }else{
+                alert('Please Login')
+             }
           }
 
 
