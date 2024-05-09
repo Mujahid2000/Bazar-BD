@@ -2,7 +2,7 @@ import React from 'react';
 
 const Suppliers = () => {
     return (
-        <div className="max-w-[1840px] mb-9 px-2 z-10 h-[446px] mx-auto relative" style={{backgroundImage: 'url("https://i.ibb.co/hCDGvkv/warehouse.jpg")'}}>
+        <div className="max-w-[1840px] mb-9 mt-7 px-2 z-10 h-[446px] mx-auto relative" style={{backgroundImage: 'url("https://i.ibb.co/hCDGvkv/warehouse.jpg")'}}>
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-sky-500 to-cyan-200 opacity-80"></div>
             <div className="z-20 relative flex justify-between gap-96 text-white p-8">
                 <div>
