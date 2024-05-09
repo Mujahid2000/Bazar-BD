@@ -6,6 +6,7 @@ import NewArrivals from "../Components/Home/NewArrivals";
 import ProductCard from "../Components/Home/ProductCard";
 import Region from "../Components/Home/Region";
 import Service from "../Components/Home/Service";
+import Subscribe from "../Components/Home/Subscribe";
 import Suppliers from "../Components/Home/Suppliers";
 import TopProducts from "../Components/Home/TopProducts";
 
@@ -23,6 +24,7 @@ const Home = () => {
         <NewArrivals/>
         <Region/>
         <Delivery/>
+        <Subscribe/>
         </div>
     );
 };
