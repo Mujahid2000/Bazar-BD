@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../../Configs/AuthContext";
-import { FaArrowAltCircleRight, FaArrowRight, FaCartArrowDown, FaHeart } from "react-icons/fa";
+import { FaArrowRight, FaCartArrowDown, FaHeart } from "react-icons/fa";
 // import './ProductCard.css';
 
 

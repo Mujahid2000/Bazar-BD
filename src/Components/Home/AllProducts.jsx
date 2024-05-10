@@ -4,49 +4,65 @@ import { AuthContext } from "../../Configs/AuthContext";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
 import { Link } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 
 const AllProducts = () => {
-    const [allProduct, setAllProducts] = useState();
+  const [allProduct, setAllProducts] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+    const [loading, setLoading] = useState(false); // State for loading indicator
+    const [page, setPage] = useState(1);
     const { user } = useContext(AuthContext);
     const email = user?.email;
 
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
+        loadProducts();
+    }, []);
+
+    const loadProducts = () => {
+        setLoading(true); // Set loading to true while fetching data
+        axios.get(`https://bazar-bd-server.vercel.app/addProducts?page=${page}`)
             .then(res =>  res.data)
             .then(data => {
                 const shuffledArray = data.sort(() => 0.5 - Math.random());
-                setAllProducts(shuffledArray)
+                setAllProducts(prevProducts => [...prevProducts, ...shuffledArray]);
+                setPage(prevPage => prevPage + 1);
+                setHasMore(data.length > 0);
             })
-            .catch(error => console.error(error));
-    }, []);
-
-    
+            .catch(error => console.error(error))
+            .finally(() => setLoading(false)); // Set loading to false after data fetching
+    };
 
     const handleAddCart = (data) => {
-      if(user){
-        axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
-        .then((response) => console.log(response));
-      toast.success("Item added to cart!").catch(console.log("error"));
-      }else{
-        alert('Log in Please')
-      }
-      };
-
-
-      const handleWishlist = (product) =>{
         if(user){
-          axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
-          .then(res => console.log(res));
-          toast.success("Added Favourite !").catch(console.log("error"));
-        }else{
-          alert('Log in Please')
+            axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+            .then((response) => console.log(response));
+            toast.success("Item added to cart!");
+        } else {
+            alert('Log in Please')
         }
-      }
+    };
+
+    const handleWishlist = (product) =>{
+        if(user){
+            axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+            .then(res => console.log(res));
+            toast.success("Added Favourite !");
+        } else {
+            alert('Log in Please')
+        }
+    };
+
 
 
     return (
         <div className="mt-20 mx-auto">
+          <InfiniteScroll
+                dataLength={allProduct.length}
+                next={loadProducts}
+                hasMore={hasMore}
+                loader={<h4>Loading...</h4>}
+            >
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 mb-5">
            {
               allProduct &&  allProduct.map(product =>(
@@ -71,7 +87,12 @@ const AllProducts = () => {
                 ))
             }
            </div>
-
+           </InfiniteScroll>
+           {loading && (
+                <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+                    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+                </div>
+            )}
 <Toaster
         position="bottom-right"
         toastOptions={{
