@@ -2,7 +2,7 @@ import { IoSearch } from "react-icons/io5";
 
 const Service = () => {
   return (
-    <div className="max-w-[1850px] mx-auto mb-4 mt-20">
+    <div className="max-w-[1850px] mx-auto mb-4 mt-14">
       <h2 className="text-2xl font-bold leading-8 text-left ml-16 mb-4">Our extra services</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4 place-items-center">
         {/* card 1 */}

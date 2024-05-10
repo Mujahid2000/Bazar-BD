@@ -31,6 +31,7 @@ import TotalOrder from './Pages/Dashboard/AdminDashboard/TotalOrder';
 import Products from './Pages/Dashboard/AdminDashboard/Products';
 import ProductUpolad from './Pages/Dashboard/AdminDashboard/ProductUpolad';
 import DetailPayment from './Components/Home/Payment/DetailPayment';
+import AllProducts from './Components/Home/AllProducts';
 
 
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
+      },
+      {
+        path: '/allProducts',
+        element: <AllProducts/>
       },
       {
         path:'/result',

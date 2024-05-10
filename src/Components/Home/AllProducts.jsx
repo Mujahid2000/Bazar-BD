@@ -1,28 +1,27 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Toaster, toast } from "sonner";
+import { FaCartArrowDown, FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../Configs/AuthContext";
-import { FaArrowAltCircleRight, FaArrowRight, FaCartArrowDown, FaHeart } from "react-icons/fa";
-// import './ProductCard.css';
+import axios from "axios";
+import { Toaster, toast } from "sonner";
+import { Link } from "react-router-dom";
 
 
-const ProductCard = () => {
-    const [products, setProducts] = useState([]);
-    const [loadProducts, setLoadProducts] = useState(5)
+const AllProducts = () => {
+    const [allProduct, setAllProducts] = useState();
     const { user } = useContext(AuthContext);
     const email = user?.email;
-    // console.log(products);
 
     useEffect(() => {
         axios.get('https://bazar-bd-server.vercel.app/addProducts')
-            .then(res => setProducts(res.data))
+            .then(res =>  res.data)
+            .then(data => {
+                const shuffledArray = data.sort(() => 0.5 - Math.random());
+                setAllProducts(shuffledArray)
+            })
             .catch(error => console.error(error));
     }, []);
 
-    const loadMore= () =>{
-        setLoadProducts((prev) => prev + 5)
-    }
+    
 
     const handleAddCart = (data) => {
       if(user){
@@ -45,17 +44,13 @@ const ProductCard = () => {
         }
       }
 
+
     return (
-        <div className="mx-2 mt-7">
-          <div className="flex justify-end mr-6">
-            <Link to={'/allProducts'}>        
-            <button className="flex gap-3 font-serif font-semibold">See All<FaArrowRight className="h-5 w-5"/></button>
-            </Link>
-          </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-7 gap-y-8 place-items-center">
-  {products.slice(0, loadProducts).map((product) => (
-   
-    <div className="max-w-xs mx-auto relative shadow-lg bg-[#1A2238] spacing" key={product._id}>
+        <div className="mt-20 mx-auto">
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 mb-5">
+           {
+              allProduct &&  allProduct.map(product =>(
+                    <div className="max-w-xs mx-auto relative shadow-lg bg-[#1A2238] spacing" key={product._id}>
         <div className="absolute left-0 top-10 text-uppercase text-xs font-semibold bg-gray-600 text-green-500 px-2 py-1">New Product</div>
         <div className="flex items-center justify-center h-72 bg-white">
             <img src={product.product_image} className="max-w-full max-h-64"/>
@@ -73,14 +68,11 @@ const ProductCard = () => {
             </div>
         </div>
     </div>
+                ))
+            }
+           </div>
 
-  ))}
-</div>
-
-        <div className="flex block md:hidden lg:hidden justify-center items-center place-items-center">
-        <button className="px-4 py-2 bg-indigo-600 active:bg-indigo-700 hover:bg-indigo-500 text-white rounded-md mt-5 " onClick={loadMore} >Load More</button>
-        </div> 
-        <Toaster
+<Toaster
         position="bottom-right"
         toastOptions={{
           classNames: {
@@ -92,4 +84,4 @@ const ProductCard = () => {
     );
 };
 
-export default ProductCard;
+export default AllProducts;
