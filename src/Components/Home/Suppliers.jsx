@@ -14,15 +14,15 @@ const Suppliers = () => {
                         <h1 className="text-lg text-black font-bold mb-4">Send quote to suppliers</h1>
                         <form >
                             <div className="mb-4">
-                                <input type="text" id="email" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="What item you need?"  />
+                                <input type="text" id="email" className="shadow-sm rounded-md w-full px-3 py-2 border text-gray-500 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="What item you need?"  />
                             </div>
                             <div className="mb-4">
-                                <textarea type="text" id="password" className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Type more details"  />
+                                <textarea type="text" id="password" className="shadow-sm rounded-md w-full text-gray-500 px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Type more details"  />
                             </div>
-                            <button  className="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Send inquiry</button>
+                            <button disabled className="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Send inquiry</button>
                             <div className='flex gap-3 mt-3'>
-                                <input type="text" placeholder="Quantity" className="flex-grow border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700" />
-                                <input type="text" placeholder="Pcs" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700" />
+                                <input type="text" placeholder="Quantity" className="flex-grow border text-gray-500 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700" />
+                                <input type="text" placeholder="Pcs" className="w-full border text-gray-500 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700" />
                             </div>
                         </form>
                     </div>

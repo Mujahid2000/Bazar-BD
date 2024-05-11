@@ -72,7 +72,7 @@ const FlashSale = () => {
         };
 
     return (
-        <div className="mt-16">
+        <div className="mt-16 mb-6">
           <div>
 
             <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[95vh] ">
