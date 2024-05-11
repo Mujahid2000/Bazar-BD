@@ -34,7 +34,7 @@ const SignUp = () => {
                     password: password,
                     admin: false
                 }
-                axios.post('https://bazar-bd-server.vercel.appuser', userInfo)
+                axios.post('https://bazar-bd-server.vercel.app/user', userInfo)
                 .then(res => {
                     if(res.data.insertedId){
                         toast.success('User has been created')

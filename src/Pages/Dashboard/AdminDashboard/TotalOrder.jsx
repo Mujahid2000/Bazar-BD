@@ -12,7 +12,7 @@ const TotalOrder = () => {
 
 
   useEffect(() =>{
-    axios.get('https://bazar-bd-server.vercel.apptotalOrder')
+    axios.get('https://bazar-bd-server.vercel.app/totalOrder')
     .then(res => {
       setOrder(res.data)
       let dataLength = 0;

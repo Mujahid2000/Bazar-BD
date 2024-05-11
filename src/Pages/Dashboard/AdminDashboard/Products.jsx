@@ -10,7 +10,7 @@ const Products = () => {
     const [selectAllChecked, setSelectAllChecked] = useState(false);
 	// console.log(selectedProducts);
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.appaddProducts')
+        axios.get('https://bazar-bd-server.vercel.app/addProducts')
             .then(res => setMyProducts(res.data))
             .catch(error => console.error(error));
     }, [myProducts]);
@@ -32,7 +32,7 @@ const Products = () => {
         const stock = form.get('newStockItem');
         const productData = selectedProducts[0];
         console.log({ productName, price, discountPrice, stock, productData, discountPercentage });
-        await axios.post('https://bazar-bd-server.vercel.appproductDiscount', { productName, price, discountPrice, stock, productData, discountPercentage });
+        await axios.post('https://bazar-bd-server.vercel.app/productDiscount', { productName, price, discountPrice, stock, productData, discountPercentage });
         setOpen(false);
         Swal.fire({
             title: "Good job!",
@@ -43,7 +43,7 @@ const Products = () => {
 
     const handleSelectChange = async (event, data) => {
         const selectedValue = event.target.value;
-        const response = await axios.put(`https://bazar-bd-server.vercel.appaddProductsUpdate/${data._id}`, { stock: selectedValue });
+        const response = await axios.put(`https://bazar-bd-server.vercel.app/addProductsUpdate/${data._id}`, { stock: selectedValue });
         console.log(response.data);
     };
 
@@ -74,7 +74,7 @@ const Products = () => {
             const selectedProductIds = selectedProducts.map(product => product._id);
 
             // Send a DELETE request to the backend API
-            const response = await axios.delete('https://bazar-bd-server.vercel.appproducts', { data: { ids: selectedProductIds } });
+            const response = await axios.delete('https://bazar-bd-server.vercel.app/products', { data: { ids: selectedProductIds } });
 
             if (response.data.success) {
                 // Remove deleted products from the selectedProducts state

@@ -27,7 +27,7 @@ const Cart = () => {
 
                 if(email){
         
-                    axios.get(`https://bazar-bd-server.vercel.appaddCart/${email}`)
+                    axios.get(`https://bazar-bd-server.vercel.app/addCart/${email}`)
                     .then(res => setCart(res.data))
                     .catch((error) => console.log(error))
                 }

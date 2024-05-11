@@ -25,7 +25,7 @@ const ProductDetails = () => {
     
     useEffect(() => {
         axios
-          .get(`https://bazar-bd-server.vercel.appaddProducts/${id}`)
+          .get(`https://bazar-bd-server.vercel.app/addProducts/${id}`)
           .then((res) => setProducts(res.data))
           .catch((error) => console.error(error));
       }, [id]);
@@ -33,7 +33,7 @@ const ProductDetails = () => {
 
 
       useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.appaddProducts')
+        axios.get('https://bazar-bd-server.vercel.app/addProducts')
             .then(res =>  res.data)
             .then(data => {
                 const shuffledArray = data.sort(() => 0.5 - Math.random());
@@ -47,7 +47,7 @@ const ProductDetails = () => {
     useEffect(() =>{
         // Use a separate variable to store the id obtained from useParams()
         const productId = id;
-        axios.get(`https://bazar-bd-server.vercel.appproductDiscount/${productId}`)
+        axios.get(`https://bazar-bd-server.vercel.app/productDiscount/${productId}`)
             .then((response) => setDiscount(response.data))
             .catch((error) => console.error(error));
     }, [id, ]);
@@ -57,7 +57,7 @@ const ProductDetails = () => {
     const handleAddCart = (data) => {
       
          if(user){
-           axios.post(`https://bazar-bd-server.vercel.appaddCart`, { data, email })
+           axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
            .then((response) => console.log(response));
          toast.success("Item added to cart!")
          }else{
@@ -67,7 +67,7 @@ const ProductDetails = () => {
 
         const handleWishlist = (product) =>{
             if(user){
-              axios.post('https://bazar-bd-server.vercel.appwishlist',{product, email})
+              axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
               .then(res => console.log(res));
               toast.success("Added Favourite !").catch(console.log("error"));
             }else{

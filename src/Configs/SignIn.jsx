@@ -36,7 +36,7 @@ const handleGoogleLogin = () => {
         name: result.user?.displayName,
         admin: false
     };
-    axios.post("https://bazar-bd-server.vercel.appuser", userInfo)
+    axios.post("https://bazar-bd-server.vercel.app/user", userInfo)
     .then((res) => {
         console.log(res.data);
         navigate('/')

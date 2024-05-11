@@ -21,7 +21,7 @@ const AllProducts = () => {
 
     const loadProducts = () => {
         setLoading(true); // Set loading to true while fetching data
-        axios.get(`https://bazar-bd-server.vercel.appaddProducts?page=${page}`)
+        axios.get(`https://bazar-bd-server.vercel.app/addProducts?page=${page}`)
             .then(res =>  res.data)
             .then(data => {
                 const shuffledArray = data.sort(() => 0.5 - Math.random());
@@ -35,7 +35,7 @@ const AllProducts = () => {
 
     const handleAddCart = (data) => {
         if(user){
-            axios.post(`https://bazar-bd-server.vercel.appaddCart`, { data, email })
+            axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
             .then((response) => console.log(response));
             toast.success("Item added to cart!");
         } else {
@@ -45,7 +45,7 @@ const AllProducts = () => {
 
     const handleWishlist = (product) =>{
         if(user){
-            axios.post('https://bazar-bd-server.vercel.appwishlist',{product, email})
+            axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
             .then(res => console.log(res));
             toast.success("Added Favourite !");
         } else {

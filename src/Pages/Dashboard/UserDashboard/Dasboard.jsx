@@ -16,14 +16,14 @@ const Dasboard = () => {
     const photo = user?.photoURL;
 
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.appusers')
+        axios.get('https://bazar-bd-server.vercel.app/users')
             .then(res => {
                 setAllUser(res.data)})
             .catch(error => console.error(error));
     }, []);
  
     useEffect(() =>{
-        axios.get('https://bazar-bd-server.vercel.apptotalOrder')
+        axios.get('https://bazar-bd-server.vercel.app/totalOrder')
         .then(res => {
           setOrder(res.data)
           let dataLength = 0;
