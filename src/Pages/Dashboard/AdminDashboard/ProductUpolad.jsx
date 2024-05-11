@@ -27,7 +27,7 @@ const ProductUpolad = () => {
             const imageUrl = res.data.data.display_url;
             const newData = { productName, shopName, price, category, Stock, description, product_image: imageUrl };
 
-            axios.post('https://bazar-bd-server.vercel.app/uploadProduct', newData)
+            axios.post('https://bazar-bd-server.vercel.appuploadProduct', newData)
                 .then(res => console.log(res.data))
                 .catch((error) => console.log(error));
         })

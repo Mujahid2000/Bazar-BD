@@ -2,6 +2,7 @@ import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPasswor
 import {app} from "./firebase.config"
 import { createContext, useEffect } from "react";
 import { useState } from "react";
+import axios from "axios";
 
 export const AuthContext= createContext(null);
 const auth = getAuth(app)
@@ -50,15 +51,30 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(() =>{
-        const unSubscribe = onAuthStateChanged(auth, currentUser =>{
-            setUser(currentUser);
-            
-            setLoading(false)
-        })
-        return  () => {
-            return unSubscribe()
-        }
-    },[])
+        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+                setUser(currentUser);
+                if(currentUser){
+                    // token store
+                    const userInfo = {email: currentUser.email}
+                    axios.post('https://bazar-bd-server.vercel.app/jwt', userInfo)
+                    .then(res => {
+                    if(res.data.token){
+                        localStorage.setItem('access-token', res.data.token);
+                        setLoading(false);
+                    } 
+                    })
+    
+                }else{
+                    // something doing
+                    localStorage.removeItem('access-token');
+                    setLoading(false);
+                }
+                
+            })
+            return () =>{
+                return unsubscribe();
+            }
+        }, []);
     const authInfo = { 
         user,
         loading,

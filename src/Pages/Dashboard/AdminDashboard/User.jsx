@@ -8,7 +8,7 @@ const User = () => {
 	console.log(search);
     
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/users')
+        axios.get('https://bazar-bd-server.vercel.appusers')
             .then(res => setAllUser(res.data))
             .catch(error => console.error(error));
     }, []);

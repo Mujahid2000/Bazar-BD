@@ -5,7 +5,7 @@
 
 
 // const axiosSecure = axios.create({
-//     baseURL: 'http://localhost:5000'
+//     baseURL: 'https://bazar-bd-server.vercel.app'
 // })
 
 // const UseAxiosSecure = () => {

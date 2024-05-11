@@ -9,7 +9,7 @@ const Wishlist = () => {
     const email = user.email;
 
     useEffect(() => {
-        axios.get(`https://bazar-bd-server.vercel.app/wishlist/${email}`)
+        axios.get(`https://bazar-bd-server.vercel.appwishlist/${email}`)
             .then(res => {
                 console.log(res.data); // Log the response to check if it's as expected
                 setWishlist(res.data);
@@ -19,7 +19,7 @@ const Wishlist = () => {
 
 	const handleDelete = (id) =>{
 		console.log(id);
-		axios.delete(`https://bazar-bd-server.vercel.app/wishlist/${id}`)
+		axios.delete(`https://bazar-bd-server.vercel.appwishlist/${id}`)
 		.then(() => setWishlist(prevState => prevState.filter(item => item._id !== id)))
 		.catch(error => console.log(error))
 	}

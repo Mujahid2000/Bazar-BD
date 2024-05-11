@@ -12,7 +12,7 @@ const Shop = () => {
    
 
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/shop')
+        axios.get('https://bazar-bd-server.vercel.appshop')
             .then(res => setProducts(res.data))
             .catch(error => console.error(error));
     }, []);

@@ -72,7 +72,7 @@ const Result = () => {
     };
 
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
+        axios.get('https://bazar-bd-server.vercel.appaddProducts')
             .then(res => {
                 setProducts(res.data);
                 filterProducts(searchQuery, res.data, value1,); 
@@ -112,7 +112,7 @@ const Result = () => {
 
     const handleAddCart = (data) => {
         if(user){
-          axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+          axios.post(`https://bazar-bd-server.vercel.appaddCart`, { data, email })
           .then((response) => console.log(response));
         toast.success("Item added to cart!").catch(console.log("error"));
         }
@@ -121,7 +121,7 @@ const Result = () => {
   
         const handleWishlist = (product) =>{
           if(user){
-            axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+            axios.post('https://bazar-bd-server.vercel.appwishlist',{product, email})
             .then(res => console.log(res));
             toast.success("Added Favourite !").catch(console.log("error"));
           }
