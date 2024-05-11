@@ -10,7 +10,7 @@ const CheckAdmin = () => {
     useEffect(() => {
         const fetchAdminStatus = async () => {
             if (user && !loading) {
-                setIsAdminLoading(false);
+                setIsAdminLoading(true);
                 try {
                     
                     const res = await axios.get(`https://bazar-bd-server.vercel.app/user/${user.email}`);

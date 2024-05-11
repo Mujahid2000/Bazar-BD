@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [isAdmin] = CheckAdmin();
   const [menuVisible, setMenuVisible] = useState(false);
   const {user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
