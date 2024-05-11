@@ -73,7 +73,7 @@ const ShopProfile = ({ shop }) => {
   }
 
   return (
-    <div className="mt-[5rem] ">
+    <div className="mt-[5rem] mb-6">
       <Parallax
         blur={{ min: -15, max: 15 }}
         bgImage={filter}
