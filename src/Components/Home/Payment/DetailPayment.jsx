@@ -27,7 +27,7 @@ const DetailPayment = () => {
     const handlePayment = async (payment, email, currentDate, name, cart) =>{
         // console.log(payment, email, currentDate, name, cart);
         try{
-        axios.post(`http://localhost:5000/myPayment`, {payment, email, currentDate, name, cart})
+        axios.post(`https://bazar-bd-server.vercel.app/myPayment`, {payment, email, currentDate, name, cart})
         .then((response) => {console.log(response.data.url)
     window.location.replace(response.data.url)});
     } catch(error){
