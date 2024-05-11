@@ -79,6 +79,7 @@ const Navbar = () => {
   data-popover-placement="bottom"
   className="absolute z-10 flex min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg right-10 top-16 shadow-blue-gray-500/10 focus:outline-none"
 >
+  <Link to={'/profile'}>
   <button
     tabIndex="-1"
     role="menuitem"
@@ -90,7 +91,9 @@ const Navbar = () => {
       My Profile
     </p>
   </button>
-  
+
+  </Link>
+    
   <Link to={'/dashboard/dasboard'}>
   <button
     tabIndex="-1"

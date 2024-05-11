@@ -32,6 +32,7 @@ import Products from './Pages/Dashboard/AdminDashboard/Products';
 import ProductUpolad from './Pages/Dashboard/AdminDashboard/ProductUpolad';
 import DetailPayment from './Components/Home/Payment/DetailPayment';
 import AllProducts from './Components/Home/AllProducts';
+import Profile from './Components/Home/Profile';
 
 
 
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: '/myPayment/:payment/:id',
         element: <DetailPayment/>
+      },
+      {
+        path:'/profile',
+        element: <Profile/>
       }
     ],
   },
