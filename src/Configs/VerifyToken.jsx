@@ -25,6 +25,7 @@ export const UserVerify = ({ children }) => {
     }
   };
 
+  
   return (
     <VerifyContext.Provider value={{ token, setToken, verifyToken }}>
       {children}
