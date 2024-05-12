@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
 
@@ -12,16 +12,9 @@ const CheckAdmin = () => {
             if (user && !loading) {
                 setIsAdminLoading(true);
                 try {
-                    const token = await user.getIdToken();
-
-                    // Set token as cookie
-                    document.cookie = `jwtToken=${token}; path=/`;
-
-                    const res = await axios.get(`https://bazar-bd-server.vercel.app/user/${user.email}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
+                    
+                    const res = await axios.get(`https://bazar-bd-server.vercel.app/user/${user.email}`);
+                    
                     setIsAdmin(res.data.admin);
                 } catch (error) {
                     console.error("Error fetching admin status:", error);
@@ -36,5 +29,4 @@ const CheckAdmin = () => {
 
     return [isAdmin, isAdminLoading];
 };
-
 export default CheckAdmin;

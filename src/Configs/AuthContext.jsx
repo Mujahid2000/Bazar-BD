@@ -49,6 +49,7 @@ const AuthProvider = ({children}) => {
         setLoading(true);
         return signOut(auth)
     }
+    
 
     useEffect(() =>{
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{
@@ -59,6 +60,7 @@ const AuthProvider = ({children}) => {
                     axios.post('https://bazar-bd-server.vercel.app/jwt', userInfo)
                     .then(res => {
                     if(res.data.token){
+                        // console.log(res.data.token);
                         localStorage.setItem('access-token', res.data.token);
                         setLoading(false);
                     } 
@@ -75,6 +77,8 @@ const AuthProvider = ({children}) => {
                 return unsubscribe();
             }
         }, []);
+
+
     const authInfo = { 
         user,
         loading,

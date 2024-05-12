@@ -33,6 +33,7 @@ import ProductUpolad from './Pages/Dashboard/AdminDashboard/ProductUpolad';
 import DetailPayment from './Components/Home/Payment/DetailPayment';
 import AllProducts from './Components/Home/AllProducts';
 import Profile from './Components/Home/Profile';
+import UserVerify from './Configs/VerifyToken';
 
 
 
@@ -159,8 +160,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <AuthProvider>
+    <UserVerify>
     <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
+    </UserVerify>
   </AuthProvider>
 )
