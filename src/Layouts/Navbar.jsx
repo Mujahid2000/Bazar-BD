@@ -94,7 +94,7 @@ const Navbar = () => {
 
   </Link>
     
-  <Link to={'/dashboard/dasboard'}>
+  <Link to={'/dashboard'}>
   <button
     tabIndex="-1"
     role="menuitem"

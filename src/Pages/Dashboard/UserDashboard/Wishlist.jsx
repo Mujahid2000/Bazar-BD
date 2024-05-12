@@ -11,7 +11,7 @@ const Wishlist = () => {
     useEffect(() => {
         axios.get(`https://bazar-bd-server.vercel.app/wishlist/${email}`)
             .then(res => {
-                console.log(res.data); // Log the response to check if it's as expected
+                // console.log(res.data); // Log the response to check if it's as expected
                 setWishlist(res.data);
             })
             .catch(error => console.log(error));
