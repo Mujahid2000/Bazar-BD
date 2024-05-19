@@ -40,7 +40,7 @@ import UserVerify from './Configs/VerifyToken';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main>Hello world!</Main>,
+    element: <Main></Main>,
     errorElement: <Error></Error>,
     children: [
       {
