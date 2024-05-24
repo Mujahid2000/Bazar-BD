@@ -41,7 +41,7 @@ const CategoryPage = ({ categories }) => {
     
     return (
         <div>
-           <h2 className=" mt-20 text-xl text-center font-medium">Find Result: {filterData.length}</h2>
+           <h2 className=" mt-24 mb-7  text-xl text-center font-medium">Find Result: {filterData.length}</h2>
         <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 place-items-center">
             {
                 filterData.map(product => (
