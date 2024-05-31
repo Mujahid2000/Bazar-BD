@@ -30,7 +30,7 @@ const AllProducts = () => {
                 setHasMore(data.length > 0);
             })
             .catch(error => console.error(error))
-            .finally(() => setLoading(false)); // Set loading to false after data fetching
+            .finally(() => setLoading(false)); 
     };
 
     const handleAddCart = (data) => {
