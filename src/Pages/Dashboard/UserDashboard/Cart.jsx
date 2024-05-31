@@ -1,9 +1,8 @@
-import { MdDelete } from "react-icons/md";
-import { AiOutlinePlus } from "react-icons/ai";
+
 import axios from 'axios';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Configs/AuthContext";
-import { AiOutlineMinus } from "react-icons/ai";
+
 import { Link } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
 import { IoIosArrowForward } from "react-icons/io";
@@ -17,7 +16,7 @@ const Cart = () => {
     const {user} = useContext(AuthContext);
     const email = user?.email;
     const name = user?.disPlayName;
-    const currentDate = new Date();
+
     
     
     
@@ -47,6 +46,7 @@ const Cart = () => {
 
         cart.forEach(item => {
             totalPrice += item?.data?.price
+           
         });
     }
    
