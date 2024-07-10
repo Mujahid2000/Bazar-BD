@@ -23,7 +23,7 @@ const FlashSale = () => {
         let interval = useRef();
 
         const startTimer = () =>{
-            const countdownDate = new Date('June 06, 2024 00:00:00').getTime()
+            const countdownDate = new Date('August 06, 2024 00:00:00').getTime()
 
             interval = setInterval(() => {
                 const now = new Date().getTime();
@@ -72,7 +72,7 @@ const FlashSale = () => {
         };
 
     return (
-        <div className="mt-16 mb-6">
+        <div className=" mb-6">
           <div>
 
             <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[95vh] ">
@@ -148,7 +148,7 @@ const FlashSale = () => {
             </div>
           </div>
           
-            <div className="mt-5 mx-w-[1440px] mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
+            <div className="mt-5 max-w-[1440px] mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
   {products.map((myData) => (
     <div key={myData._id} className="rounded w-80  shadow-lg">
       <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>

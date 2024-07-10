@@ -1,15 +1,15 @@
-import React from 'react';
+
 
 const Suppliers = () => {
     return (
-        <div className="max-w-[1840px] mb-9 mt-7 px-2 z-10 h-[446px] mx-auto relative" style={{backgroundImage: 'url("https://i.ibb.co/hCDGvkv/warehouse.jpg")'}}>
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-sky-500 to-cyan-200 opacity-80"></div>
+        <div className="max-w-[1400px] md:rounded-lg mb-9 mt-7 px-6 z-10 max-h-[446px] mx-auto relative" style={{backgroundImage: 'url("https://i.ibb.co/hCDGvkv/warehouse.jpg")'}}>
+            <div className="absolute md:rounded-lg inset-0 bg-gradient-to-r from-indigo-500 via-sky-500 to-cyan-200 opacity-80"></div>
             <div className="z-20 relative flex justify-evenly gap-80 text-white p-8">
                 <div>
-                    <h1 className="text-xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold leading-10 md:leading-12 lg:leading-14 xl:leading-16 tracking-tighter md:tracking-normal lg:tracking-normal xl:tracking-normal ">An easy way to send <br /> requests to all suppliers</h1>
-                    <p className="text-xl mt-6 leading-6 font-normal tracking-tighter mb-5">We are committed to deliver your products on time.</p>
+                    <h1 className="text-[1rem] text-left md:text-4xl lg:text-5xl xl:text-6xl font-semibold  md:leading-12 lg:leading-14 xl:leading-16 tracking-tighter md:tracking-normal lg:tracking-normal xl:tracking-normal ">An easy way to send <br /> requests to all suppliers</h1>
+                    <p className="text-xl hidden md:block mt-6 leading-6 font-normal tracking-tighter mb-5">We are committed to deliver your products on time.</p>
                 </div>
-                <div className="hidden md:hidden lg:hidden xl:block 2xl:block items-center justify-end w-1/4 mt-4">
+                <div className="hidden md:hidden lg:hidden xl:block 2xl:block items-center justify-end w-1/4 pt-7 pr-96">
                     <div className="bg-white shadow-md rounded-lg px-8 py-6 min-w-96">
                         <h1 className="text-lg text-black font-bold mb-4">Send quote to suppliers</h1>
                         <form >

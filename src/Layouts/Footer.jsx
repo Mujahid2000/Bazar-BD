@@ -1,128 +1,91 @@
-import { FaFacebook } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaSquareInstagram } from "react-icons/fa6";
-import { FaLinkedinIn } from "react-icons/fa";
-
-
+import React from 'react';
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
-    return (
-        <footer className="bg-gray-900 text-white ">
+  return (
+    <footer className="bg-white text-gray-600 py-8">
+      <div className="container mx-auto px-20">
+        <div className="flex flex-wrap justify-between">
+          {/* Brand Section */}
+          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+            <div className='flex '>
+            <img src="https://i.ibb.co/C1knfqQ/Screenshot-2024-06-29-180913-removebg-preview.png" alt="Brand Logo" className="mb-4 w-9 h-8" />
+            <h3 className="text-sky-400 text-base lg:text-2xl font-bold">Brand</h3>
+            </div>
+            <p className="text-sm">
+              We will provide you best service.
+            </p>
+            <div className="flex mt-4 space-x-2 lg:space-x-4">
+              <p  aria-label="Facebook" className="text-gray-600 cursor-pointer text-xl hover:text-gray-900"><FaFacebook/></p>
+              <p  aria-label="Twitter" className="text-gray-600 cursor-pointer text-xl hover:text-gray-900"><FaTwitter/></p>
+              <p  aria-label="LinkedIn" className="text-gray-600 cursor-pointer text-xl hover:text-gray-900"><FaLinkedin/></p>
+              <p  aria-label="Instagram" className="text-gray-600 cursor-pointer text-xl hover:text-gray-900"><FaInstagram/></p>
+              <p  aria-label="YouTube" className="text-gray-600 cursor-pointer text-xl hover:text-gray-900"><FaYoutube/></p>
+            </div>
+          </div>
+
+          {/* Links Section */}
+          <div className="w-full md:w-3/4 flex flex-wrap justify-between">
+            <div className="w-1/2 md:w-1/5 mb-6 md:mb-0">
+              <h5 className="font-bold mb-2">About</h5>
+              <ul className="text-sm space-y-2">
+                <li><p  className="hover:underline cursor-pointer">About Us</p></li>
+                <li><p  className="hover:underline cursor-pointer">Find store</p></li>
+                <li><p  className="hover:underline cursor-pointer">Categories</p></li>
+                <li><p  className="hover:underline cursor-pointer">Blogs</p></li>
+              </ul>
+            </div>
+            <div className="w-1/2 md:w-1/5 mb-6 md:mb-0">
+              <h5 className="font-bold mb-2">Partnership</h5>
+              <ul className="text-sm space-y-2">
+                <li><p href="#" className="hover:underline cursor-pointer">About Us</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Find store</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Categories</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Blogs</p></li>
+              </ul>
+            </div>
+            <div className="w-1/2 md:w-1/5 mb-6 md:mb-0">
+              <h5 className="font-bold mb-2">Information</h5>
+              <ul className="text-sm space-y-2">
+                <li><p href="#" className="hover:underline cursor-pointer">Help Center</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Money Refund</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Shipping</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Contact us</p></li>
+              </ul>
+            </div>
+            <div className="w-1/2 md:w-1/5 mb-6 md:mb-0">
+              <h5 className="font-bold mb-2">For users</h5>
+              <ul className="text-sm space-y-2">
+                <li><p href="#" className="hover:underline cursor-pointer">Login</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Register</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">Settings</p></li>
+                <li><p href="#" className="hover:underline cursor-pointer">My Orders</p></li>
+              </ul>
+            </div>
+            <div className="w-1/2 md:w-1/5 mb-6 md:mb-0">
+              <h5 className="font-bold mb-2">Our App</h5>
+              <ul className="text-sm space-y-2">
+                <li><img src="https://i.ibb.co/FVZYBgX/Group.png" alt="" /></li>
+                <li><img src="https://i.ibb.co/tXsFWh0/Group1.png" alt="" /></li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
         
-<div className="flex items-end w-full  bg-gray-900">
-
-    <footer className="w-full text-gray-700 bg-gray-900 body-font">
-        <div
-            className="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
-            <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
-                <a className="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
-                    <svg className="w-auto h-5 text-white fill-current" viewBox="0 0 202 69"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M57.44.672s6.656 1.872 6.656 5.72c0 0-1.56 2.6-3.744 6.552 8.424 1.248 16.744 1.248 23.816-1.976-1.352 7.904-12.688 8.008-26.208 6.136-7.696 13.624-19.656 36.192-19.656 42.848 0 .416.208.624.52.624 4.576 0 17.888-14.352 21.112-18.824 1.144-1.456 4.264.728 3.12 2.392C56.608 53.088 42.152 69 36.432 69c-4.472 0-8.216-5.928-8.216-10.4 0-6.552 11.752-28.08 20.28-42.952-9.984-1.664-20.176-3.64-27.976-3.848-13.936 0-16.64 3.536-17.576 6.032-.104.312-.52.52-.832.312-3.744-7.072-1.456-14.56 14.144-14.56 9.36 0 22.048 4.576 34.944 7.592C54.736 5.04 57.44.672 57.44.672zm46.124 41.08c1.144-1.456 4.264.728 3.016 2.392C100.236 53.088 85.78 69 80.06 69c-4.576 0-8.32-5.928-8.32-10.4v-.208C67.58 64.32 63.524 69 61.34 69c-4.472 0-8.944-4.992-8.944-11.856 0-10.608 15.704-33.072 24.96-33.072 4.992 0 7.384 2.392 8.528 4.576l2.6-4.576s6.656 1.976 6.656 5.824c0 0-13.312 24.336-13.312 30.056 0 .208 0 .624.52.624 4.472 0 17.888-14.352 21.216-18.824zm-40.56 18.72c2.184 0 11.752-13.312 17.368-22.048l4.16-7.488c-8.008-7.904-27.248 29.536-21.528 29.536zm57.564-38.168c-2.184 0-4.992-2.808-4.992-4.784 0-2.912 5.824-14.872 7.28-14.872 2.6 0 6.136 2.808 6.136 6.344 0 2.08-7.176 12.064-8.424 13.312zm-17.68 46.592c-4.472 0-8.216-5.928-8.216-10.4 0-6.656 16.744-34.528 16.744-34.528s6.552 1.976 6.552 5.824c0 0-13.312 24.336-13.312 30.056 0 .208.104.624.624.624 4.472 0 17.888-14.352 21.112-18.824 1.144-1.456 4.264.728 3.12 2.392-6.448 8.944-20.904 24.856-26.624 24.856zM147.244.672s6.656 1.872 6.656 5.72c0 0-25.792 43.784-25.792 53.56 0 .416.208.624.52.624 4.576 0 17.888-14.352 21.112-18.824 1.144-1.456 4.264.728 3.12 2.392C146.412 53.088 131.956 69 126.236 69c-4.472 0-8.216-5.928-8.216-10.4 0-10.4 29.224-57.928 29.224-57.928zM169.7 60.16c3.848-2.392 7.904-6.864 10.816-10.92 6.656-9.464 11.544-20.696 10.504-27.352-.312-3.432-.104-4.056 3.12-2.704 5.2 2.392 11.336 8.632 2.184 22.88-5.2 8.008-12.48 15.288-19.344 19.76-2.704 1.768-6.344 3.328-9.984 4.16-.52.416-1.04.728-1.456.936-1.872 1.352-4.264 2.08-7.592 2.08-14.664 0-16.848-12.272-16.848-16.016 0-2.392 3.224-4.68 4.784-3.744.208.104.312.416.312.624 0 2.808 1.872 13.104 9.984 13.104 7.904 0 3.432-18.304 2.288-27.144-1.456 2.288-3.432 4.992-5.616 8.32-2.6 3.744-5.72 1.456-4.784 0 5.824-8.424 9.152-13.832 11.856-18.616 1.248-2.08 3.328-3.328 6.448-3.328 2.704 0 5.824 3.016 6.864 4.784.312.52 0 1.04-.52 1.144a5.44 5.44 0 00-4.368 5.408c0 6.968 2.6 17.16 1.664 24.856l-.312 1.768z"
-                            fill-rule="nonzero" /></svg>
-                </a>
-                <p className="mt-2 text-sm text-white">Your trust is a real asset for us.</p>
-                <div className="mt-4">
-                    <span className="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
-                        <a className="text-gray-500 cursor-pointer hover:text-indigo-500">
-                        <FaFacebook className="text-white h-5 w-5"/>
-
-                        </a>
-                        <a className="ml-3 text-gray-500 cursor-pointer hover:text-indigo-500">
-                        <FaTwitter className="text-white h-5 w-5"/>
-
-                        </a>
-                        <a className="ml-3 text-gray-500 cursor-pointer hover:text-indigo-500">
-                        <FaSquareInstagram className="text-white h-5 w-5"/>
-
-                        </a>
-                        <a className="ml-3 text-gray-500 cursor-pointer hover:text-indigo-500">
-                        <FaLinkedinIn className="text-white h-5 w-5"/>
-
-                        </a>
-                    </span>
-                </div>
-            </div>
-            <div className="flex flex-wrap flex-grow mt-10 -mb-10 text-left  md:pl-20 md:mt-0 md:text-left">
-                <div className="w-full px-4 lg:w-1/4 md:w-1/2">
-                    <h2 className="mb-3 text-sm font-medium tracking-widest text-white uppercase title-font">About</h2>
-                    <nav className="mb-10 list-none">
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Company</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Careers</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Blog</a>
-                        </li>
-                    </nav>
-                </div>
-                <div className="w-full px-4 lg:w-1/4 md:w-1/2">
-                    <h2 className="mb-3 text-sm font-medium tracking-widest text-white uppercase title-font">Support</h2>
-                    <nav className="mb-10 list-none">
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Contact Support</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Help Resources</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Release Updates</a>
-                        </li>
-                    </nav>
-                </div>
-                <div className="w-full px-4 lg:w-1/4 md:w-1/2">
-                    <h2 className="mb-3 text-sm font-medium tracking-widest text-white uppercase title-font">Platform
-                    </h2>
-                    <nav className="mb-10 list-none">
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Terms &amp; Privacy</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Pricing</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">FAQ</a>
-                        </li>
-                    </nav>
-                </div>
-                <div className="w-full px-4 lg:w-1/4 md:w-1/2">
-                    <h2 className="mb-3 text-sm font-medium tracking-widest text-white uppercase title-font">Contact</h2>
-                    <nav className="mb-10 list-none">
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Send a Message</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">Request a Quote</a>
-                        </li>
-                        <li className="mt-3">
-                            <a className="text-white cursor-pointer ">+123-456-7890</a>
-                        </li>
-                    </nav>
-                </div>
-            </div>
+        {/* App Links */}
+        <div className="mt-8 flex justify-between items-center border-t pt-4">
+          <div className="flex space-x-4">
+          © 2023 Brand.
+          </div>
+          <div className="text-sm">
+            <p href="#" className="hover:underline cursor-pointer">English</p>
+          </div>
         </div>
-        <div>
-        <h3 className="text-center text-lg text-white font-bold">Payment Methods</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 place-items-center max-w-2xl mx-auto mb-6 ">
-                <img src="https://i.ibb.co/YtxBBFN/DBBL-Rocket-Vector-Logo.jpg" alt="" className="h-20 w-24 rounded-md mt-2"/>
-                <img src="https://i.ibb.co/5WKf2pg/mycash.jpg" alt="" className="h-20 w-24 rounded-md  mt-2"/>
-                <img src="https://i.ibb.co/thX2L5W/unnamed-1.png" alt="" className="h-20 w-24 rounded-md  mt-2"/>
-                <img src="https://i.ibb.co/GHC18cd/unnamed.png" alt="" className="h-20 w-24 rounded-md  mt-2"/>
-            </div>
-        </div>
-        <div className="bg-gray-700">
-            <div className="container px-5 py-4 mx-auto">
-                <p className="text-sm text-white capitalize xl:text-center">© 2024 All rights reserved </p>
-            </div>
-        </div>
+
+      </div>
     </footer>
-
-</div>
-        </footer>
-    );
+  );
 };
 
 export default Footer;

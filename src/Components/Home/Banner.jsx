@@ -1,36 +1,93 @@
-import { useState } from 'react';
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
 
+import { useContext } from 'react';
+import { FaUser } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Configs/AuthContext';
+const categories = [
+    { "id": 1, "name": "Home Appliance", "color": "#3498db" },
+    { "id": 2, "name": "Beauty Products", "color": "#d946ef" },
+    { "id": 8, "name": "Women's Fashion", "color": "#e74c3c" },
+    { "id": 7, "name": "Men's Fashion", "color": "#c026d3" },
+    { "id": 3, "name": "Food Item", "color": "#e67e22" },
+    { "id": 5, "name": "Electronics", "color": "#34495e" },
+    { "id": 4, "name": "Furniture", "color": "#9b59b6" },
+    { "id": 6, "name": "Kids Item", "color": "#1abc9c" },
+    { "id": 9, "name": "Mobile", "color": "#4f46e5" }
+];
 
 
 const Banner = () => {
-    const [sliderIndex, setSliderIndex] = useState(0);
-    const images = [
-        'https://i.ibb.co/jZ7WtLc/Banner-1.jpg',
-        'https://i.ibb.co/hWn7Gy3/Banner2.jpg',
-        'https://i.ibb.co/tJkDmrP/Banner3.jpg',
-    ];
-
-    const pervSlide = () => {
-        setSliderIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
-
-    const nextSlide = () => {
-        setSliderIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
-
+    const {user}= useContext(AuthContext)
     return (
-        <div className="relative overflow-hidden mt-16 md:mt-10 lg:mt-20 z-20">
-            <div className="allImage flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${sliderIndex * 100}%)` }}>
-                {images.map((image, index) => (
-                    <img key={index} className="w-full" src={image} alt={`Slide ${index + 1}`} />
-                ))}
+        <div className="flex flex-col  px-2 md:flex-row justify-center md:justify-between lg:justify-center items-center">
+            {/* category side */}
+            <div className='w-[23.8rem] lg:w-auto scroll-m-0 overflow-x-auto px-1'>
+                <ul className=" md:space-y-2 flex flex-row md:flex-col ">
+                    {
+                        categories.map(cat => (
+                            <Link key={cat.id} to={`/categoryPage/${cat.name}`}><li><button className="w-[12.625rem] py-2 hover:bg-blue-100 mx-0 md:mx-1 text-left px-2 rounded-md font-semibold">{cat.name}</button></li></Link>
+                        ))
+                    }
+                    
+                
+                </ul>
             </div>
-            <button onClick={pervSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 px-3 py-2 mx-1 text-white rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-300"><IoIosArrowBack />
-</button>
-            <button onClick={nextSlide} className="absolute top-1/2 right-0 transform -translate-y-1/2 px-3 py-2 mx-1 text-white rounded-md bg-gray-800 hover:bg-gray-700 transition-colors duration-300"><IoIosArrowForward />
-</button>
+            {/* banner picture */}
+            <div className="w-full lg:w-2/4">
+            <div className="relative w-full h-full md:h-[420px] bg-teal-200 flex items-center justify-center">
+            {/* Background Image */}
+            <img
+                src="https://i.ibb.co/xGMnpjC/Banner-board-800x420-2.png"
+                alt="Banner"
+                className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Overlay Content */}
+            <div className="relative z-10 text-center">
+                <h1 className="text-xl md:text-4xl font-bold my-4">Latest trending</h1>
+                <h2 className="text-sm md:text-3xl font-bold mb-6">Electronic items</h2>
+                <button className="bg-white text-black font-semibold py-2 mb-5 px-4 rounded-md shadow-md">
+                    Learn more
+                </button>
+            </div>
+            {/* Overlay Background */}
+            <div className="absolute inset-0 bg-teal-200 opacity-75"></div>
+        </div>
+            </div>
+            {/* user info */}
+            <div className={`${user ? ' space-y-10' : ' space-y-2'} 'hidden lg:flex  flex-col items-center px-4 `}>
+               {user?  
+               <div className='bg-blue-100 w-[14rem]
+                h-[7rem] p-5 rounded-lg'>
+               <div className='flex gap-6'>
+              
+               <div className=''>
+                <p className='font-semibold pb-5'>Hi User</p>
+                <p className='font-semibold'>Thanks for Login</p>
+               </div>
+               </div>
+                
+               </div>:
+               <div className='bg-blue-100 p-5 rounded-lg'>
+               <div className='flex gap-6'>
+               <button className='p-3 rounded-full bg-blue-200'><FaUser className='text-white text-2xl'/></button>
+               <div className=''>
+                <p className='font-semibold'>Hi User</p>
+                <p className='font-semibold'>Let's get started</p>
+               </div>
+               </div>
+                <div className=''>
+                    <button className="w-full bg-blue-500 text-white py-1 px-4 rounded-md mt-2">Join now</button>
+                    <Link to={'/signIn'}><button className="bg-white w-full text-blue-500 py-1 px-4 rounded-md mt-2 border border-blue-500">Log in</button></Link>
+                </div>
+               </div>
+               }
+                <div className="bg-[#F38332] w-[14rem] text-white h-[7rem] p-4 rounded-md text-lg shadow-md ">
+                    <p className='w-[9rem]'>Get US $10 off  with a new  supplier</p>
+                </div>
+                <div className="bg-[#55BDC3] text-white w-[14rem] text-lg h-[7rem] p-4 rounded-md shadow-md">
+                    <p className=' w-[10rem]'>Send quotes with supplier  preferences</p>
+                </div>
+            </div>
         </div>
     );
 };
