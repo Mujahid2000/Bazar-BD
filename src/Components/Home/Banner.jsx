@@ -57,7 +57,7 @@ const Banner = () => {
             <div className={`${user ? ' space-y-10' : ' space-y-2'} 'hidden lg:flex  flex-col items-center px-4 `}>
                {user?  
                <div className='bg-blue-100 w-[14rem]
-                h-[7rem] p-5 rounded-lg'>
+                h-[7rem] p-5 rounded-lg hidden md:block'>
                <div className='flex gap-6'>
               
                <div className=''>
@@ -67,7 +67,7 @@ const Banner = () => {
                </div>
                 
                </div>:
-               <div className='bg-blue-100 p-5 rounded-lg'>
+               <div className='bg-blue-100 hidden md:block p-5 rounded-lg'>
                <div className='flex gap-6'>
                <button className='p-3 rounded-full bg-blue-200'><FaUser className='text-white text-2xl'/></button>
                <div className=''>

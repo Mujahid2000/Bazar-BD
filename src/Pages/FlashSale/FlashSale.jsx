@@ -153,7 +153,7 @@ const FlashSale = () => {
     <div key={myData._id} className="rounded w-80  shadow-lg">
       <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>
         <div className="relative">
-          <img className="w-full h-72" src={myData?.productData?.product_image} alt="Sunset in the mountains" />
+          <img className="w-full h-64" src={myData?.productData?.product_image} alt="Sunset in the mountains" />
           <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
           
           <div className="text-sm absolute top-0 right-0 bg-indigo-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
