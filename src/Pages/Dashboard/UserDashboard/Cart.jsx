@@ -11,7 +11,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const Cart = () => {
     const [cart, setCart] = useState(null);
-    const item  = cart?.length 
+    const item  = cart?.length || 0
     const [number, setNumber] = useState(1)
     const {user} = useContext(AuthContext);
     const email = user?.email;
@@ -42,10 +42,11 @@ const Cart = () => {
 
   let totalPrice = 0;
     // const totalPrice = cart?.reduce((total, item) => total + item?.data?.price, 0);
-    if(cart){
 
+   
+    if(cart){
         cart.forEach(item => {
-            totalPrice += item?.data?.price
+            totalPrice += parseFloat(item?.data?.price) || 0;
            
         });
     }
@@ -54,7 +55,7 @@ const Cart = () => {
     let payment = delivery + totalPrice;
    
     
-
+    
 
     return (
     
