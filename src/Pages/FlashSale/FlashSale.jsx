@@ -154,9 +154,10 @@ const FlashSale = () => {
   {products.map((myData) => (
     <div key={myData._id} className="w-[18.4375rem] h-[25.3125rem] border mx-auto bg-white  rounded-lg overflow-hidden">
     <img className="w-[15rem] h-[15rem]  py-5  mx-auto object-cover object-center" src={myData?.productData?.product_image} alt="Product" />
+  
+   <div className="p-4 mt-7 flex justify-between items-start">
    <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>
-   <div className="p-4 mt-7">
-      <div className="flex justify-between items-center">
+      <div className="">
       <div>
       <div className="flex items-center">
         <span className="text-lg font-semibold text-gray-900">${myData?.discountPrice}</span>
@@ -167,18 +168,20 @@ const FlashSale = () => {
         <span className="text-gray-500 text-sm ml-2">{myData?.rating}</span>
       </div>
       </div>
+      <h2 className="text-gray-900 font-semibold mt-2">{myData.productData?.productName}</h2>
+      </div>
+ </Link>
       <button onClick={() => {
                 handleAddCart(myData); // Call handleAddCart after successful toast display
               }}>
 
         <FaShoppingCart className="w-[1.5rem] text-gray-500 active:text-green-500 h-[1.5rem]"/>
       </button>
-      </div>
       
-      <h2 className="text-gray-900 font-semibold mt-2">{myData.productData?.productName}</h2>
+      
       
     </div>
-   </Link>
+  
     
   </div>
   ))}
