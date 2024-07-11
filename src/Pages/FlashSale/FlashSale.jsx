@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useLocation  } from 'react-router-dom';
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../../Configs/AuthContext";
+import Rating from "../Result/Rating";
+import { FaShoppingCart } from "react-icons/fa";
 
 const FlashSale = () => {
         const [timerDays, setTimerDays] = useState('00');
@@ -17,7 +19,7 @@ const FlashSale = () => {
         const { user } = useContext(AuthContext);
         const email = user?.email;
         
-       
+       console.log(products);
         
 
         let interval = useRef();
@@ -150,34 +152,35 @@ const FlashSale = () => {
           
             <div className="mt-5 max-w-[1440px] mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
   {products.map((myData) => (
-    <div key={myData._id} className="rounded w-80  shadow-lg">
-      <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>
-        <div className="relative">
-          <img className="w-full h-64" src={myData?.productData?.product_image} alt="Sunset in the mountains" />
-          <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
-          
-          <div className="text-sm absolute top-0 right-0 bg-indigo-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
-            <span className="font-bold">{myData?.discountPercentage}%</span>
-          </div>
-        </div>
-        <div className="px-6 py-4">
-          <h3 className="font-semibold text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out">{myData.productData?.productName}</h3>
-          <p className="text-gray-500 text-sm">{myData.productData?.description}</p>
-          <div  className="flex justify-between">
-          <p className="text-black text-sm font-bold">${myData.productData?.price - myData?.discountPrice}</p>
-          <p className="text-black text-sm font-bold line-through">${myData?.discountPrice}</p>
-
-          </div>
-        </div>
-      </Link>
-      <div className="px-6 py-4 flex flex-row items-center">
-        <span className="py-1 text-sm font-regular text-gray-900 mr-1 flex flex-row items-center">
-          <button onClick={() => {
-                handleAddCart(myData); // Call handleAddCart after successful toast display
-              }} className="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 py-2 rounded-md px-3 text-white">Add to cart</button>
-        </span>
+    <div key={myData._id} className="w-[18.4375rem] h-[25.3125rem] border mx-auto bg-white  rounded-lg overflow-hidden">
+    <img className="w-[15rem] h-[15rem]  py-5  mx-auto object-cover object-center" src={myData?.productData?.product_image} alt="Product" />
+   <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>
+   <div className="p-4 mt-7">
+      <div className="flex justify-between items-center">
+      <div>
+      <div className="flex items-center">
+        <span className="text-lg font-semibold text-gray-900">${myData?.discountPrice}</span>
+        <span className="text-gray-500 line-through ml-2">${myData.productData?.price - myData?.discountPrice}</span>
       </div>
+      <div className="flex items-center mt-2">
+        <Rating stars={myData?.productData?.rating}/>
+        <span className="text-gray-500 text-sm ml-2">{myData?.rating}</span>
+      </div>
+      </div>
+      <button onClick={() => {
+                handleAddCart(myData); // Call handleAddCart after successful toast display
+              }}>
+
+        <FaShoppingCart className="w-[1.5rem] text-gray-500 active:text-green-500 h-[1.5rem]"/>
+      </button>
+      </div>
+      
+      <h2 className="text-gray-900 font-semibold mt-2">{myData.productData?.productName}</h2>
+      
     </div>
+   </Link>
+    
+  </div>
   ))}
           </div>
 

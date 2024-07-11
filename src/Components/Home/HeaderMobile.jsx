@@ -118,10 +118,10 @@ const HeaderMobile = () => {
                         <FaHeart className="ml-3" />
                         <p>Order</p>
                     </button>
-                    <button className="block items-center justify-center flex flex-col text-gray-400 text-base">
+                    <Link to={'/dashboard/cart'}> <button className="block items-center justify-center flex flex-col text-gray-400 text-base">
                         <FaCartPlus className='w-5 h-5'/>
                         <p className='hidden md:block'>Cart</p>
-                    </button>
+                    </button></Link>
                 </div>
             </div>
 

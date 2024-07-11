@@ -73,7 +73,7 @@ const ShopProfile = ({ shop }) => {
   }
 
   return (
-    <div className="mt-[5rem] mb-6">
+    <div className=" mb-6">
       <Parallax
         blur={{ min: -15, max: 15 }}
         bgImage={filter}
@@ -84,8 +84,8 @@ const ShopProfile = ({ shop }) => {
       </Parallax>
       <div>
         <h1 className="text-5xl text-center font-bold mt-5">{name[0]}</h1>
-        <div className="flex flex-wrap mt-5 mx-5 removable">
-          <div className="w-full max-w-full px-3 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
+        <div className="flex max-w-[1440px] mx-auto flex-wrap mt-5  removable">
+          <div className="w-full max-w-full px-2 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
             <div
               className="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30 draggable"
               draggable="true"
@@ -128,7 +128,7 @@ const ShopProfile = ({ shop }) => {
               </div>
             </div>
           </div>
-          <div className="w-full max-w-full px-3 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
+          <div className="w-full max-w-full px-2 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
             <div
               className="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30 draggable"
               draggable="true"
@@ -171,7 +171,7 @@ const ShopProfile = ({ shop }) => {
               </div>
             </div>
           </div>
-          <div className="w-full max-w-full px-3 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
+          <div className="w-full max-w-full px-2 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
             <div
               className="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30 draggable"
               draggable="true"
@@ -205,7 +205,7 @@ const ShopProfile = ({ shop }) => {
               </div>
             </div>
           </div>
-          <div className="w-full max-w-full px-3 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
+          <div className="w-full max-w-full px-2 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
             <div
               className="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30 draggable"
               draggable="true"
@@ -250,31 +250,43 @@ const ShopProfile = ({ shop }) => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-8 place-items-center">
+      <div className="grid grid-cols-1 mt-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-8 place-items-center max-w-[1440px] mx-auto">
         {filterData.map((product) => (
-           <div className="max-w-xs mx-auto   relative shadow-lg bg-[#1A2238] spacing" key={product._id} style={{ boxShadow: '0px 0px 0px #888, 0px -0px 1px #888' }}>
-           <div className="absolute left-0 top-10 text-uppercase text-xs font-semibold bg-gray-600 text-green-500 px-2 py-1">New Product</div>
-           <div className="flex items-center justify-center h-72 bg-white">
-               <img src={product.product_image} className="max-w-full max-h-64"/>
+           <div className="w-[20rem]  mx-auto rounded-lg  relative border  spacing" key={product._id} >
+           
+           <div className="flex items-center justify-center h-64 bg-white">
+               <img src={product.product_image} className="w-[12rem] h-[12rem] py-2"/>
            </div>
+           
            <div className="p-7">
-               <span className="block text-xs font-semibold uppercase text-blue-300 ">{product.category}</span>
-               <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${product._id}`}>{product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link></h4>
-               <p className="text-base leading-6 mb-4 text-blue-200">{product.description.slice(0, 40)}</p>
-               <div className="overflow-hidden border-t border-blue-200 ">
-                   <div className="text-lg font-semibold text-red-600">${product?.price}</div>
+               <div className="flex justify-between items-center">
+                <div className="">
+                  <h4 className="block font-medium   uppercase text-gray-900 no-underline transition duration-300 hover:text-blue-600">
+                <Link to={`/productDetails/${product._id}`}>
+                {product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link>
+                </h4>
+                <span className="block text-xs  font-semibold uppercase text-gray-900 ">{product.category}</span>
+               
+                </div>
+                <div>
+                <div className="text-lg font-semibold text-gray-900">${product?.price}</div>
+                </div>
+               </div>
+               {/* <p className="text-base leading-6 mb-4 text-gray-900">{product.description.slice(0, 40)}</p> */}
+               <div className="overflow-hidden pt-2 text-gray-900 ">
+                   
                    <div className=" flex justify-between items-start gap-4">
                      <div>
-
                      <Rating stars={product.rating}/>
                      </div>
                      <div className="flex gap-2">
-                       <button onClick={() => handleWishlist(product)}><FaHeart  className="text-white active:text-red-600"/></button>
-                       <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-white active:text-red-600"/></button>
+                       <button onClick={() => handleWishlist(product)}><FaHeart  className="text-gray-900 active:text-red-600"/></button>
+                       <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-gray-900 active:text-red-600"/></button>
                      </div>
                    </div>
                </div>
            </div>
+
        </div>
         ))}
       </div>

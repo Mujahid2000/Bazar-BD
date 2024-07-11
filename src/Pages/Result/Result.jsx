@@ -129,35 +129,48 @@ const Result = () => {
 
 
     return (
-        <div className="flex flex-col-reverse md:flex-row lg:flex-row mx-auto justify-evenly">
+        <div className="flex max-w-[144xpx]  flex-col-reverse md:flex-row lg:flex-row mx-auto justify-evenly">
             <div>
-            <div className=" mx-2 mt-20">
+            <div className=" mx-2 ">
         <h2 className="text-black ml-14 text-xl">Search Results:{searchResults.length}</h2>
         <div >
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-7 mt-9 gap-y-8 place-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-7 mt-9 gap-y-8 place-items-center">
             {searchResults.map((product) => (
-                                <div className="max-w-xs mx-auto relative shadow-lg bg-[#1A2238] spacing" key={product._id}>
-                                <div className="absolute left-0 top-10 text-uppercase text-xs font-semibold bg-gray-600 text-green-500 px-2 py-1">New Product</div>
-                                <div className="flex items-center justify-center h-72 bg-white">
-                                    <img src={product.product_image} className="max-w-full max-h-64"/>
+                                <div className="w-[20rem]  mx-auto rounded-lg  relative border  spacing" key={product._id} >
+           
+                                <div className="flex items-center justify-center h-64 bg-white">
+                                    <img src={product.product_image} className="w-[12rem] h-[12rem] py-2"/>
                                 </div>
+                                
                                 <div className="p-7">
-                                    <span className="block text-xs font-semibold uppercase text-blue-300 ">{product.category}</span>
-                                    <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${product._id}`}>{product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link></h4>
-                                    <p className="text-base leading-6 mb-4 text-blue-200">{product.description.slice(0, 40)}</p>
-                                    <div className="overflow-hidden border-t border-blue-200 ">
-                                        <div className="text-lg font-semibold text-red-600">${product?.price}</div>
-                                        <div className=" flex justify-between items-start gap-4">
-                                        <div>
-                                        <Rating stars={product.rating}/>
-                                        </div>
-                                        <div className="flex gap-2">
-                                        <button onClick={() => handleWishlist(product)}><FaHeart  className="text-white active:text-red-600"/></button>
-                                        <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-white active:text-red-600"/></button>
-                                        </div>
+                                    <div className="flex justify-between items-center">
+                                     <div className="">
+                                       <h4 className="block font-medium   uppercase text-gray-900 no-underline transition duration-300 hover:text-blue-600">
+                                     <Link to={`/productDetails/${product._id}`}>
+                                     {product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link>
+                                     </h4>
+                                     <span className="block text-xs  font-semibold uppercase text-gray-900 ">{product.category}</span>
+                                    
+                                     </div>
+                                     <div>
+                                     <div className="text-lg font-semibold text-gray-900">${product?.price}</div>
+                                     </div>
                                     </div>
+                                    {/* <p className="text-base leading-6 mb-4 text-gray-900">{product.description.slice(0, 40)}</p> */}
+                                    <div className="overflow-hidden pt-2 text-gray-900 ">
+                                        
+                                        <div className=" flex justify-between items-start gap-4">
+                                          <div>
+                                          <Rating stars={product.rating}/>
+                                          </div>
+                                          <div className="flex gap-2">
+                                            <button onClick={() => handleWishlist(product)}><FaHeart  className="text-gray-900 active:text-red-600"/></button>
+                                            <button onClick={() => {handleAddCart(product)}}><FaCartArrowDown className="text-gray-900 active:text-red-600"/></button>
+                                          </div>
+                                        </div>
                                     </div>
                                 </div>
+                     
                             </div>
                             ))}
         </div>
@@ -165,7 +178,7 @@ const Result = () => {
         </div>
         </div>
             </div>
-            <div className="w-80 mx-10 md:mx-1 lg:mx-0 rounded-md border min-h-[90vh] mt-[140px] text-center shadow-md">
+            <div className="w-80 mx-10 md:mx-1 lg:mx-0 rounded-md border min-h-[90vh] mt-14 text-center shadow-md">
             <h3>Price Range</h3>
                 <div className="flex w-72 mx-auto gap-2">
                     <div>
