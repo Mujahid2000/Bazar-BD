@@ -5,7 +5,7 @@ export const VerifyContext = createContext();
 
 export const UserVerify = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("access-token"));
-console.log(token);
+// console.log(token);
 
   const verifyToken = async () => {
     try {
