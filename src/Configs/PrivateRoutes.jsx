@@ -17,7 +17,7 @@ const PrivateRoute = ({ children }) => {
                 console.error('Token verification failed:', error);
             });
             
-    }, [verifyToken]);
+    }, [verifyToken, token]);
 
     if (loading)
         return <Loading />;

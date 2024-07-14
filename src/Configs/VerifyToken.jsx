@@ -5,7 +5,7 @@ export const VerifyContext = createContext();
 
 export const UserVerify = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("access-token"));
-//   console.log(token);
+console.log(token);
 
   const verifyToken = async () => {
     try {
@@ -13,11 +13,9 @@ export const UserVerify = ({ children }) => {
         throw new Error("No token found");
       }
       axios.defaults.headers.common['authorization'] = token
-
       const response = await axios.post("https://bazar-bd-server.vercel.app/verify-token", {
         token,
       });
-
       return response.data;
     } catch (error) {
       localStorage.removeItem("access-token");
