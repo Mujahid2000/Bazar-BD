@@ -4,7 +4,7 @@ import axios from "axios";
 export const VerifyContext = createContext();
 
 export const UserVerify = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem("access-token"));
+  const [token, setToken] = useState(sessionStorage.getItem("access-token"));
 
 
   const verifyToken = async  () => {
