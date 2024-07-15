@@ -1,13 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const VerifyContext = createContext();
 
 export const UserVerify = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("access-token"));
-// console.log(token);
 
-  const verifyToken = async () => {
+
+  const verifyToken = async  () => {
     try {
       if (!token) {
         throw new Error("No token found");
@@ -22,6 +22,11 @@ export const UserVerify = ({ children }) => {
       throw error;
     }
   };
+
+
+  useEffect(() =>{
+    verifyToken();
+  }, [verifyToken])
 
   
   return (
