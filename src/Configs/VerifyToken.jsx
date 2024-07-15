@@ -12,7 +12,7 @@ export const UserVerify = ({ children }) => {
       if (!token) {
         throw new Error("No token found");
       }
-      axios.defaults.headers.common['authorization'] = token
+      axios.defaults.headers.common['Authorization']  = token
       const response = await axios.post("https://bazar-bd-server.vercel.app/verify-token", {
         token,
       });
