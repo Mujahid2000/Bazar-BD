@@ -5,6 +5,7 @@ import Loading from '../Components/Loading/Loading';
 import { VerifyContext } from './VerifyToken';
 
 
+
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const { token, verifyToken } = useContext(VerifyContext);
@@ -17,7 +18,7 @@ const PrivateRoute = ({ children }) => {
                 console.error('Token verification failed:', error);
             });
             
-    }, [verifyToken]);
+    }, [verifyToken, token]);
 
     if (loading)
         return <Loading />;

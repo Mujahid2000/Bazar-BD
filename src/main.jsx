@@ -34,7 +34,8 @@ import DetailPayment from './Components/Home/Payment/DetailPayment';
 import AllProducts from './Components/Home/AllProducts';
 import Profile from './Components/Home/Profile';
 import UserVerify from './Configs/VerifyToken';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const queryClient = new QueryClient();
 
 
 const router = createBrowserRouter([
@@ -159,11 +160,13 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <AuthProvider>
-    <UserVerify>
-    <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-    </UserVerify>
-  </AuthProvider>
+<QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <UserVerify>
+        <React.StrictMode>
+          <RouterProvider router={router} />
+        </React.StrictMode>
+      </UserVerify>
+    </AuthProvider>
+  </QueryClientProvider>
 )

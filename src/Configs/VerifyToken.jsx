@@ -1,37 +1,48 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useCallback } from "react";
 
 export const VerifyContext = createContext();
 
 export const UserVerify = ({ children }) => {
-  const [token, setToken] = useState(sessionStorage.getItem("access-token"));
+  const [token, setToken] = useState(localStorage.getItem("access-token") || null);
+  const queryClient = useQueryClient();
 
-
-  const verifyToken = async  () => {
-    try {
-      if (!token) {
-        throw new Error("No token found");
-      }
-      axios.defaults.headers.common['Authorization']  = token
-      const response = await axios.post("https://bazar-bd-server.vercel.app/verify-token", {
-        token,
-      });
-      return response.data;
-    } catch (error) {
-      localStorage.removeItem("access-token");
-      throw error;
-    }
+  const fetchToken = async () => {
+    axios.defaults.headers.common['Authorization']  = token
+    const response = await axios.post("https://bazar-bd-server.vercel.app/verify-token", {
+      token,
+    });
+    return response.data;
   };
 
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["verifyToken", token],
+    queryFn: fetchToken,
+    enabled: !!token,
+    retry: false,
+    onError: () => {
+      localStorage.removeItem("access-token");
+    },
+  });
 
-  useEffect(() =>{
-    verifyToken();
-  }, [verifyToken])
+  useEffect(() => {
+    if (data) {
+      console.log("Token Verified:", data);
+    }
+    if (error) {
+      console.error("Token Verification Error:", error);
+    }
+  }, [data, error]);
 
-  
+  const verifyToken = useCallback(() =>{
+    return fetchToken()
+  },[token])
+
   return (
     <VerifyContext.Provider value={{ token, setToken, verifyToken }}>
-      {children}
+      {isLoading ? <p>Loading...</p> : children}
     </VerifyContext.Provider>
   );
 };
