@@ -11,7 +11,7 @@ export const UserVerify = ({ children }) => {
 
   const fetchToken = async () => {
     axios.defaults.headers.common['Authorization']  = token
-    const response = await axios.post("https://bazar-bd-server.vercel.app/verify-token", {
+    const response = await axios.post("https://postgre-server.vercel.app/verify-token", {
       token,
     });
     return response.data;
@@ -32,7 +32,7 @@ export const UserVerify = ({ children }) => {
       console.log("Token Verified:", data);
     }
     if (error) {
-      console.error("Token Verification Error:", error);
+      console.error("Token Verification Error:");
     }
   }, [data, error]);
 
@@ -42,7 +42,7 @@ export const UserVerify = ({ children }) => {
 
   return (
     <VerifyContext.Provider value={{ token, setToken, verifyToken }}>
-      {isLoading ? <p>Loading...</p> : children}
+      { children}
     </VerifyContext.Provider>
   );
 };

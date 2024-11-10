@@ -19,7 +19,7 @@ const FlashSale = () => {
         const { user } = useContext(AuthContext);
         const email = user?.email;
         
-       console.log(products);
+
         
 
         let interval = useRef();
@@ -58,20 +58,42 @@ const FlashSale = () => {
 
 
         useEffect(() => {
-            axios.get('https://bazar-bd-server.vercel.app/productDiscount')
-                .then(res => setProducts(res.data))
+            axios.get('https://postgre-server.vercel.app/discount')
+                .then(res => setProducts(res.data.data))
                 .catch(error => console.error(error));
         }, []);
 
 
         const handleAddCart = (data) => {
-          if(user){
-            axios
-              .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
-              .then((response) => console.log(response));
-            toast.success("Item added to cart!").catch(console.log("error"));
+          const productid = data.idp;
+          console.log(productid);
+        
+          if (user) {
+          
+            try {
+              axios
+                .post("https://postgre-server.vercel.app/cart", { productid, email })
+                .then((response) => {
+                  
+                  console.log(response);
+                  toast.success("Item added to cart!");
+                })
+                .catch((error) => {
+                  
+                  console.error("Error adding item to cart:", error);
+                  toast.error("Failed to add item to cart. Please try again.");
+                });
+            } catch (error) {
+              
+              console.error("Unexpected error:", error);
+              toast.error("An unexpected error occurred. Please try again.");
+            }
+          } else {
+            
+            toast.error("You need to be logged in to add items to the cart.");
           }
         };
+        
 
     return (
         <div className=" mb-6">
@@ -151,24 +173,25 @@ const FlashSale = () => {
           </div>
           
             <div className="mt-5 max-w-[1440px] mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
-  {products.map((myData) => (
-    <div key={myData._id} className="w-[18.4375rem] h-[25.3125rem] border mx-auto bg-white  rounded-lg overflow-hidden">
-    <img className="w-[15rem] h-[15rem]  py-5  mx-auto object-cover object-center" src={myData?.productData?.product_image} alt="Product" />
+  {products && products.map((myData) => (
+    <div key={myData.id} className="w-[18.4375rem] h-[25.3125rem] border mx-auto bg-white  rounded-lg overflow-hidden">
+    <img className="w-[15rem] h-[15rem]  py-5  mx-auto object-cover object-center" src={myData?.product_image} alt="Product" />
   
    <div className="p-4 mt-7 flex justify-between items-start">
-   <Link to={`/productDetails/${myData._id}?fromFlashSale=${location.pathname}`}>
+   <Link to={`/productDetails/${myData.id}?fromFlashSale=${location.pathname}`}>
       <div className="">
       <div>
       <div className="flex items-center">
-        <span className="text-lg font-semibold text-gray-900">${myData?.discountPrice}</span>
-        <span className="text-gray-500 line-through ml-2">${myData.productData?.price - myData?.discountPrice}</span>
+        <span className="text-lg font-semibold text-gray-900">${myData?.discountprice}</span>
+        <span className="text-gray-500 line-through ml-2">${(myData.price - myData?.discountprice).toFixed(2)}
+        </span>
       </div>
       <div className="flex items-center mt-2">
-        <Rating stars={myData?.productData?.rating}/>
+        <Rating stars={myData?.rating}/>
         <span className="text-gray-500 text-sm ml-2">{myData?.rating}</span>
       </div>
       </div>
-      <h2 className="text-gray-900 font-semibold mt-2">{myData.productData?.productName}</h2>
+      <h2 className="text-gray-900 font-semibold mt-2">{myData?.productname}</h2>
       </div>
  </Link>
       <button onClick={() => {

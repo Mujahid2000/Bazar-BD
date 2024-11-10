@@ -21,12 +21,8 @@ const Home = () => {
         <Subscribe/>
         <Service/>
         {/* <ProductCard/>
-        <TopProducts/>
-        <Cupon></Cupon>
-        <NewArrivals/>
-        <Region/>
-        <Delivery/>
-        <Subscribe/> */}
+        <TopProducts/> */}
+      
         </div>
     );
 };

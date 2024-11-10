@@ -1,4 +1,6 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const cardsData = [
   {
@@ -44,6 +46,19 @@ const cardsData = [
 ];
 
 const HomeOutdoorSection = () => {
+  const [product, setProduct] = useState([]);
+
+
+  useEffect(() => {
+    axios.get('https://postgre-server.vercel.app/product')
+        .then(res => {
+            const filteredProducts = res.data.data.filter(product => product.shopname  === 'Kitchen Marvel');
+            setProduct(filteredProducts);
+        })
+        .catch(error => console.error(error));
+}, []);
+
+
   return (
     <div className='max-w-[1400px] mx-auto my-8'>
       <div className='grid grid-cols-1 lg:grid-cols-3'>
@@ -60,22 +75,24 @@ const HomeOutdoorSection = () => {
             alt='Home and outdoor'
           />
         </div>
-        <div className='col-span-2 lg:col-span-2 grid grid-cols-2 lg:grid-cols-4 '>
-          {cardsData.map((item, index) => (
+        <div className='col-span-2 gap-y-4 lg:col-span-2 grid grid-cols-2 lg:grid-cols-4 '>
+          {product && product.slice(0, 8).map((item, index) => (
+            <Link key={index} to={`/productDetails/${item.id}`}>
             <div
-              key={index}
-              className='bg-white border-r-md  py-2 px-7 flex flex-col items-center justify-between border'
+              className='bg-white border-r-md  py-3 px-7 flex flex-col items-center justify-between border'
             >
               <img
                 className='w-28 h-28 object-contain mb-4'
-                src={item.image}
-                alt={item.title}
+                src={item.product_image}
+                alt={item.productname}
               />
               <div className='text-center'>
-                <h3 className='text-lg font-semibold'>{item.title}</h3>
-                <p className='text-gray-500'>{item.price}</p>
+                <h3 className='text-lg font-semibold'>{item.productname.slice(0,15)}</h3>
+                <p className='text-gray-500'>${item.price}</p>
               </div>
             </div>
+            </Link>
+            
           ))}
         </div>
       </div>

@@ -21,7 +21,7 @@ const Result = () => {
     const [rating, setRating] = useState(0);
     const { user } = useContext(AuthContext);
     const email = user?.email;
-    // console.log(rating);
+    console.log(products);
     // console.log(isChecked1);
     // console.log(isChecked2);
     // console.log(isChecked3);
@@ -72,19 +72,19 @@ const Result = () => {
     };
 
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
+        axios.get('https://postgre-server.vercel.app/product')
             .then(res => {
-                setProducts(res.data);
-                filterProducts(searchQuery, res.data, value1,); 
+                setProducts(res.data.data);
+                filterProducts(searchQuery, res.data.data, value1,); 
             })
             .catch(error => console.error(error));
     }, [searchQuery,location, value1,isChecked2, isChecked1, isChecked3, rating]); 
-
+// console.log(filterProducts);
     const filterProducts = (query, products, range) => {
         let filteredProducts = [...products];
 
         if (query) {
-            filteredProducts = filteredProducts.filter(product => product.productName.toLowerCase().includes(query.toLowerCase()));
+            filteredProducts = filteredProducts.filter(product => product.productname.toLowerCase().includes(query.toLowerCase()));
         }
 
         // Filter based on price range
@@ -112,7 +112,7 @@ const Result = () => {
 
     const handleAddCart = (data) => {
         if(user){
-          axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+          axios.post(`https://postgre-server.vercel.app/cart`, { data, email })
           .then((response) => console.log(response));
         toast.success("Item added to cart!").catch(console.log("error"));
         }
@@ -121,7 +121,7 @@ const Result = () => {
   
         const handleWishlist = (product) =>{
           if(user){
-            axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+            axios.post('https://postgre-server.vercel.app/wishlist',{product, email})
             .then(res => console.log(res));
             toast.success("Added Favourite !").catch(console.log("error"));
           }
@@ -135,8 +135,8 @@ const Result = () => {
         <h2 className="text-black ml-14 text-xl">Search Results:{searchResults.length}</h2>
         <div >
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-7 mt-9 gap-y-8 place-items-center">
-            {searchResults.map((product) => (
-                                <div className="w-[20rem]  mx-auto rounded-lg  relative border  spacing" key={product._id} >
+            {searchResults && searchResults.map((product) => (
+                                <div className="w-[20rem]  mx-auto rounded-lg  relative border  spacing" key={product.id} >
            
                                 <div className="flex items-center justify-center h-64 bg-white">
                                     <img src={product.product_image} className="w-[12rem] h-[12rem] py-2"/>
@@ -146,8 +146,8 @@ const Result = () => {
                                     <div className="flex justify-between items-center">
                                      <div className="">
                                        <h4 className="block font-medium   uppercase text-gray-900 no-underline transition duration-300 hover:text-blue-600">
-                                     <Link to={`/productDetails/${product._id}`}>
-                                     {product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link>
+                                     <Link to={`/productDetails/${product.id}`}>
+                                     {product.productname.length > 20 ? product.productname.slice(0,10) : product.productname}</Link>
                                      </h4>
                                      <span className="block text-xs  font-semibold uppercase text-gray-900 ">{product.category}</span>
                                     

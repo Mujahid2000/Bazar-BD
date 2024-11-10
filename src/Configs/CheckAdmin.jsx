@@ -7,19 +7,23 @@ const CheckAdmin = () => {
     const [isAdmin, setIsAdmin] = useState(null);
     const [isAdminLoading, setIsAdminLoading] = useState(true);
 
+
+
     useEffect(() => {
         const fetchAdminStatus = async () => {
-            if (user && !loading) {
+            if (user) {
                 setIsAdminLoading(true);
+                
                 try {
                     
-                    const res = await axios.get(`https://bazar-bd-server.vercel.app/user/${user.email}`);
+                    const res = await axios.get(`https://postgre-server.vercel.app/user/${user?.email}`);
                     
-                    setIsAdmin(res.data.admin);
+                    setIsAdmin(res.data);
                 } catch (error) {
                     console.error("Error fetching admin status:", error);
                 } finally {
                     setIsAdminLoading(false);
+                    
                 }
             }
         };

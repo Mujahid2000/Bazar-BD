@@ -11,10 +11,13 @@ import { FaCartArrowDown, FaHeart } from "react-icons/fa";
 const ShopProfile = ({ shop }) => {
   const { shopName } = useParams();
   const [products, setProducts] = useState([]);
-  const [filter, setFilter] = useState([]);
+  const [shopData, setShop] = useState([])
+
   const [name, setName] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user?.email;
+
+
 
   const [userData] = useState({
     totalOrders: 52,
@@ -22,68 +25,56 @@ const ShopProfile = ({ shop }) => {
     responseTime: "1-2 business days",
   });
 
-  useEffect(() => {
-    axios
-      .get("https://bazar-bd-server.vercel.app/addProducts")
-      .then((res) => setProducts(res.data))
-      .catch((error) => console.error(error));
-  }, []);
-
-  const filterData = products.filter((cat) => cat.shopName == shopName);
-
-  const posterImg = filterData.filter((pro) => {
-    if (
-      pro.shopName === shopName &&
-      !filter.find((item) => item === pro.shopPicture)
-    ) {
-      setFilter((prevFilter) => [...prevFilter, pro.shopPicture]);
-      return true;
-    } else {
-      return false;
-    }
-  });
 
   useEffect(() => {
-    const myShop = filterData.filter((name) => {
-      if (
-        name?.shopName === shopName &&
-        !filter.find((item) => item === name?.shopName)
-      ) {
-        setName((prevFilter) => [...prevFilter, name?.shopName]);
-        return true;
-      } else {
-        return false;
+    axios.get(`https://postgre-server.vercel.app/shop/${shopName}`)
+        .then((res) => setShop(res.data.data))
+        .catch((error) => console.error("Error fetching shop data:", error));
+}, [shopName]);
+
+useEffect(() => {
+    axios.get(`https://postgre-server.vercel.app/product/shop/${shopName}`)
+        .then((res) => setProducts(res.data.data))
+        .catch((error) => console.error("Error fetching products:", error));
+}, [shopName]);
+
+
+
+
+const handleAddCart = (data) => {
+  const productid = data.idp;
+     if(user){
+       axios.post(`https://postgre-server.vercel.app/cart`, { productid, email })
+       .then((response) => console.log(response));
+     toast.success("Item added to cart!")
+     }else{
+        alert('Please Login')
+     }
+    };
+
+    const handleWishlist = (product) =>{
+        const productid = product.idp;
+        if(user){
+          axios.post('https://postgre-server.vercel.app/wishlist',{productid, email})
+          .then(res => console.log(res));
+          toast.success("Added Favourite !").catch(console.log("error"));
+        }else{
+            alert('Please Login')
+         }
       }
-    });
-  }, [filter, shopName]);
-
-  const handleAddCart = (data) => {
-    axios
-      .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
-      .then((response) => console.log(response));
-    toast.success("Item added to cart!").catch(console.log("error"));
-  };
-
-  const handleWishlist = (product) =>{
-    if(user){
-      axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
-      .then(res => console.log(res));
-      toast.success("Added Favourite !").catch(console.log("error"));
-    }
-  }
 
   return (
     <div className=" mb-6">
       <Parallax
         blur={{ min: -15, max: 15 }}
-        bgImage={filter}
+        bgImage={shopData[0]?.shoppicture}
         bgImageAlt="the dog"
         strength={200}
       >
         <div style={{ height: "40rem" }} />
       </Parallax>
       <div>
-        <h1 className="text-5xl text-center font-bold mt-5">{name[0]}</h1>
+        <h1 className="text-5xl text-center font-bold mt-5">{shopName}</h1>
         <div className="flex max-w-[1440px] mx-auto flex-wrap mt-5  removable">
           <div className="w-full max-w-full px-2 mb-6 sm:w-1/4 sm:flex-none xl:mb-0 xl:w-1/4 drop-zone">
             <div
@@ -113,13 +104,13 @@ const ShopProfile = ({ shop }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4 mr-1"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
                     ></path>
                   </svg>
@@ -156,13 +147,13 @@ const ShopProfile = ({ shop }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4 mr-1"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
                     ></path>
                   </svg>
@@ -233,13 +224,13 @@ const ShopProfile = ({ shop }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-4 h-4 mr-1"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
                     ></path>
                   </svg>
@@ -251,8 +242,8 @@ const ShopProfile = ({ shop }) => {
         </div>
       </div>
       <div className="grid grid-cols-1 mt-5 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-8 place-items-center max-w-[1440px] mx-auto">
-        {filterData.map((product) => (
-           <div className="w-[20rem]  mx-auto rounded-lg  relative border  spacing" key={product._id} >
+        {products.map((product) => (
+           <div className="w-[20rem]  mx-auto rounded-lg  relative border  spacing" key={product.id} >
            
            <div className="flex items-center justify-center h-64 bg-white">
                <img src={product.product_image} className="w-[12rem] h-[12rem] py-2"/>
@@ -262,8 +253,8 @@ const ShopProfile = ({ shop }) => {
                <div className="flex justify-between items-center">
                 <div className="">
                   <h4 className="block font-medium   uppercase text-gray-900 no-underline transition duration-300 hover:text-blue-600">
-                <Link to={`/productDetails/${product._id}`}>
-                {product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link>
+                <Link to={`/productDetails/${product.id}`}>
+                {product.productname?.length > 20 ? product.productname?.slice(0,10) : product.productname}</Link>
                 </h4>
                 <span className="block text-xs  font-semibold uppercase text-gray-900 ">{product.category}</span>
                

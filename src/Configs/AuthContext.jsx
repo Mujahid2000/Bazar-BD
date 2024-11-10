@@ -57,8 +57,9 @@ const AuthProvider = ({children}) => {
                 if(currentUser){
                     // token store
                     const userInfo = {email: currentUser.email}
-                    axios.post('https://bazar-bd-server.vercel.app/jwt', userInfo)
+                    axios.post('https://postgre-server.vercel.app/jwt', userInfo)
                     .then(res => {
+                        
                     if(res.data.token){
                         localStorage.setItem('access-token', res.data.token);
                         setLoading(false);

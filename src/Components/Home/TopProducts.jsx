@@ -12,9 +12,9 @@ const TopProducts = () => {
     const email = user?.email;
     // console.log(products);
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
+        axios.get('https://postgre-server.vercel.app/product')
             .then(res => {
-                const filteredProducts = res.data.filter(product => product.rating > 3.5);
+                const filteredProducts = res.data.data.filter(product => product.rating > 3.5);
                 setProducts(filteredProducts);
             })
             .catch(error => console.error(error));
@@ -23,7 +23,7 @@ const TopProducts = () => {
     const handleAddCart = (data) => {
         if(user){
             axios
-              .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+              .post(`https://postgre-server.vercel.app/addCart`, { data, email })
               .then((response) => console.log(response));
             toast.success("Item added to cart!").catch(console.log("error"));
         }
@@ -36,7 +36,7 @@ const TopProducts = () => {
 
     const handleWishlist = (product) =>{
         if(user){
-            axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+            axios.post('https://postgre-server.vercel.app/wishlist',{product, email})
             .then(res => console.log(res));
             toast.success("Added Favourite !").catch(console.log("error"));
         }
@@ -56,7 +56,7 @@ const TopProducts = () => {
                 </div>
                 <div className="p-7">
                     <span className="block text-xs font-semibold uppercase text-blue-300 ">{data.category}</span>
-                    <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${data._id}`}>{data.productName.length > 20 ? data.productName.slice(0,10) : data.productName}</Link></h4>
+                    <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${data._id}`}>{data.productname.length > 20 ? data.productname.slice(0,10) : data.productName}</Link></h4>
                     <p className="text-base leading-6 mb-4 text-blue-200">{data.description.slice(0, 40)}</p>
                     <div className="overflow-hidden border-t border-blue-200 ">
                         <div className="text-lg font-semibold text-red-600">${data.price}</div>

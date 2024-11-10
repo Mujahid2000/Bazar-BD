@@ -1,161 +1,207 @@
-
 import axios from 'axios';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Configs/AuthContext";
-
-import { Link } from "react-router-dom";
-import { FiPlus } from "react-icons/fi";
-import { IoIosArrowForward } from "react-icons/io";
-
+import './cart.css';
+import { BsTrash3 } from 'react-icons/bs';
+import { MdArrowBackIos } from 'react-icons/md';
 
 
 const Cart = () => {
-    const [cart, setCart] = useState(null);
-    const item  = cart?.length || 0
-    const [number, setNumber] = useState(1)
-    const {user} = useContext(AuthContext);
-    const email = user?.email;
-    const name = user?.disPlayName;
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState(1);
+  const [token, setToken] = useState(localStorage.getItem("deleteCartAfterCheckout"));
+  const { user } = useContext(AuthContext);
+  const email = user?.email;
+  const [userData, setUserData] = useState(null);
+  const itemCount = cart.length;
+  const deliveryCharge = 15.00 * itemCount;
+  const totalPrice = Array.isArray(cart)
+  ? cart.reduce((total, item) => total + parseFloat(item?.price || 0), 0)
+  : 0;
 
-    
-    
-    
-    useEffect(() =>{
-        const fetchData = async () =>{
-            try {
+  const payments = deliveryCharge + totalPrice;
+  const userId = (userData?.user_id);
 
-                if(email){
-        
-                    axios.get(`https://bazar-bd-server.vercel.app/addCart/${email}`)
-                    .then(res => setCart(res.data))
-                    .catch((error) => console.log(error))
-                }
-            }catch(error){
-                console.error('error', error)
-            }
-            }
-            fetchData();
-    },[email])
 
-    const delivery= 15.00 * item;
-    
 
-  let totalPrice = 0;
-    // const totalPrice = cart?.reduce((total, item) => total + item?.data?.price, 0);
 
-   
-    if(cart){
-        cart.forEach(item => {
-            totalPrice += parseFloat(item?.data?.price) || 0;
-           
-        });
+useEffect(() =>{
+  try {
+    const getData =async () =>{
+      const res = await axios.get(`https://postgre-server.vercel.app/user/${email}`);
+      (setUserData(res.data.data))
     }
-   
+    getData()
+  } catch (error) {
+    console.error("Error fetching cart data:", error);
+  }
+},[email])
 
-    let payment = delivery + totalPrice;
-   
-    
-    
+  // Fetch cart data
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!email) return;
+      setLoading(true);
+      try {
+        const response = await axios.get(`https://postgre-server.vercel.app/cart/${email}`);
+        setCart(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching cart data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [email]);
 
-    return (
-    
-        <div className="max-w-7xl ml-16 xl:mx-96 2xl:mx-96">
-            <section className="py-24 relative">
-        <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
+  // Delete item from cart
+  const handleCartDataDelete = async (id) => {
+    if (!id) return;
+    try {
+      await axios.delete(`https://postgre-server.vercel.app/cart/${id}`);
+      setCart(prevCart => prevCart.filter(item => item.cart_id !== id)); // Update cart immediately
+    } catch (error) {
+      console.error("Error deleting item from cart:", error);
+    }
+  };
 
-            <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Shopping Cart
-            </h2>
-            <div className="hidden lg:grid grid-cols-2 py-6">
-                <div className="font-normal text-xl leading-8 text-gray-500">Product</div>
-                <p className="font-normal text-xl leading-8 text-gray-500 flex items-center justify-between">
-                    <span className="w-full max-w-[200px] text-center">Delivery Charge</span>
-                    <span className="w-full max-w-[260px] text-center">Quantity</span>
-                    <span className="w-full max-w-[200px] text-center">Total</span>
-                </p>
+  // Handle form submission (e.g., payment)
+
+  const proceedData = async () => {
+    try {
+      const res = await fetch('https://postgre-server.vercel.app/checkout', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: 'cors',
+        body: JSON.stringify({
+          payment: payments,
+          cart: cart,
+          deliveryCharge
+        })
+      });
+      const data = await res.json();
+      console.log('success done');
+      if (data.url) {
+        localStorage.setItem('deleteCartAfterCheckout', 'true');
+        window.location = data.url; 
+      } 
+      else {
+        console.error("Error: Checkout URL not provided in response");
+      }
+    } catch (error) {
+      console.log("Error during checkout:", error);
+    }
+  };
+
+
+  useEffect(() => {
+    const cartDataDeleteAfterPayment = async () => {
+      if (token) { // Check if the token is "true"
+        try {
+          console.log('Deleting cart data after payment');
+          console.log(cart);
+          axios.post('https://postgre-server.vercel.app/order', {cart, email, totalPrice, deliveryCharge, userId})
+          await axios.delete(`https://postgre-server.vercel.app/cart/all/${email}`);
+          setCart(''); // Clear the cart state
+          localStorage.removeItem('deleteCartAfterCheckout'); // Remove the flag
+          console.log("Cart deleted after successful payment");
+        } catch (error) {
+          console.error("Error deleting cart:", error);
+        }
+      } else {
+        console.log('No token available');
+      }
+    };
+
+    cartDataDeleteAfterPayment(); // Call the function within the effect
+  }, [token,cart,deliveryCharge, totalPrice, userId, email]); // Include email as a dependency if it changes
+
+  console.log(token);
+
+  return (
+    <div className="max-w-[1440px] mx-auto mt-20 lg:p-4 flex flex-col lg:flex-row gap-8">
+    {/* Left Section - Cart Data */}
+    <div className="flex-1 w-2/3 bg-[#ffffff] lg:shadow-md p-6 rounded-lg ">
+      <div className="flex items-center mb-4">
+        <button>
+          <MdArrowBackIos />
+        </button>
+        <h3 className="text-sm lg:text-xl font-medium ml-2">Continue Shopping</h3>
+      </div>
+      <hr className="mb-4" />
+      <h3 className="text-sm lg:text-lg font-medium py-2">Shopping Cart</h3>
+      <p className="text-sm lg:text-base font-medium">You have {itemCount} item(s) in your cart</p>
+  
+      <div className="mt-4  space-y-6">
+        {loading ? (
+          <div className="bg-[#FFF8EE] w-full p-4 rounded-2xl shadow-md flex flex-col gap-4 animate-pulse">
+            <div className="h-52 w-full rounded-xl bg-gray-200"></div>
+            <div className="space-y-3">
+              <div className="bg-gray-200 h-6 w-3/4 rounded-xl"></div>
+              <div className="bg-gray-200 h-6 w-full rounded-xl"></div>
+              <div className="bg-gray-200 h-6 w-full rounded-xl"></div>
             </div>
-            
-           {
-            cart && cart.map(((myData , index) => (
-                <div key={myData._id} className="grid grid-cols-1 lg:grid-cols-2 min-[550px]:gap-6 border-t border-gray-200 py-6">
-                <div
-                    className="flex items-center flex-col min-[550px]:flex-row gap-3 min-[550px]:gap-6 w-full max-xl:justify-center max-xl:max-w-xl max-xl:mx-auto">
-                    <div className="img-box">
-                        <img  src={myData.data.product_image} alt="perfume bottle image" className="xl:w-[140px]"/>
-                        </div>
-                    <div className="pro-data w-full max-w-sm ">
-                        <h5 className="font-semibold text-xl leading-8 text-black max-[550px]:text-center">D{myData.data.productName}
-                        </h5>
-                        <p
-                            className="font-normal text-lg leading-8 text-gray-500 my-2 min-[550px]:my-3 max-[550px]:text-center">
-                            Perfumes</p>
-                        <h6 className="font-medium text-lg leading-8 text-indigo-600  max-[550px]:text-center">${myData.data.price}</h6>
-                    </div>
-                </div>
-                <div
-                    className="flex items-center flex-col min-[550px]:flex-row w-full max-xl:max-w-xl max-xl:mx-auto gap-2">
-                    <h6 className="font-manrope font-bold text-2xl leading-9 text-black w-full max-w-[176px] text-center">
-                        $15.00 <span className="text-sm text-gray-300 ml-3 lg:hidden whitespace-nowrap">(Delivery
-                            Charge)</span></h6>
-                    <div className="flex items-center w-full mx-auto justify-center">
-                        <button
-                            className="group rounded-l-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
-                         <FiPlus className="h-[1.4rem]"/>
-                        </button>
-                        <input type="text"
-                            className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[118px] min-w-[80px] placeholder:text-gray-900 py-[15px] text-center bg-transparent"
-                            placeholder="1"/>
-                        <button
-                            className="group rounded-r-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
-                             <FiPlus className="h-[1.4rem]"/>
-                        </button>
-                    </div>
-                    <h6
-                        className="text-indigo-600 font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
-                        ${(myData.data.price)}</h6>
-                </div>
+            <div className="flex justify-end gap-3 mt-auto">
+              <div className="bg-gray-200 h-8 w-20 rounded-full"></div>
+              <div className="bg-gray-200 h-8 w-20 rounded-full"></div>
             </div>
-            )))
-           }
-            <div className="bg-gray-50 rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto">
-                <div className="flex items-center justify-between w-full mb-6">
-                    <p className="font-normal text-xl leading-8 text-gray-400">Sub Total</p>
-                    <h6 className="font-semibold text-xl leading-8 text-gray-900">${totalPrice.toFixed(1)}</h6>
-                </div>
-                <div className="flex items-center justify-between w-full pb-6 border-b border-gray-200">
-                    <p className="font-normal text-xl leading-8 text-gray-400">Delivery Charge</p>
-                    <h6 className="font-semibold text-xl leading-8 text-gray-900">${delivery}</h6>
-                </div>
-                <div className="flex items-center justify-between w-full py-6">
-                    <p className="font-manrope font-medium text-2xl leading-9 text-gray-900">Total</p>
-                    <h6 className="font-manrope font-medium text-2xl leading-9 text-indigo-500">${payment.toFixed(2)}</h6>
-                </div>
+          </div>
+        ) : (
+          cart && cart.map((data) => (
+            <div
+              key={data.cart_id}
+              className="flex p-2 w-[300px] lg:w-[600px] items-center bg-white lg:p-4 rounded-lg shadow-md gap-3 lg:gap-6"
+            >
+              <img src={data.product_image} alt={data.productname} className="w-16 lg:w-24 h-16 lg:h-24 rounded-md" />
+              <div className="flex-1">
+                <h4 className="text-sm lg:text-lg font-medium">{data.productname}</h4>
+                <p className="text-sm text-gray-500">{data.category}</p>
+              </div>
+              <div className="flex items-center">
+                {count}
+              </div>
+              <p className="text-sm lg:text-base font-medium">${data.price}</p>
+              <button onClick={() => handleCartDataDelete(data.cart_id)}>
+                <BsTrash3 className="text-gray-500 hover:text-red-600" />
+              </button>
             </div>
-            <div className="flex items-center flex-col sm:flex-row justify-center gap-3 mt-8">
-                <button
-                    className="rounded-full py-4 w-full max-w-[280px]  flex items-center bg-indigo-50 justify-center transition-all duration-500 hover:bg-indigo-100">
-                    <span className="px-2 font-semibold text-lg leading-8 text-indigo-600">Add Coupon Code</span>
-                    <IoIosArrowForward className="text-indigo-600"/>
-                </button>
-                {
-                    payment !==  0 ?  <Link to={`/dashboard/payment/${payment}`}>
-                    <button
-    
-    className="rounded-full px-8 w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700"
-    >
-    Continue to Payment
-    <IoIosArrowForward />
-    </button>
-                    </Link> : ''
-                }
-                
-                
-            </div>
+          ))
+        )}
+      </div>
+    </div>
+  
+    {/* Right Section - Checkout */}
+    <div className="w-full lg:w-[500px] max-h-[300px] bg-[#FFF8EE] p-6 rounded-lg shadow-md overflow-y-auto">
+      <h2 className="text-2xl font-semibold text-red-600 mb-4">Cart Subtotal</h2>
+      <div className="space-y-4">
+        <div className="flex justify-between">
+          <span>Order Subtotal</span>
+          <span>${totalPrice.toFixed(2)}</span>
         </div>
-    </section>
-                                            
+        <div className="flex justify-between">
+          <span>Shipping</span>
+          <span>${deliveryCharge}</span>
         </div>
-    
-    );
+        <div className="flex justify-between font-semibold">
+          <span>Total</span>
+          <span>${payments.toFixed(2)}</span>
+        </div>
+      </div>
+      <button
+        onClick={proceedData}
+        className="bg-red-600 text-white py-2 w-full rounded mt-14 hover:bg-red-700 transition duration-200"
+      >
+        Proceed To Checkout
+      </button>
+    </div>
+  </div>
+  
+  
+   
+  );
 };
 
 export default Cart;

@@ -15,7 +15,7 @@ const ProductCard = () => {
     // console.log(products);
 
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
+        axios.get('https://postgre-server.vercel.app/products')
             .then(res => setProducts(res.data))
             .catch(error => console.error(error));
     }, []);
@@ -26,7 +26,7 @@ const ProductCard = () => {
 
     const handleAddCart = (data) => {
       if(user){
-        axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+        axios.post(`https://postgre-server.vercel.app/cart`, { data, email })
         .then((response) => console.log(response));
       toast.success("Item added to cart!").catch(console.log("error"));
       }else{
@@ -37,7 +37,7 @@ const ProductCard = () => {
 
       const handleWishlist = (product) =>{
         if(user){
-          axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+          axios.post('https://postgre-server.vercel.app/wishlist',{product, email})
           .then(res => console.log(res));
           toast.success("Added Favourite !").catch(console.log("error"));
         }else{
@@ -62,7 +62,7 @@ const ProductCard = () => {
         </div>
         <div className="p-7">
             <span className="block text-xs font-semibold uppercase text-blue-300 ">{product.category}</span>
-            <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${product._id}`}>{product.productName.length > 20 ? product.productName.slice(0,10) : product.productName}</Link></h4>
+            <h4 className="block font-medium  uppercase text-blue-500 no-underline transition duration-300 hover:text-red-500"><Link to={`/productDetails/${product.id}`}>{product.productname.length > 20 ? product.productname.slice(0,10) : product.productName}</Link></h4>
             <p className="text-base leading-6 mb-4 text-blue-200">{product.description.slice(0, 40)}</p>
             <div className="overflow-hidden border-t border-blue-200 ">
                 <div className="text-lg font-semibold text-red-600">${product?.price}</div>

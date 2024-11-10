@@ -8,31 +8,35 @@ const Products = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [search, setSearch] = useState('');
     const [selectAllChecked, setSelectAllChecked] = useState(false);
-	// console.log(selectedProducts);
+    const [discountId, setPId] = useState();
+
+    console.log(discountId);
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
-            .then(res => setMyProducts(res.data))
+        // Fetch products only once
+        axios.get('https://postgre-server.vercel.app/product')
+            .then(res => setMyProducts(res.data.data))
             .catch(error => console.error(error));
-    }, [myProducts]);
+    }, []); // Empty dependency array to fetch once
 
     const handlePassInfoShow = (data) => {
         setOpen(true);
+        if(!open){
+            setPId(null)
+        }
         setSelectedProducts([data]);
     };
 
     const handleProductUpdate = async (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-        const productName = form.get('productName');
-        const price = form.get('Price');
-        const discountPriceString = form.get('discountPrice');
-        const discountPrice = parseFloat(discountPriceString);
-        const discountPercentageString = form.get('discountPercentage');
-        const discountPercentage = parseFloat(discountPercentageString);
+        // const productName = form.get('productName');
+        // const price = form.get('Price');
+        const discountPrice = parseFloat(form.get('discountPrice'));
+        const percentage = parseFloat(form.get('discountPercentage'));
         const stock = form.get('newStockItem');
-        const productData = selectedProducts[0];
-        console.log({ productName, price, discountPrice, stock, productData, discountPercentage });
-        await axios.post('https://bazar-bd-server.vercel.app/productDiscount', { productName, price, discountPrice, stock, productData, discountPercentage });
+        // const productData = selectedProducts[0];
+
+        await axios.post('https://postgre-server.vercel.app/discount', { discountId, discountPrice, stock, percentage });
         setOpen(false);
         Swal.fire({
             title: "Good job!",
@@ -43,9 +47,15 @@ const Products = () => {
 
     const handleSelectChange = async (event, data) => {
         const selectedValue = event.target.value;
-        const response = await axios.put(`https://bazar-bd-server.vercel.app/addProductsUpdate/${data._id}`, { stock: selectedValue });
-        console.log(response.data);
+    
+        try {
+            const response = await axios.put(`https://postgre-server.vercel.app/product/${data.id}`, { stock: selectedValue });
+            console.log(response.data);
+        } catch (error) {
+            console.error("Error in PUT request:", error);
+        }
     };
+    
 
     const handleProductSearch = (event) => {
         setSearch(event.target.value);
@@ -54,39 +64,34 @@ const Products = () => {
     const handleCheckedAll = (isChecked) => {
         setSelectAllChecked(isChecked);
         if (isChecked) {
-            setSelectedProducts([...myProducts]);
+            setSelectedProducts([...myProducts]); // Select all products
         } else {
-            setSelectedProducts([]);
+            setSelectedProducts([]); // Deselect all products
         }
     };
 
     const handleChecked = (isChecked, data) => {
         if (isChecked) {
-            setSelectedProducts(prevSelected => [...prevSelected, data]);
+            setSelectedProducts(prevSelected => [...prevSelected, data]); // Add selected product
         } else {
-            setSelectedProducts(prevSelected => prevSelected.filter(item => item._id !== data._id));
+            setSelectedProducts(prevSelected => prevSelected.filter(item => item.id !== data.id)); // Remove unselected product
         }
+        setSelectAllChecked(false); // Reset 'select all' if individual rows are being toggled
     };
 
     const handleDeleteSelectedProducts = async () => {
         try {
-            // Get the IDs of selected products
             const selectedProductIds = selectedProducts.map(product => product._id);
-
-            // Send a DELETE request to the backend API
-            const response = await axios.delete('https://bazar-bd-server.vercel.app/products', { data: { ids: selectedProductIds } });
+            const response = await axios.delete('https://postgre-server.vercel.app/products', { data: { ids: selectedProductIds } });
 
             if (response.data.success) {
-                // Remove deleted products from the selectedProducts state
                 setSelectedProducts([]);
-                // Show success message
                 Swal.fire({
                     title: "Success!",
                     text: "Selected products have been deleted.",
                     icon: "success"
                 });
             } else {
-                // Show error message
                 Swal.fire({
                     title: "Error!",
                     text: "Failed to delete selected products.",
@@ -94,8 +99,6 @@ const Products = () => {
                 });
             }
         } catch (error) {
-            console.error("Error deleting products:", error);
-            // Show error message
             Swal.fire({
                 title: "Error!",
                 text: "Failed to delete selected products.",
@@ -104,141 +107,195 @@ const Products = () => {
         }
     };
 
-
-    const filteredProducts = myProducts.filter(product => {
-        return product?.productName.toLowerCase().includes(search.toLowerCase());
-    });
+    const filteredProducts = myProducts.filter(product =>
+        product?.productname.toLowerCase().includes(search?.toLowerCase())
+    );
 
     return (
         <div>
             <div className="max-w-7xl mt-20">
-                <div className="relative bg-gray-950 shadow-md sm:rounded-lg">
+                <div className="relative  shadow-md sm:rounded-lg">
                     <div className="p-4 flex  gap-5 items-center">
-                        <label htmlFor="checkbox-all-search" className="sr-only text-white">Select All</label>
-                        <div className="relative mt-1">
-                            <input id="checkbox-all-search" type="checkbox" onChange={(e) => handleCheckedAll(e.target.checked)} checked={selectAllChecked} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        </div>
-
-					<input onChange={ handleProductSearch} type="text" id="table-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Products"/>
-					<h2 className='text-white text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-xl'>Total Products: {filteredProducts.length}</h2>
-                        <div className='ml-[500px]'>
-                            <button onClick={handleDeleteSelectedProducts} className={`${selectedProducts.length === 0 ? 'hidden' : 'middle none center mr-4 rounded-lg bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'}`} data-ripple-light="true">Delete</button>
-                        </div>
+                        <input
+                            type="checkbox"
+                            onChange={(e) => handleCheckedAll(e.target.checked)}
+                            checked={selectAllChecked}
+                            className="w-4 h-4 text-blue-600 bg-gray-200 border-gray-50 rounded"
+                        />
+                        <input
+                            onChange={handleProductSearch}
+                            type="text"
+                            className=" border border-gray-200 text-gray-900 rounded-lg p-2.5"
+                            placeholder="Search Products"
+                        />
+                        <h2 className='text-white'>Total Products: {filteredProducts.length}</h2>
+                        {selectedProducts.length > 0 && (
+                            <button onClick={handleDeleteSelectedProducts} className="bg-red-500 py-2 px-4 text-white rounded">
+                                Delete
+                            </button>
+                        )}
                     </div>
-                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table className="w-full text-sm text-left text-black ">
+                        <thead className="bg-gray-200  text-gray-400">
                             <tr>
-                                <th scope="col" className="p-4">
-                                    <div className="flex items-center">
-                                        <input id="checkbox-all-search" type="checkbox" onChange={(e) => handleCheckedAll(e.target.checked)} checked={selectAllChecked} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        <label htmlFor="checkbox-all-search" className="sr-only">checkbox</label>
-                                    </div>
+                                <th className="p-4">
+                                    <input
+                                        type="checkbox"
+                                        onChange={(e) => handleCheckedAll(e.target.checked)}
+                                        checked={selectAllChecked}
+                                        className="w-4 h-4 text-blue-600  border-gray-50 rounded"
+                                    />
                                 </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Product name
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Color
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Category
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Price
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Stock
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    <span className="sr-only">Edit</span>
-                                </th>
+                                <th className="px-6 text-gray-900 py-3">Product name</th>
+                                <th className="px-6 text-gray-900 py-3">Color</th>
+                                <th className="px-6 text-gray-900 py-3">Category</th>
+                                <th className="px-6 text-gray-900 py-3">Price</th>
+                                <th className="px-6 text-gray-900 py-3">Stock</th>
+                                <th className="px-6 text-gray-900 py-3">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filteredProducts.map(data => (
-                                <tr key={data._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td className="w-4 p-4">
-                                        <div className="flex items-center">
-                                            <input onChange={(e) => handleChecked(e.target.checked, data)} id={`checkbox-table-search-${data._id}`} type="checkbox" checked={selectAllChecked || selectedProducts.some(item => item._id === data._id)} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                            <label htmlFor={`checkbox-table-search-${data._id}`} className="sr-only">checkbox</label>
-                                        </div>
+                                <tr key={data._id} className=" border-b shadow-sm border-gray-50 ">
+                                    <td className="p-4">
+                                        <input
+                                            onChange={(e) => handleChecked(e.target.checked, data)}
+                                            type="checkbox"
+                                            checked={selectedProducts.some(item => item.id === data.id)}
+                                            className="w-4 h-4 text-blue-600 border-b bg-gray-50 border-gray-50 rounded"
+                                        />
                                     </td>
-                                    <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap">
-                                        {data?.productName}
-                                    </th>
-                                    <td className="px-6 py-4 text-white">
-                                        Sliver
+                                    <td className="px-6 text-gray-900 font-semibold py-4">{data.productname}</td>
+                                    <td className="px-6 text-gray-900 font-semibold py-4">Silver</td>
+                                    <td className="px-6 text-gray-900 font-semibold py-4">{data.category}</td>
+                                    <td className="px-6 text-gray-900 font-semibold py-4">${data.price}</td>
+                                    <td className="px-6 text-gray-900 font-semibold py-4">
+                                    <select onChange={(event) => handleSelectChange(event, data)} className="bg-white rounded-md">
+                                    <option value="In Stock" selected={data.stock === "In Stock"}>In Stock</option>
+                                    <option value="Stock Out" selected={data.stock === "Stock Out"}>Stock Out</option>
+                                </select>
+
                                     </td>
-                                    <td className="px-6 py-4 text-white">
-                                        {data?.category}
-                                    </td>
-                                    <td className="px-6 py-4 text-white">
-                                        ${data?.price}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <select onChange={(event) => handleSelectChange(event, data)} className='bg-white rounded-md'>
-                                            <option value="In Stock">In Stock</option>
-                                            <option value="Stock Out">Stock Out</option>
-                                        </select>
-                                    </td>
-                                    <td className="px-6 py-4 text-right">
-                                        <p onClick={() => { handlePassInfoShow(data) }} className="font-medium cursor-pointer text-blue-600 dark:text-blue-500 hover:underline">Edit</p>
+                                    <td className="px-6 text-gray-900 font-semibold py-4">
+                                        <p onClick={() => {
+  handlePassInfoShow(data);
+  setPId(data.idp);
+}}
+ className="text-blue-600 cursor-pointer">Edit</p>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
-                <p className="mt-5">Here is All Products List. In here you can Update or Delete any Products using this table. This Table is for Admin for control the Product Available.</p>
             </div>
-            <div className="flex justify-center items-center h-screen">
+
+            {/* modal */}
+            <div className="flex justify-center items-center h-screen bg-gray-100">
+  <div>
+    {open && (
+      <div className="fixed inset-0 z-10 flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+        {/* Modal Content */}
+        <div className="relative z-20 w-full max-w-lg bg-white rounded-lg shadow-lg">
+          {/* Modal Header */}
+          <div className="flex items-center justify-between bg-indigo-600 p-2 text-white rounded-t-lg">
+            <h2 className="text-lg font-semibold px-4">Update Product</h2>
+            <button
+              onClick={() => setOpen(false)}
+              className="text-white bg-indigo-500 hover:bg-indigo-400 px-3 py-1 rounded-md"
+            >
+              Close
+            </button>
+          </div>
+
+          {/* Modal Body */}
+          <div className="p-6">
+            <form onSubmit={handleProductUpdate} method="POST">
+              {/* Product Information */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                    {open && (
-                        <div className="fixed inset-0 px-2 z-10 overflow-hidden flex items-center justify-center">
-                            <div className="absolute inset-0 bg-gray-500 bg-opacity-75"></div>
-                            <div className="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50">
-                                <div className="bg-indigo-500 text-white px-4 py-2 flex justify-between">
-                                    <h2 className="text-lg font-semibold text-center">Update Product</h2>
-                                </div>
-                                <div className="p-4">
-                                    <form onSubmit={handleProductUpdate} method="POST">
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700">Product Name</label>
-                                                <input type="text" id="productName" name="productName" placeholder={selectedProducts[0]?.productName} value={selectedProducts[0]?.productName} className="mt-1 p-2 w-full border rounded-md" />
-                                            </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700">Price</label>
-                                                <input type="number" placeholder={selectedProducts[0]?.price} id="Price" name="Price" value={selectedProducts[0]?.price} className="mt-1 p-2 w-full border rounded-md" />
-                                            </div>
-                                        </div>
-                                        <div className='grid grid-cols-2 gap-4'>
-                                            <div className="mt-4">
-                                                <label className="block text-sm font-medium text-gray-700">Discount Price</label>
-                                                <input type="text" id="discountPrice" placeholder='Type discount price' name="discountPrice" className="mt-1 p-2 w-full border rounded-md" />
-                                            </div>
-                                            <div className="mt-4">
-                                                <label className="block text-sm font-medium text-gray-700">Discount Percentage</label>
-                                                <input type="text" id="discountPercentage" placeholder='Type percentage' name="discountPercentage" className="mt-1 p-2 w-full border rounded-md" />
-                                            </div>
-                                        </div>
-                                        <div className="mt-4">
-                                            <label className="block text-sm font-medium text-gray-700">Stock Item</label>
-                                            <input type="number" id="stockItem" placeholder='Stock Item' name="newStockItem" className="mt-1 p-2 w-full border rounded-md" />
-                                        </div>
-                                        <div className="mt-6">
-                                            <button type="submit" className="w-full p-3 bg-indigo-500 text-white rounded-md hover:bg-blue-600">Update</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="border-t px-4 py-2 flex justify-end">
-                                    <button onClick={() => setOpen(false)} className="px-3 py-1 bg-indigo-500 text-white rounded-md w-full sm:w-auto">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+                  <label className="block text-sm font-medium text-gray-700">Product Name</label>
+                  <input
+                    type="text"
+                    id="productName"
+                    name="productName"
+                    placeholder={selectedProducts[0]?.productname || "Enter product name"}
+                    value={selectedProducts[0]?.productname}
+                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
                 </div>
-            </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Price</label>
+                  <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    placeholder={selectedProducts[0]?.price || "Enter price"}
+                    value={selectedProducts[0]?.price}
+                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+
+              {/* Discount Information */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Discount Price</label>
+                  <input
+                    type="number"
+                    id="discountPrice"
+                    min="0"          // Optional: sets a minimum value
+                    step="0.01"      // Allows decimals to two places
+                    name="discountPrice"
+                    placeholder="Type discount price"
+                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Discount Percentage</label>
+                  <input
+                    type="number"
+                    id="discountPercentage"
+                    name="discountPercentage"
+                    placeholder="Type percentage"
+                    className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+
+              {/* Stock Information */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700">Stock Item</label>
+                <input
+                  type="number"
+                  id="stockItem"
+                  name="newStockItem"
+                  placeholder="Stock item quantity"
+                  className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="mt-6">
+                <button
+                  type="submit"
+                  className="w-full p-3 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+
+
         </div>
     );
 };

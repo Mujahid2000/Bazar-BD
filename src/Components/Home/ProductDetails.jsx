@@ -16,25 +16,37 @@ const ProductDetails = () => {
     const searchParams = new URLSearchParams(location.search);
     const fromFlashSale = searchParams.get('fromFlashSale');
     // console.log('From Flash Sale:', fromFlashSale);
-    const [products, setProducts] = useState({}); 
+    const [products, setProducts] = useState(null); 
+    const [loading, setLoading] = useState(true)
     const [allProduct, setAllProducts] = useState()
     const [discount, setDiscount] = useState({})
     const { user } = useContext(AuthContext);
     const email = user?.email;
-    
+
     
     useEffect(() => {
-        axios
-          .get(`https://bazar-bd-server.vercel.app/addProducts/${id}`)
-          .then((res) => setProducts(res.data))
-          .catch((error) => console.error(error));
+        const fetchData = async () => {
+          if (!id) return; // Exit if no `id` is provided
+          
+          setLoading(true); // Start loading before data fetch
+          try {
+            const res = await axios.get(`https://postgre-server.vercel.app/product/${id}`);
+            setProducts(res.data.data[0]); // Update product data
+          } catch (error) {
+            console.error("Error fetching product data:", error);
+          } finally {
+            setLoading(false); // Stop loading after fetch attempt
+          }
+        };
+      
+        fetchData();
       }, [id]);
 
 
 
       useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
-            .then(res =>  res.data)
+        axios.get('https://postgre-server.vercel.app/product')
+            .then(res =>  res.data.data)
             .then(data => {
                 const shuffledArray = data.sort(() => 0.5 - Math.random());
                 setAllProducts(shuffledArray)
@@ -47,17 +59,18 @@ const ProductDetails = () => {
     useEffect(() =>{
         // Use a separate variable to store the id obtained from useParams()
         const productId = id;
-        axios.get(`https://bazar-bd-server.vercel.app/productDiscount/${productId}`)
-            .then((response) => setDiscount(response.data))
+        axios.get(`https://postgre-server.vercel.app/discount/${productId}`)
+            .then((response) => setDiscount(response.data.data[0]))
             .catch((error) => console.error(error));
     }, [id, ]);
 
     const isFromFlashSalePage = fromFlashSale === '/flashSale';
     
     const handleAddCart = (data) => {
-      
+      const productid = data.idp;
+      console.log(productid);
          if(user){
-           axios.post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+           axios.post(`https://postgre-server.vercel.app/cart`, { productid, email })
            .then((response) => console.log(response));
          toast.success("Item added to cart!")
          }else{
@@ -66,8 +79,9 @@ const ProductDetails = () => {
         };
 
         const handleWishlist = (product) =>{
+            const productid = product.idp;
             if(user){
-              axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+              axios.post('https://postgre-server.vercel.app/wishlist',{productid, email})
               .then(res => console.log(res));
               toast.success("Added Favourite !").catch(console.log("error"));
             }else{
@@ -78,41 +92,52 @@ const ProductDetails = () => {
 
     return (
         <div className="max-w-[1440px] mx-auto">
-            {(Object.keys(products || discount).length > 0) && (
-    <div className="min-w-screen min-h-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
-        <div className="min-w-screen min-h-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
+            {loading? (
+               
+                <div className="bg-white p-2 md:h-screen sm:p-4 sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">
+                      <div className="h-52 sm:h-full sm:w-72 rounded-xl bg-gray-200 animate-pulse" ></div>
+                      <div className="flex flex-col flex-1 gap-5 sm:p-2">
+                        <div className="flex flex-1 flex-col gap-3">
+                          <div className="bg-gray-200 w-full animate-pulse h-14 rounded-2xl" ></div>
+                          <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
+                          <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
+                          <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
+                          <div className="bg-gray-200 w-full animate-pulse h-3 rounded-2xl" ></div>
+                        </div>
+                        <div className="mt-auto flex gap-3">
+                          <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full" ></div>
+                          <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full" ></div>
+                          <div className="bg-gray-200 w-20 h-8 animate-pulse rounded-full ml-auto" ></div>
+                        </div>
+                      </div>
+                </div>
+            ):
+            
+            ((Object.keys(products || discount).length > 0) && (
+    <div className="min-w-screen   flex items-center p-5 lg:p-10 overflow-hidden relative">
+        <div className="min-w-screen   flex items-center p-5 lg:p-10 overflow-hidden relative">
             <div className="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
                 <div className="md:flex items-center -mx-10">
                     <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
                         <div className="relative">
-                            <img src={isFromFlashSalePage ? discount?.productData?.product_image : products.product_image} className="w-full relative z-10" alt={isFromFlashSalePage ? discount.productName : products.productName} />
+                            <img src={isFromFlashSalePage ? discount?.product_image : products.product_image} className="w-full relative z-10" alt={isFromFlashSalePage ? discount.productname : products.productname} />
                             <div className="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 px-10">
                         <div className="mb-10">
-                            <h1 className="font-bold uppercase text-2xl mb-5">{isFromFlashSalePage ? discount.productName : products.productName}</h1>
-                            <p className="text-base">{isFromFlashSalePage ? discount?.productData?.description : products.description} <a href="#" className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i className="mdi mdi-arrow-right"></i></a></p>
+                            <h1 className="font-bold uppercase text-2xl mb-5">{isFromFlashSalePage ? discount.productname : products.productname}</h1>
+                            <p className="text-base">{isFromFlashSalePage ? discount?.description : products.description} <a href="#" className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i className="mdi mdi-arrow-right"></i></a></p>
                         </div>
                         <div>
                             <div className="inline-block align-bottom mr-5">
                                 <span className="text-2xl leading-none align-baseline">$</span>
-                                <span className="font-bold text-5xl leading-none align-baseline">{isFromFlashSalePage ? discount?.price?.toString().slice(0, 3) : products?.price?.toString().slice(0, 3)}</span>
-                                <span className="text-2xl leading-none align-baseline">{isFromFlashSalePage ? discount?.price?.toString().slice(3, 6) : products?.price?.toString().slice(3, 6)}</span>
+                                <span className="font-bold text-5xl leading-none align-baseline">{isFromFlashSalePage ? discount?.discountprice?.toString().slice(0, 3) : products?.price?.toString().slice(0, 3)}</span>
+                                <span className="text-2xl leading-none align-baseline">{isFromFlashSalePage ? discount?.discountprice?.toString().slice(3, 6) : products?.price?.toString().slice(3, 6)}</span>
                             </div>
                             <div className="inline-block sm:mt-3 align-bottom">
                                 <div className="flex items-center mt-6">
-                                {/* {isFromFlashSalePage ? (
-                                <Link to={`/myPayment/${discount.price.toFixed(2)}/${discount._id}`}>
-                                    <button className="px-3 py-3 flex justify-between gap-2 items-center bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700"><FaHeart /> WishList</button>
-                                </Link>
-                                ) : (
-                                products.price.toFixed(2) !== '0' && (
-                                    <Link to={`/myPayment/${products.price.toFixed(2)}/${products._id}`}>
-                                    <button className="px-3 flex justify-between gap-2 items-center py-3 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700"><FaHeart /> WishList</button>
-                                    </Link>
-                                )
-                                )} */}
+                                
 
                                 <button onClick={() => handleWishlist(isFromFlashSalePage ? discount?.productData : products)} className="px-3 flex justify-between gap-2 items-center py-3 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700"><FaHeart /> WishList</button>
 
@@ -129,7 +154,7 @@ const ProductDetails = () => {
             </div>
         </div>
     </div>
-)}
+))}
 
 
          <div className=" px-3 mb-9">
@@ -137,7 +162,7 @@ const ProductDetails = () => {
         <div className="w-full max-w-full mx-auto rounded-md overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-7">
     {
         allProduct && allProduct.slice(0, 4).map(myData => (
-            <Link to={`/productDetails/${myData._id}`} key={myData._id}>
+            <Link to={`/productDetails/${myData.id}`} key={myData.id}>
                 <div className="border">
                     <div className="flex items-end justify-end h-56 w-full bg-cover" style={{backgroundImage: `url(${myData.product_image})`}}>
                         <button onClick={() => {handleAddCart(isFromFlashSalePage ? discount : products)}} className="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">

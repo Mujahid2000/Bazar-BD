@@ -13,8 +13,8 @@ const CategoryPage = ({ categories }) => {
     const email = user?.email;
 
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/addProducts')
-            .then(res => setProducts(res.data))
+        axios.get('https://postgre-server.vercel.app/product')
+            .then(res => setProducts(res.data.data))
             .catch(error => console.error(error));
     }, []);
 
@@ -23,7 +23,7 @@ const CategoryPage = ({ categories }) => {
     const handleAddCart = (data) => {
       if(user){
         axios
-          .post(`https://bazar-bd-server.vercel.app/addCart`, { data, email })
+          .post(`https://postgre-server.vercel.app/addCart`, { data, email })
           .then((response) => console.log(response));
         toast.success("Item added to cart!").catch(console.log("error"));
       }
@@ -31,7 +31,7 @@ const CategoryPage = ({ categories }) => {
 
       const handleWishlist = (product) =>{
         if(user){
-          axios.post('https://bazar-bd-server.vercel.app/wishlist',{product, email})
+          axios.post('https://postgre-server.vercel.app/wishlist',{product, email})
           .then(res => console.log(res));
           toast.success("Added Favourite !").catch(console.log("error"));
         }
@@ -46,10 +46,10 @@ const CategoryPage = ({ categories }) => {
           {filterData.map((item, index) => (
             <div key={index} className='bg-white border rounded-lg p-4 flex flex-col justify-between'>
               <img className='w-full h-40 object-contain mb-4' src={item.product_image} alt={item.productName} />
-              <Link to={`/productDetails/${item._id}`}>
+              <Link to={`/productDetails/${item.id}`}>
               <div>
                 <p className='text-lg font-semibold'>${item.price}</p>
-                <p className='text-gray-500'>{item.productName.slice(0,21)}</p>
+                <p className='text-gray-500'>{item.productname?.slice(0,21)}</p>
               </div>
               </Link>
             </div>

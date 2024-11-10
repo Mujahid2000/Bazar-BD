@@ -8,8 +8,8 @@ const User = () => {
 	console.log(search);
     
     useEffect(() => {
-        axios.get('https://bazar-bd-server.vercel.app/users')
-            .then(res => setAllUser(res.data))
+        axios.get('https://postgre-server.vercel.app/user')
+            .then(res => setAllUser(res.data.data))
             .catch(error => console.error(error));
     }, []);
 
@@ -92,7 +92,7 @@ const User = () => {
 								</td>
 								<td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p className="text-gray-900 whitespace-no-wrap">
-										43
+										{data.admin == true ? data.order : '33'}
 									</p>
 								</td>
 								<td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -103,7 +103,7 @@ const User = () => {
                                         className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
                                             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-									<span className="relative">User</span>
+									<span className="relative">{data.admin == true ? 'Admin' : 'User'}</span>
 									</span>
 								</td>
 							</tr>

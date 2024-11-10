@@ -2,174 +2,99 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Configs/AuthContext";
 import axios from "axios";
 
-
-
 const Order = () => {
   const { user } = useContext(AuthContext);
-  const [order, setOrder] = useState(null);
- 
-  const photo = user?.photoURL;
+  const [orders, setOrders] = useState([]);
+ console.log(orders);
   const email = user?.email;
+
+  const name = user?.displayName
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (email) {
-          const response = await axios.get(`https://bazar-bd-server.vercel.app/order/${email}`);
-          setOrder(response.data);
+          const response = await axios.get(`https://postgre-server.vercel.app/order/${email}`);
+          setOrders(response.data.data); // Assuming response.data.data is an array of orders
         }
       } catch (error) {
-        console.error('Error fetching order:', error);
+        console.error('Error fetching orders:', error);
       }
     };
   
     fetchData();
   }, [email]);
 
-  
+  return (
+    <div className="mt-24 w-full">
+      <h2 className="text-4xl font-semibold text-slate-500">Your Orders</h2>
 
-
-    return (
-<div className="bg-white h-screen  mt-20  lg:mx-auto rounded-md w-80  md:w-full lg:w-full">
-<div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
-  <div className="flex justify-start item-start space-y-2 flex-col">
-    <h1 className="text-3xl ml-4 dark:text-black lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Order #13432</h1>
-    <p className="text-base ml-4 dark:text-black font-medium leading-6 text-gray-600">21st Mart 2024 at 10:34 PM</p>
-  </div>
-  <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
-    <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
-      <div className="flex flex-col justify-start items-start dark:bg-white bg-gray-100 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
-        <p className="text-lg md:text-xl dark:text-black font-semibold leading-6 xl:leading-5 text-gray-800">Customer’s Order</p>
-        
-        
-
-      {
-        order && order.map(item => (
-          <div key={item._id}>
-            {
-            item.sendingData &&  item.sendingData.map(orderItem=> (
-              <div key={orderItem._id}>
-                <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
-          <div className="pb-4 md:pb-8 w-full md:w-40">
-            <img className="w-full hidden md:block" src={orderItem.data.product_image} alt="dress" />
-            <img className="w-full md:hidden " src={orderItem.data.product_image} alt="dress" />
-          </div>
-          <div className="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
-            <div className="w-full flex flex-col justify-start items-start space-y-8">
-              <h3 className="text-xl dark:text-black xl:text-2xl font-semibold leading-6 text-gray-800">{orderItem.data.productName}</h3>
-              <div className="flex justify-start items-start flex-col space-y-2">
-                <p className="text-sm dark:text-black leading-none text-black"><span className="dark:text-black text-black">Style: </span> Italic Minimal Design</p>
-                <p className="text-sm dark:text-black leading-none text-black"><span className="dark:text-black text-black">Size: </span> Small</p>
-                <p className="text-sm dark:text-black leading-none text-black"><span className="dark:text-black text-black">Color: </span> Light Blue</p>
-              </div>
+      {orders && orders.map((order, index) => (
+        <div key={order.id} className="mb-8">
+          {/* Order Details */}
+          <div className="grid border border-gray-200 mt-3 grid-cols-5 gap-10 bg-gray-100 py-4 px-4 rounded-t-lg items-center">
+            <div className="w-full">
+              <h3 className="text-xl">Order Number</h3>
+              <p className="text-base">#{order.id}</p>
             </div>
-            <div className="flex justify-between space-x-8 items-start w-full">
-              <p className="text-base dark:text-black xl:text-lg leading-6">${orderItem.data.price}</p>
-              <p className="text-base dark:text-black xl:text-lg leading-6 text-gray-800">01</p>
-              <p className="text-base dark:text-black xl:text-lg font-semibold leading-6 text-gray-800">${orderItem.data.price}</p>
+            <div className="w-full">
+              <h3 className="text-xl">Date</h3>
+              <p className="text-xl">{new Date(order.created_at).toLocaleDateString()}</p>
+            </div>
+            <div className="w-full">
+              <h3 className="text-xl">Total</h3>
+              <p className="text-xl">${parseFloat(order.total_price) + parseFloat(order.delivery_charge)}</p>
+            </div>
+            <div className="w-full">
+              <h3 className="text-xl">Shipped To</h3>
+              <p className="text-xl">{name || "Not specified"}</p>
+            </div>
+            <div className="w-full">
+              <button className="bg-[#C62931] w-full px-24 rounded-md text-xl text-white duration-300 hover:bg-[#FFFFFF] hover:text-gray-600 py-2">View Order</button>
+            </div>
+          </div>
+
+          {/* Order Status */}
+          <div className="grid grid-cols-5 gap-8 mx-2 items-start">
+            <div className="col-span-4">
+              <div className="bg-[#dff0d8] my-5 py-3 rounded-lg px-8">
+                <h4 className="text-lg text-[#00A362] font-semibold">Shipped</h4>
+                <p className="text-lg text-[#00A362] font-medium">Est. delivery between Aug 5 – Aug 9th, 2017</p>
+              </div>
+
+              {/* Display each item in the cart */}
+              {order && order.cart.map((item) => (
+                <div key={item.id} className="flex justify-between mb-4">
+                  <div className="flex items-center gap-10">
+                    <img src={item.product_image || "https://via.placeholder.com/150"} alt={item.productname} className="w-20 h-20 rounded-xl" />
+                    <div>
+                      <h6 className="text-charcoal mb-2">
+                        <a href="" className="text-charcoal">{1} x {item.productname}</a>
+                      </h6>
+                      <ul className="list-unstyled text-pebble mb-2 small">
+                        <li><b>Color:</b> {item.color || "N/A"}</li>
+                        <li><b>Size:</b> {item.size || "N/A"}</li>
+                      </ul>
+                      <h6 className="text-charcoal text-left"><b>${item.price}</b></h6>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <button className="bg-[#ffffff] border border-gray-200 py-2 w-full px-14 hover:bg-gray-100 text-gray-600 rounded-md text-xl">Buy It Again</button>
+                    <button className="bg-[#ffffff] border border-gray-200 py-2 w-full px-14 hover:bg-gray-100 text-gray-600 rounded-md text-xl">Request a Return</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Track Shipment Button */}
+            <div className="w-full col-span-1 my-5">
+              <button className="bg-[#FFFFFF] w-full px-20 rounded-md text-xl hover:text-white text-gray-800 border border-gray-300 duration-300 hover:bg-red-600 py-2">Track Shipment</button>
             </div>
           </div>
         </div>
-        
-              </div>
-            ))}
-            
-          </div>
-        ))
-      }
-
-
-
-
-      </div>
-
-
-      <div className="flex justify-center  md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">
-        <div className="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 dark:bg-white space-y-6">
-          <h3 className="text-xl dark:text-black font-semibold leading-5 text-gray-800">Summary</h3>
-          <div className="flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4">
-            <div className="flex justify-between w-full">
-              <p className="text-base dark:text-black leading-4 text-gray-800">Subtotal</p>
-              <p className="text-base dark:text-gray-300 leading-4 text-gray-600">$56.00</p>
-            </div>
-            <div className="flex justify-between items-center w-full">
-              <p className="text-base dark:text-black leading-4 text-gray-800">Discount <span className="bg-gray-200 p-1 text-xs font-medium dark:bg-white dark:text-gray-800 leading-3 text-gray-800">STUDENT</span></p>
-              <p className="text-base dark:text-gray-300 leading-4 text-gray-600">-$28.00 (50%)</p>
-            </div>
-            <div className="flex justify-between items-center w-full">
-              <p className="text-base dark:text-black leading-4 text-gray-800">Shipping</p>
-              <p className="text-base dark:text-black leading-4 text-gray-600">$8.00</p>
-            </div>
-          </div>
-          <div className="flex justify-between items-center w-full">
-            <p className="text-base dark:text-black font-semibold leading-4 text-gray-800">Total</p>
-            <p className="text-base dark:text-gray-300 font-semibold leading-4 text-gray-600">$36.00</p>
-          </div>
-
-
-
-        </div>
-        <div className="flex flex-col justify-center px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 dark:bg-white space-y-6">
-          <h3 className="text-xl dark:text-black font-semibold leading-5 text-gray-800">Shipping</h3>
-          <div className="flex justify-between items-start w-full">
-            <div className="flex justify-center items-center space-x-4">
-              <div className="w-8 h-8">
-                <img className="w-full h-full" alt="logo" src="https://i.ibb.co/L8KSdNQ/image-3.png" />
-              </div>
-              <div className="flex flex-col justify-start items-center">
-                <p className="text-lg leading-6 dark:text-black font-semibold text-gray-800">DPD Delivery<br /><span className="font-normal">Delivery with 24 Hours</span></p>
-              </div>
-            </div>
-            <p className="text-lg font-semibold leading-6 dark:text-black text-gray-800">$8.00</p>
-          </div>
-          <div className="w-full flex justify-center items-center">
-            <button className=" dark:bg-black  dark:text-white dark:hover:bg-gray-100 active:bg-black  hover:text-black  py-5 w-96 md:w-full bg-gray-800 text-base font-medium leading-4 text-white">View Carrier Details</button>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
-    <div className="bg-gray-50 dark:bg-gray-800 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
-      <h3 className="text-xl dark:text-white font-semibold leading-5 text-gray-800">Customer</h3>
-      <div className="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0">
-        <div className="flex flex-col justify-start items-start flex-shrink-0">
-          <div className="flex justify-center w-full md:justify-start items-center space-x-4 py-8 border-b border-gray-200">
-            <img src={photo} alt="avatar" className="w-12 h-12 rounded-md"/>
-            <div className="flex justify-start items-start flex-col space-y-2">
-              <p className="text-base dark:text-white font-semibold leading-4 text-left text-gray-800">{user?.displayName}</p>
-              <p className="text-sm dark:text-gray-300 leading-5 text-gray-600">10 Previous Orders</p>
-            </div>
-          </div>
-
-          <div className="flex justify-center text-gray-800 dark:text-white md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <p className="cursor-pointer text-sm leading-5 ">{user?.email}</p>
-          </div>
-        </div>
-        <div className="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
-          <div className="flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-12 md:space-y-0 md:flex-row items-center md:items-start">
-            <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
-              <p className="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800">Shipping Address</p>
-              <p className="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">180 North King Street, Northhampton MA 1060</p>
-            </div>
-            <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4">
-              <p className="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800">Billing Address</p>
-              <p className="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">180 North King Street, Northhampton MA 1060</p>
-            </div>
-          </div>
-          <div className="flex w-full justify-center items-center md:justify-start md:items-start">
-            <button className="mt-6 md:mt-0 dark:border-white dark:hover:bg-gray-900 dark:bg-transparent dark:text-white py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base font-medium leading-4 text-gray-800">Edit Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-	</div>
-  
-    );
+  );
 };
 
 export default Order;

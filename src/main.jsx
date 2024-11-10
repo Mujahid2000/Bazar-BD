@@ -104,54 +104,55 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'order',
-        element:<PrivateRoutes> <Order/> </PrivateRoutes> 
+        element: <PrivateRoutes> <Order/> </PrivateRoutes>  
       },
       {
         path: 'cart',
-        element: <PrivateRoutes> <Cart/> </PrivateRoutes> 
+        element: <PrivateRoutes> <Cart/> </PrivateRoutes>  
       },
       {
         path: 'delivery',
-        element: <PrivateRoutes> <Deliveried/> </PrivateRoutes> 
+        element: <PrivateRoutes> <Deliveried/> </PrivateRoutes>  
       },
       {
         path: 'dasboard',
-        element: <PrivateRoutes> <Dasboard/> </PrivateRoutes> 
+        element:  <Dasboard/>  
       },
       {
         path: 'wishlist',
-        element: <PrivateRoutes> <Wishlist/> </PrivateRoutes> 
+        element: <PrivateRoutes> <Wishlist/> </PrivateRoutes>  
       },
       {
         path:'/dashboard/payment/:payment',
-        element:<PrivateRoutes> <Payment/> </PrivateRoutes> 
+        element: <PrivateRoutes> <Payment/> </PrivateRoutes>  
       },
       {
-        path:'/dashboard/paid/:tranId',
-        element:<PrivateRoutes> <Success/> </PrivateRoutes> 
+        path:'/dashboard/success',
+        element: <PrivateRoutes> <Success/> </PrivateRoutes>  
       },
       {
-        path: '/dashboard/failed/:tranId',
-        element: <PrivateRoutes><Failed/> </PrivateRoutes>      },
+        path: '/dashboard/failed',
+        element: <PrivateRoutes> <Failed/> </PrivateRoutes>       
+      },
       {
         path: 'payment/cancel',
-        element:<PrivateRoutes><Cancel/> </PrivateRoutes> 
+        element: <PrivateRoutes> <Cancel/> </PrivateRoutes>
       },
       {
         path: 'user',
-        element: <User></User>
+        element: <PrivateRoutes> <User></User> </PrivateRoutes>
       },
       {
         path: 'adminOrder',
-        element: <TotalOrder></TotalOrder>
+        element: <PrivateRoutes> <TotalOrder></TotalOrder> </PrivateRoutes>
       },
       {
         path: 'products',
-        element:<PrivateRoutes><Products/> </PrivateRoutes> 
+        element: <PrivateRoutes> <Products/> </PrivateRoutes>  
       },
       {
         path: 'addProduct',
-        element: <ProductUpolad/>
+        element: <PrivateRoutes> <ProductUpolad/> </PrivateRoutes>
       }
 
     ]

@@ -2,56 +2,108 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Configs/AuthContext";
 import Rating from "../../Result/Rating";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
-    const [wishlist, setWishlist] = useState(null);
-    const { user } = useContext(AuthContext);
-    const email = user.email;
+  const [wishlist, setWishlist] = useState([]);
+  const { user } = useContext(AuthContext);
+  const email = user?.email;
+// console.log(wishlist);
+  useEffect(() => {
+    
+    if (email) {
+      axios
+        .get(`https://postgre-server.vercel.app/wishlist/${email}`)
+        .then((res) => setWishlist(res.data.data))
+        .catch((error) => console.log(error));
+    }
+  }, [email, wishlist]);
 
-    useEffect(() => {
-        axios.get(`https://bazar-bd-server.vercel.app/wishlist/${email}`)
-            .then(res => {
-                // console.log(res.data); // Log the response to check if it's as expected
-                setWishlist(res.data);
-            })
-            .catch(error => console.log(error));
-    }, [email]);
+  const handleDelete = (id) => {
+    axios
+      .delete(`https://postgre-server.vercel.app/wishlist/${id}`)
+      .then(() =>
+        setWishlist((prevState) => prevState.filter((item) => item._id !== id))
+      )
+      .catch((error) => console.log(error));
+  };
 
-	const handleDelete = (id) =>{
-		console.log(id);
-		axios.delete(`https://bazar-bd-server.vercel.app/wishlist/${id}`)
-		.then(() => setWishlist(prevState => prevState.filter(item => item._id !== id)))
-		.catch(error => console.log(error))
-	}
-
-    return (
-       
-            <div className=" mt-20 mb-5 md:mx-64 lg:mx-80">
-            {wishlist?.map(({ _id, product }) => (
-                <div key={_id} className="flex flex-col justify-center mt-4">
-                    <div className="relative flex flex-col md:flex-row rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-                        <div className="w-full md:w-1/3 bg-white grid place-items-center">
-                            <img src={product.product_image} alt={product.productName} className="rounded-xl" />
-                        </div>
-                        <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
-                            <div className="flex justify-between item-center">
-                                <p className="text-gray-500 font-medium hidden md:block">{product.category}</p>
-                               <Rating stars={product.rating}/>
-                                <button onClick={() =>handleDelete(_id)} className="bg-gray-300 rounded-md px-4 active:bg-red-600 active:text-white py-1 text-xs font-medium text-gray-800 hidden md:block">Remove</button>
-                            </div>
-                            <h3 className="font-black text-gray-800 md:text-3xl text-xl">{product.productName}</h3>
-                            <p className="md:text-lg text-gray-500 text-base">{product.description}</p>
-                            <p className="text-xl font-black text-gray-800">
-                                ${product.price}
-                                <span className="font-normal text-gray-600 text-base">/item</span>
-                            </p>
-                        </div>
+  return (
+    <div className="mt-20 mb-5">
+      <h2 className="text-2xl font-semibold mb-6 text-center">Your Wishlist</h2>
+      {wishlist.length > 0 ? (
+        <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
+          <thead className="bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Image
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Product Name
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Price
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Rating
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Description
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {wishlist.map((item) => (
+              <tr key={item.
+                wish_id}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-20 w-20">
+                      <Link to={`/productDetails/${item.product_id}`}>
+                      <img className="h-20 w-20 rounded-full" src={item.product_image} alt="" />
+                      </Link>
                     </div>
-                </div>
+                    <div className="ml-4">
+                     
+                      
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                <Link to={`/productDetails/${item.product_id}`}>
+                  <div className="text-sm hover:text-orange-600 text-gray-900">{item.productname || "Regional Paradigm Technician"}</div>
+                  </Link>
+                  <div className="text-sm text-gray-500">{item.category}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  ${item.price}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <Rating stars={item.rating}/>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {item.description || "description"}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    onClick={() => handleDelete(item.wish_id)}
+                    className="text-white rounded-md px-3 py-2 bg-red-600 hover:bg-gradient-to-r from-sky-600 to-cyan-400"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
             ))}
-        </div>
-      
-    );
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-center text-gray-600 mt-6">Your wishlist is empty.</p>
+      )}
+    </div>
+  );
 };
 
 export default Wishlist;

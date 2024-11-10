@@ -17,7 +17,7 @@ const DetailPayment = () => {
 
     useEffect(() => {
         axios
-          .get(`https://bazar-bd-server.vercel.app/addProducts/${id}`)
+          .get(`https://postgre-server.vercel.app/addProducts/${id}`)
           .then((res) => setProducts(res.data))
           .catch((error) => console.error(error));
       }, [id]);
@@ -27,7 +27,7 @@ const DetailPayment = () => {
     const handlePayment = async (payment, email, currentDate, name, cart) =>{
         // console.log(payment, email, currentDate, name, cart);
         try{
-        axios.post(`https://bazar-bd-server.vercel.app/myPayment`, {payment, email, currentDate, name, cart})
+        axios.post(`https://postgre-server.vercel.app/myPayment`, {payment, email, currentDate, name, cart})
         .then((response) => {console.log(response.data.url)
     window.location.replace(response.data.url)});
     } catch(error){
