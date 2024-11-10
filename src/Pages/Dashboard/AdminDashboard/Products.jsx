@@ -10,7 +10,6 @@ const Products = () => {
     const [selectAllChecked, setSelectAllChecked] = useState(false);
     const [discountId, setPId] = useState();
 
-    console.log(discountId);
     useEffect(() => {
         // Fetch products only once
         axios.get('https://postgre-server.vercel.app/product')

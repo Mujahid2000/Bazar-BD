@@ -6,7 +6,6 @@ import { toast, Toaster } from "sonner";
 
 const ProductUpolad = () => {
     const [productImage, setProductImage] = useState(null);
-    
     const handleImageChange = (e) => {
         setProductImage(e.target.files[0]);
     };
@@ -14,7 +13,7 @@ const ProductUpolad = () => {
     const handleProductData = async (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-        
+
         // Retrieve fields from form
         const productname = form.get('productName');
         const shopName = form.get('shopName');
@@ -25,33 +24,33 @@ const ProductUpolad = () => {
         const shoppicture = form.get('shoppicture');
         const rating = form.get('rating');
         const color = form.get('color');
-
         console.log({
             productname, shopName, price, category, stock, description, productImage, shoppicture, rating, color
         });
-
         if (!productImage) {
             toast.error("Please select an image to upload.");
             return;
         }
-
         try {
-            // Upload image to ImgBB
+            // Upload image to Cloudinary
             const imageFormData = new FormData();
-            imageFormData.append('image', productImage);
+            imageFormData.append('file', productImage);
+            imageFormData.append('upload_preset', 'jocqw4zs'); // Replace with your Cloudinary upload preset
+
+            // Replace with your Cloudinary API URL
             const res = await axios.post(
-                `https://api.imgbb.com/1/upload?key=163d09b9b1e568932b8a3c29bfa9630d`,
+                `https://api.cloudinary.com/v1_1/dhfqokxun/image/upload`, // Replace `your_cloud_name` with your Cloudinary cloud name
                 imageFormData, {
-                  headers: {
-                    "Content-Type": "multipart/form-data",
-                  },
-                  mode: 'cors'
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                   
                 }
-              );
-              
-            
-            const imageUrl = res.data.data.display_url;
+            );
+
+            const imageUrl = res.data.secure_url; // Cloudinary URL
             console.log(imageUrl);
+
             const newData = {
                 productname, shopName, price, category, stock, description, product_image: imageUrl, shoppicture, rating, color
             };
@@ -61,6 +60,10 @@ const ProductUpolad = () => {
             // Send product data to your server
             await axios.post('https://postgre-server.vercel.app/product', newData);
             toast.success("Item added to cart!");
+
+            // reset form if the product upload complete
+            e.target.reset();
+        setProductImage(null);
         } catch (error) {
             console.error("Image upload error:", error);
             toast.error("Failed to add item. Please try again.");
