@@ -79,32 +79,49 @@ const Products = () => {
     };
 
     const handleDeleteSelectedProducts = async () => {
-        try {
-            const selectedProductIds = selectedProducts.map(product => product._id);
-            const response = await axios.delete('https://postgre-server.vercel.app/products', { data: { ids: selectedProductIds } });
-
-            if (response.data.success) {
-                setSelectedProducts([]);
-                Swal.fire({
-                    title: "Success!",
-                    text: "Selected products have been deleted.",
-                    icon: "success"
-                });
-            } else {
-                Swal.fire({
-                    title: "Error!",
-                    text: "Failed to delete selected products.",
-                    icon: "error"
-                });
-            }
-        } catch (error) {
-            Swal.fire({
-                title: "Error!",
-                text: "Failed to delete selected products.",
-                icon: "error"
-            });
+      try {
+        // Extract the IDs of selected products
+        const ids = selectedProducts.map(product => product.id);
+    
+        // Send DELETE request with IDs in request body
+        const response = await axios.delete("https://postgre-server.vercel.app/product", { 
+          data: { ids: ids } 
+        });
+        // Check if the deletion was successful based on the response
+        if (response.status == 200) {
+          // Update the local product list to remove deleted products
+          setMyProducts(myProducts.filter(product => !ids.includes(product.id)));
+          setSelectedProducts([]); // Clear the selected products
+    
+          // Display success message using Swal.fire
+          Swal.fire({
+            title: "Success!",
+            text: "Selected products have been deleted.",
+            icon: "success",
+            timer: 2000, 
+            showConfirmButton: false
+          });
+        } else {
+          // if does not get success message then show this message
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to delete selected products.",
+            icon: "error"
+          });
         }
+      } catch (error) {
+        // if error then show error
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete selected products.",
+          icon: "error"
+        });
+        console.error("Delete error:", error);
+      }
     };
+    
+
+  
 
     const filteredProducts = myProducts.filter(product =>
         product?.productname.toLowerCase().includes(search?.toLowerCase())
