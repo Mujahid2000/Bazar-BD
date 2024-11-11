@@ -46,7 +46,7 @@ import { Link } from "react-router-dom";
 //   ];
 const ElectronicSection = () => {
   const [product, setProduct] = useState([]);
-
+console.log(product)
 
   useEffect(() => {
     axios.get('https://postgre-server.vercel.app/product?_limit=8')
@@ -73,7 +73,7 @@ const ElectronicSection = () => {
           />
         </div>
         <div className='col-span-2 lg:col-span-2 grid grid-cols-2 lg:grid-cols-4 '>
-          {product && product.slice(0,8).map((item, index) => (
+          {product && product.slice(2,10).map((item, index) => (
             <Link  key={index} to={`/productDetails/${item.id}`}>
             <div
              
