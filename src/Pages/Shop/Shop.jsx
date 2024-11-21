@@ -20,7 +20,7 @@ const Shop = () => {
     
 
     return (
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
+        <div className="pt-32 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
 
       {
         shop.map(pro => (

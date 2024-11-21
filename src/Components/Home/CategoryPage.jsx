@@ -39,7 +39,7 @@ const CategoryPage = ({ categories }) => {
     
     return (
 
-        <div className="max-w-[1400px] my-5 mx-auto px-4 lg:px-0">
+        <div className="max-w-[1400px] pt-32 my-0 mx-auto px-4 lg:px-0">
            <h2 className=" mt-5 mb-7 text-xl text-center font-medium">Find Result: {filterData.length}</h2>
 
            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>

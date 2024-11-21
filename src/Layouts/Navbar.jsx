@@ -54,7 +54,7 @@ const Navbar = () => {
   },[])
 
   return (
-    <div className="py-4">
+    <div className="pt-4 fixed w-full z-50 bg-white">
       <nav>
         <div>
           <div>{isMobile ? <HeaderMobile /> : <HeaderDesktop />}</div>
@@ -62,8 +62,8 @@ const Navbar = () => {
 
         <hr className="my-3" />
         {/* another side */}
-        <div className="px-auto hidden md:flex lg:gap-64 lg:justify-around">
-          <div className="flex gap-5 items-center">
+        <div className="px-auto bg-white hidden md:flex lg:gap-52 lg:justify-around">
+          <div className="flex gap-2 items-center">
             <button>
               <MdMenu className="text-xl" />
             </button>
@@ -81,8 +81,7 @@ const Navbar = () => {
               <Link to={"/shop"}>
                 <li className="font-semibold text-sm md:text-base">Shops</li>
               </Link>
-              {/* <a href=""><li className="font-semibold text-sm md:text-base">Projects</li></a> */}
-              {/* <a href=""><li className="font-semibold text-sm md:text-base">Menu Item</li></a> */}
+             
 
               <li className="font-semibold">
                 <button

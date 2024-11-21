@@ -9,11 +9,11 @@ const Service = () => {
             <div className="relative flex flex-col shadow-md rounded-md overflow-hidden  max-w-80">
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
-            <img
+            <img className="hover:-translate-y-1 hover:scale-110 duration-300"
             src="https://i.ibb.co/L1M0FFr/Webp-net-resizeimage.jpg" alt=""/>
             </div>
             </div>
-            <div className="absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
+            <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
             <IoSearch />
             </div>
             <div className="bg-white py-5">
@@ -26,11 +26,11 @@ const Service = () => {
             <div className="relative flex flex-col shadow-md rounded-md overflow-hidden  max-w-80">
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
-            <img
+            <img className="hover:-translate-y-1 hover:scale-110 duration-300"
             src="https://i.ibb.co/Q8wkTpg/Webp-net-resizeimage-1.jpg" alt=""/>
             </div>
             </div>
-            <div className="absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
+            <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
             <IoSearch />
             </div>
             <div className="bg-white py-5">
@@ -43,11 +43,11 @@ const Service = () => {
             <div className="relative flex flex-col shadow-md rounded-md overflow-hidden  max-w-80">
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
-            <img
+            <img className="hover:-translate-y-1 hover:scale-110 duration-300"
             src="https://i.ibb.co/26qT7mK/Webp-net-resizeimage-2.jpg" alt=""/>
             </div>
             </div>
-            <div className="absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
+            <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
             <IoSearch />
             </div>
             <div className="bg-white py-5">
@@ -60,11 +60,11 @@ const Service = () => {
             <div className="relative flex flex-col shadow-md rounded-md overflow-hidden  max-w-80">
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
-            <img
+            <img className="hover:-translate-y-1 hover:scale-110 duration-300"
             src="https://i.ibb.co/hLH715M/Webp-net-resizeimage-3.jpg" alt=""/>
             </div>
             </div>
-            <div className="absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
+            <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
             <IoSearch />
             </div>
             <div className="bg-white py-5">

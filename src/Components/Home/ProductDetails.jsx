@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {FiMinus, FiPlus} from 'react-icons/fi';
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocation  } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { AuthContext } from "../../Configs/AuthContext";
 import { Toaster, toast } from "sonner";
 import { FaHeart } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import Rating from "../../Pages/Result/Rating";
+import { FaCreditCard, FaShieldAlt } from "react-icons/fa";
 
 
 
@@ -16,14 +18,38 @@ const ProductDetails = () => {
     const searchParams = new URLSearchParams(location.search);
     const fromFlashSale = searchParams.get('fromFlashSale');
     // console.log('From Flash Sale:', fromFlashSale);
+    const [count, setCount] = useState(1);
     const [products, setProducts] = useState(null); 
     const [loading, setLoading] = useState(true)
     const [allProduct, setAllProducts] = useState()
     const [discount, setDiscount] = useState({})
+   console.log(products);
     const { user } = useContext(AuthContext);
     const email = user?.email;
 
-    
+    const services = [
+        {
+          icon: "🚚", // Replace with an SVG or icon component
+          label: "Estimated Delivery",
+          value: "48 hours",
+        },
+        {
+          icon: "💰",
+          label: "Cash On Delivery",
+          value: "Available",
+        },
+        {
+          icon: "💳",
+          label: "EMI Facility",
+          value: "Not Available",
+        },
+        {
+          icon: "⚙️",
+          label: "Warranty",
+          value: "",
+        },
+      ];
+   
     useEffect(() => {
         const fetchData = async () => {
           if (!id) return; // Exit if no `id` is provided
@@ -66,32 +92,45 @@ const ProductDetails = () => {
 
     const isFromFlashSalePage = fromFlashSale === '/flashSale';
     
-    const handleAddCart = (data) => {
+    const handleAddCart = async (data) => {
       const productid = data.idp;
-      console.log(productid);
-         if(user){
-           axios.post(`https://postgre-server.vercel.app/cart`, { productid, email })
-           .then((response) => console.log(response));
-         toast.success("Item added to cart!")
-         }else{
-            alert('Please Login')
-         }
-        };
+    
+      if (user) {
+        try {
+          const response = await axios.post(`https://postgre-server.vercel.app/cart`, { productid, email });
+          console.log("Response:", response.data);
+          toast.success("Item added to cart!");
+        } catch (error) {
+          console.error("Error adding item to cart:", error);
+          toast.error("Failed to add item to cart. Please try again.");
+        }
+      } else {
+        alert("Please Login");
+      }
+    };
+    
+    const handleWishlist = async (product) => {
+      const productid = product.idp;
+    
+      if (user) {
+        try {
+          const response = await axios.post("https://postgre-server.vercel.app/wishlist", { productid, email });
+          console.log("Response:", response.data);
+          toast.success("Added to Favourites!");
+        } catch (error) {
+          console.error("Error adding item to wishlist:", error);
+          toast.error("Failed to add item to wishlist. Please try again.");
+        }
+      } else {
+        alert("Please Login");
+      }
+    };
 
-        const handleWishlist = (product) =>{
-            const productid = product.idp;
-            if(user){
-              axios.post('https://postgre-server.vercel.app/wishlist',{productid, email})
-              .then(res => console.log(res));
-              toast.success("Added Favourite !").catch(console.log("error"));
-            }else{
-                alert('Please Login')
-             }
-          }
+    
 
 
     return (
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-[1440px] pt-32 mx-auto">
             {loading? (
                
                 <div className="bg-white p-2 md:h-screen sm:p-4 sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">
@@ -114,41 +153,130 @@ const ProductDetails = () => {
             ):
             
             ((Object.keys(products || discount).length > 0) && (
-    <div className="min-w-screen   flex items-center p-5 lg:p-10 overflow-hidden relative">
-        <div className="min-w-screen   flex items-center p-5 lg:p-10 overflow-hidden relative">
-            <div className="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
-                <div className="md:flex items-center -mx-10">
-                    <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
-                        <div className="relative">
-                            <img src={isFromFlashSalePage ? discount?.product_image : products.product_image} className="w-full relative z-10" alt={isFromFlashSalePage ? discount.productname : products.productname} />
-                            <div className="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
+    <div className="w-full   flex justify-between   overflow-hidden relative">
+        <div className="w-full   flex items-center  overflow-hidden relative">
+            <div className="w-full max-w-full rounded shadow-xl p-5  mx-auto text-gray-800 relative md:text-left">
+                <div className="md:flex items-start justify-between gap-8">
+                    <div className="w-full items-center justify-center flex flex-col md:w-2/5 md:px-5 mb-10 md:mb-0">
+                        <div>
+                            <img className="w-full h-full" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
+                        </div>
+                        <div className="flex md:gap-5 pt-14 justify-center max-w-md">
+                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
+                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
+                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
+                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
                         </div>
                     </div>
-                    <div className="w-full md:w-1/2 px-10">
+                    <div className="w-full md:w-2/5 md:px-5">
                         <div className="mb-10">
-                            <h1 className="font-bold uppercase text-2xl mb-5">{isFromFlashSalePage ? discount.productname : products.productname}</h1>
-                            <p className="text-base">{isFromFlashSalePage ? discount?.description : products.description} <a href="#" className="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i className="mdi mdi-arrow-right"></i></a></p>
+                            <h1 className="font-bold uppercase text-3xl mb-2">{isFromFlashSalePage ? discount.productname : products.productname}</h1>
+                            <div className="flex items-center justify-start">
+                                 <Rating stars={isFromFlashSalePage ? discount?.rating : products?.rating}/>
+                            <p className="border px-3 text-base rounded-md">{isFromFlashSalePage ? discount?.rating : products?.rating}</p>
+                            </div>
+                           <hr className="mb-5 mt-1"/>
+                            <p className="text-base pt-5">{isFromFlashSalePage ? discount?.description : products.description} </p>
                         </div>
                         <div>
-                            <div className="inline-block align-bottom mr-5">
-                                <span className="text-2xl leading-none align-baseline">$</span>
-                                <span className="font-bold text-5xl leading-none align-baseline">{isFromFlashSalePage ? discount?.discountprice?.toString().slice(0, 3) : products?.price?.toString().slice(0, 3)}</span>
-                                <span className="text-2xl leading-none align-baseline">{isFromFlashSalePage ? discount?.discountprice?.toString().slice(3, 6) : products?.price?.toString().slice(3, 6)}</span>
+                            <div className="">
+                                <span className="text-5xl text-[#DC2626] ">$</span>
+                                <span className="font-bold text-[#DC2626] text-5xl ">{isFromFlashSalePage ? discount?.discountprice?.toString().slice(0, 3) : products?.price?.toString().slice(0, 3)}</span>
+                                <span className="text-5xl text-[#DC2626] ">{isFromFlashSalePage ? discount?.discountprice?.toString().slice(3, 6) : products?.price?.toString().slice(3, 6)}</span>
                             </div>
-                            <div className="inline-block sm:mt-3 align-bottom">
-                                <div className="flex items-center mt-6">
-                                
+                            <div className="inline-block sm:mt-3 ">
+                                <div className="flex flex-col md:flex-row items-start justify-start gap-4 mt-6">
+                                <div className='flex  items-center  border border-gray-200 rounded-md'>
+            <button className='bg-gray-100 active:scale-[0.9] transition-all duration-300 p-[10px] rounded-l-md text-gray-700 text-[1.1rem]'
+                    ><FiMinus/></button>
+            <input type='number' value={count}
+                   className='w-[50px] py-2.5 outline-none focus:ring-0 border-none text-center text-[1.1rem]'
+                   />
+            <button className='bg-gray-100 active:scale-[0.9] transition-all duration-300 p-[10px] rounded-r-md text-gray-700 text-[1.1rem]'
+                    ><FiPlus/></button>
+        </div>
+                                <div className="flex gap-5">
 
-                                <button onClick={() => handleWishlist(isFromFlashSalePage ? discount?.productData : products)} className="px-3 flex justify-between gap-2 items-center py-3 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none active:bg-indigo-700"><FaHeart /> WishList</button>
-
-                                    <button onClick={() => {handleAddCart(isFromFlashSalePage ? discount : products)}} className="mx-2 flex justify-between  items-center text-gray-600 border rounded-md px-3 py-3 text-sm hover:bg-gray-200 focus:outline-none">
+                                    <button onClick={() => {handleAddCart(isFromFlashSalePage ? discount : products)}} className="px-4 py-3 bg-blue-500 flex items-center gap-2 text-white border-none outline-none text-secondary text-[1rem] rounded active:scale-[0.9] transition-all duration-300">
                                     <MdOutlineShoppingCart />
 
                                     Add To Cart
                                     </button>
+
+                                <button onClick={() => handleWishlist(isFromFlashSalePage ? discount?.productData : products)} className="px-4 py-3 bg-blue-500 flex items-center gap-2 text-white border-none outline-none text-secondary text-[1rem] rounded active:scale-[0.9] transition-all duration-300"><FaHeart /> WishList</button>
+                                </div>
+
                                 </div>
                             </div>
+                            <div className="max-w-2xl mx-auto py-5 space-y-4">
+      {/* Payment Section */}
+      <div className="flex  items-start justify-center gap-4 border rounded-lg p-4 shadow-sm">
+        <FaCreditCard className="text-3xl mt-1 text-gray-500" />
+        <div>
+          <h3 className="font-semibold text-gray-800">Payment</h3>
+          <p className="text-sm text-gray-600">
+            Payment upon receipt of goods, Payment by card in the department,
+            Google Pay, Online card, -5% discount in case of payment.
+          </p>
+        </div>
+      </div>
+
+      {/* Warranty Section */}
+      <div className="flex  items-start justify-center gap-4 border rounded-lg p-4 shadow-sm">
+        <FaShieldAlt className="text-2xl mt-1 text-gray-500" />
+        <div>
+          <h3 className="font-semibold text-gray-800">Warranty</h3>
+          <p className="text-sm text-gray-600">
+            The Consumer Protection Act does not provide for the return of this
+            product of proper quality.
+          </p>
+        </div>
+      </div>
+    </div>
                         </div>
+                    </div>
+                    <div className="  md:w-1/5 w-full  lg:w-[20%]   relative overflow-hidden group  rounded-md">
+                <h2 className="pb-4 text-lg font-semibold">SELLER</h2>
+                <div className="flex py-3 bg-gray-100 rounded-md justify-between px-3 items-center border">
+                <img className="w-16 h-16" src={isFromFlashSalePage ? discount?.shoppicture : products?.shoppicture} alt="" />
+            
+            <div className="gap-3 flex  items-center flex-col">
+              <Link to={`/shopDetail/${isFromFlashSalePage ? discount?.shopname : products?.shopname}`}>
+              
+            <h3 className="font-semibold">{isFromFlashSalePage ? discount?.shopname : products?.shopname}</h3>
+              </Link>
+            <div className="flex justify-center items-center">
+            <Rating stars={3}/> <p>(3)</p>
+            </div>
+            <Link to={`/shopDetail/${isFromFlashSalePage ? discount?.shopname : products?.shopname}`}>
+            
+            <button
+                className="font-semibold rounded-md leading-none uppercase inline-flex justify-center items-center gap-2 rounded-button transition-all duration-[300ms] ease-in-out disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-white text-primary border border-secondary bg-gradient-to-l from-blue-500 from-[50%] to-secondary to-[50%] bg-[200%_auto] hover:bg-right hover:text-white px-5 h-9 md:h-[42px]">
+                VISIT SHOP
+            </button>
+            </Link>
+        </div>
+                </div>
+            
+                     <div className=" max-w-sm mx-auto  rounded-lg shadow-md">
+      <h2 className="text-lg font-semibold my-4">SERVICE</h2>
+      <div className="space-y-4">
+        {services.map((service, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between px-3 py-5 bg-gray-50 rounded-md border"
+          >
+            <div className="flex items-center space-x-3">
+              <span className="text-2xl text-green-600">{service.icon}</span>
+              <span className="text-gray-700 font-medium">{service.label}</span>
+            </div>
+            <span className={`text-sm ${service.value ? 'text-green-700' : 'text-red-600'}`}>
+              {service.value || "N/A"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>           
                     </div>
                 </div>
             </div>

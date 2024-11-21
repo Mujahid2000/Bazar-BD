@@ -3,9 +3,9 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-600 py-8">
-      <div className="container mx-auto px-20">
-        <div className="flex flex-wrap justify-between">
+    <footer className=" text-gray-600 py-2">
+      <div className="container mx-auto px-[67px]">
+        <div className="flex bg-white px-5 py-12 flex-wrap justify-between">
           {/* Brand Section */}
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
             <div className='flex '>
@@ -74,12 +74,12 @@ const Footer = () => {
         </div>
         
         {/* App Links */}
-        <div className="mt-8 flex justify-between items-center border-t pt-4">
-          <div className="flex space-x-4">
+        <div className="py-5 px-3 bg-[#e0e3e7] flex justify-between items-center border-t ">
+          <div className="flex text-base font-normal text-[#606060] space-x-4">
           © 2023 Brand.
           </div>
           <div className="text-sm">
-            <p href="#" className="hover:underline cursor-pointer">English</p>
+            <p href="#" className="hover:underline text-base font-normal text-[#606060] cursor-pointer">English</p>
           </div>
         </div>
 

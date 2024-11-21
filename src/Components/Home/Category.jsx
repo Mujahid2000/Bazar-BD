@@ -15,7 +15,7 @@ const Category = () => {
     ];
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8">
+        <div className="grid bg-white grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8">
             {categories.map((cat) => (
               <Link key={cat.id} to={`/categoryPage/${cat.name}`}>
               <p className={`py-3 px-4 bg-[${cat?.color}] gap-7 text-white rounded-lg cursor-pointer text-center font-semibold text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-lg mx-2 mt-3 transition duration-300 hover:bg-slate-800 hover:shadow-lg`} style={{ backgroundColor: cat.color }}>

@@ -19,9 +19,9 @@ const categories = [
 const Banner = () => {
     const {user}= useContext(AuthContext)
     return (
-        <div className="flex flex-col  px-2 md:flex-row justify-center md:justify-between lg:justify-center items-center">
+        <div className="flex flex-col pt-32 px-7  md:flex-row justify-center md:justify-between lg:justify-center items-center">
             {/* category side */}
-            <div className='w-[23.8rem] lg:w-auto scroll-m-0 overflow-x-auto px-1'>
+            <div className='w-[23.8rem] rounded-l-md bg-white py-4 lg:w-auto scroll-m-0 overflow-x-auto px-1'>
                 <ul className=" md:space-y-2 flex flex-row md:flex-col ">
                     {
                         categories.map(cat => (
@@ -33,7 +33,7 @@ const Banner = () => {
                 </ul>
             </div>
             {/* banner picture */}
-            <div className="w-full lg:w-2/4">
+            <div className="w-full bg-white py-[18px] lg:w-2/4">
             <div className="relative w-full h-full md:h-[420px] bg-teal-200 flex items-center justify-center">
             {/* Background Image */}
             <img
@@ -54,7 +54,7 @@ const Banner = () => {
         </div>
             </div>
             {/* user info */}
-            <div className={`${user ? ' space-y-10' : ' space-y-2'} 'hidden lg:flex  flex-col items-center px-4 `}>
+            <div className={`${user ? ' space-y-10' : ' space-y-2'} 'hidden lg:flex bg-white py-5 rounded-r-md flex-col items-center px-4 `}>
                {user?  
                <div className='bg-blue-100 w-[14rem]
                 h-[7rem] p-5 rounded-lg hidden lg:block'>

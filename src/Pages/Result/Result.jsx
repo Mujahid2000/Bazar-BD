@@ -10,21 +10,19 @@ import { Toaster, toast } from "sonner";
 
 const Result = () => {
     const [products, setProducts] = useState([]);
-    // const [isChecked, setIsChecked] = useState(false);
+
     const [searchResults, setSearchResults] = useState([]);
     const location = useLocation();
     const searchQuery = new URLSearchParams(location.search).get("q");
-    const [value1, setValue1] = useState([0, 500]);
+    const [value1, setValue1] = useState([0, 999]);
     const [isChecked1 , setIsChecked1] = useState(false);
     const [isChecked2 , setIsChecked2] = useState(false);
     const [isChecked3 , setIsChecked3] = useState(false);
     const [rating, setRating] = useState(0);
     const { user } = useContext(AuthContext);
     const email = user?.email;
-    console.log(products);
-    // console.log(isChecked1);
-    // console.log(isChecked2);
-    // console.log(isChecked3);
+ 
+
 
     const handleChange1 = (event, newValue, activeThumb) => {
         if (!Array.isArray(newValue)) {
@@ -129,10 +127,10 @@ const Result = () => {
 
 
     return (
-        <div className="flex max-w-[144xpx]  flex-col-reverse md:flex-row lg:flex-row mx-auto justify-evenly">
+        <div className="flex max-w-[1440px] pt-32 flex-col-reverse md:flex-row-reverse lg:flex-row-reverse items-start mx-auto justify-evenly">
             <div>
+        <h2 className="text-black ml-5 text-xl">Search Results:{searchResults.length}</h2>
             <div className=" mx-2 ">
-        <h2 className="text-black ml-14 text-xl">Search Results:{searchResults.length}</h2>
         <div >
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-7 mt-9 gap-y-8 place-items-center">
             {searchResults && searchResults.map((product) => (
@@ -178,16 +176,16 @@ const Result = () => {
         </div>
         </div>
             </div>
-            <div className="w-80 mx-10 md:mx-1 lg:mx-0 rounded-md border min-h-[90vh] mt-14 text-center shadow-md">
+            <div className="w-80  mx-10 md:mx-1 lg:mx-0 rounded-md  min-h-[90vh] mt-14 text-center ">
             <h3>Price Range</h3>
                 <div className="flex w-72 mx-auto gap-2">
                     <div>
                         <p>Min Price</p>
-                        <input type="number" className="w-36 text-black border text-center rounded-md" min={0} max={9990} value={value1[0]} onChange={(e) => setValue1([e.target.value, value1[1]])} />
+                        <input type="number" className="w-36 text-black border text-center rounded-md" min={0} max={999} value={value1[0]} onChange={(e) => setValue1([e.target.value, value1[1]])} />
                     </div>
                     <div>
                         <p>Max Price</p>
-                        <input type="number" className="w-36 text-black border text-center rounded-md" min={0} max={9990} value={value1[1]} onChange={(e) => setValue1([value1[0], e.target.value])} />
+                        <input type="number" className="w-36 text-black border text-center rounded-md" min={0} max={999} value={value1[1]} onChange={(e) => setValue1([value1[0], e.target.value])} />
                     </div>
                 </div>
                 <div className="mx-5">
@@ -197,7 +195,7 @@ const Result = () => {
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
                         min={0}
-                        max={9990}
+                        max={999}
                         disableSwap
                     />
                 </div>
@@ -214,41 +212,41 @@ const Result = () => {
             <h2 className="text-left ml-5 mt-5 mb-3">Ratings</h2>
             <hr />
             <button className="flex hover:bg-slate-100 py-2 px-4 rounded-md gap-6 ml-1 mt-5" value={4.5} onClick={() => handleValue(4.5)}>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
             </button>
             <button className="flex hover:bg-slate-100 py-2 px-4 rounded-md gap-6 ml-1 mt-5" value={4} onClick={() => handleValue(4)}>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
             
             </button>
             <button className="flex hover:bg-slate-100 py-2 px-4 rounded-md gap-6 ml-1 mt-5" value={3} onClick={() => handleValue(3)}>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
             
             </button>
             <button className="flex hover:bg-slate-100 py-2 px-4 rounded-md gap-6 ml-1 mt-5" value={2} onClick={() => handleValue(2)}>
-            <FaStar className="text-orange-500"/>
-            <FaStar className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
+            <FaStar className="text-yellow-400"/>
+            <FaStar className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
             </button>
             <button className="flex hover:bg-slate-100 py-2 px-4 rounded-md gap-6 ml-1 mt-5" value={1} onClick={() => handleValue(1)}>
-            <FaStar className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
-            <FaRegStar  className="text-orange-500"/>
+            <FaStar className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
+            <FaRegStar  className="text-yellow-400"/>
             </button>
             </div>
             <Toaster

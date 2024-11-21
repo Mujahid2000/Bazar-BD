@@ -46,7 +46,7 @@ import { Link } from "react-router-dom";
 //   ];
 const ElectronicSection = () => {
   const [product, setProduct] = useState([]);
-console.log(product)
+
 
   useEffect(() => {
     axios.get('https://postgre-server.vercel.app/product?_limit=8')

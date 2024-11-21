@@ -25,7 +25,7 @@ const FlashSale = () => {
         let interval = useRef();
 
         const startTimer = () =>{
-            const countdownDate = new Date('August 06, 2024 00:00:00').getTime()
+            const countdownDate = new Date('March 06, 2025 00:00:00').getTime()
 
             interval = setInterval(() => {
                 const now = new Date().getTime();
@@ -96,7 +96,7 @@ const FlashSale = () => {
         
 
     return (
-        <div className=" mb-6">
+        <div className="pt-28 mb-6">
           <div>
 
             <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-[95vh] ">
