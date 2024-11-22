@@ -9,7 +9,7 @@ const Products = () => {
     const [search, setSearch] = useState('');
     const [selectAllChecked, setSelectAllChecked] = useState(false);
     const [discountId, setPId] = useState();
-
+console.log(myProducts);
     useEffect(() => {
         // Fetch products only once
         axios.get('https://postgre-server.vercel.app/product')
@@ -124,7 +124,7 @@ const Products = () => {
   
 
     const filteredProducts = myProducts.filter(product =>
-        product?.productname.toLowerCase().includes(search?.toLowerCase())
+        product?.productname?.toLowerCase().includes(search?.toLowerCase())
     );
 
     return (

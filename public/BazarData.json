@@ -8,7 +8,12 @@
         "rating": 4.5,
         "description": "Control your home's temperature with our advanced smart thermostat.",
         "stock": "In Stock",
-        "product_image": "https://i.ibb.co/4fw9d8D/b171e503e38e7b8c0a5fa03996d5d467.png",
+        "product_image": [
+                          "https://i.ibb.co/4fw9d8D/b171e503e38e7b8c0a5fa03996d5d467.png",
+                          "https://i.ibb.co.com/VSdSJyq/t-1.png,",
+                          "https://i.ibb.co.com/HzXPNJC/t-2.png",
+                          "https://i.ibb.co.com/GJ4ycCT/t-3.png"
+                        ],
         "productName": "T-shirts with multiple colors, for men",
         "price": 10.30
     },

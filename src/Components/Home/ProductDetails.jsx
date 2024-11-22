@@ -19,11 +19,12 @@ const ProductDetails = () => {
     const fromFlashSale = searchParams.get('fromFlashSale');
     // console.log('From Flash Sale:', fromFlashSale);
     const [count, setCount] = useState(1);
+    const [image, setImage] = useState('')
     const [products, setProducts] = useState(null); 
     const [loading, setLoading] = useState(true)
     const [allProduct, setAllProducts] = useState()
     const [discount, setDiscount] = useState({})
-   console.log(products);
+   console.log(image);
     const { user } = useContext(AuthContext);
     const email = user?.email;
 
@@ -126,6 +127,10 @@ const ProductDetails = () => {
       }
     };
 
+    const handleImage = (link) =>{
+      setImage(link)
+    }
+
     
 
 
@@ -159,13 +164,21 @@ const ProductDetails = () => {
                 <div className="md:flex items-start justify-between gap-8">
                     <div className="w-full items-center justify-center flex flex-col md:w-2/5 md:px-5 mb-10 md:mb-0">
                         <div>
-                            <img className="w-full h-full" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
+                            <img className="w-full h-full" src={image ? image : isFromFlashSalePage ? discount.product_image : products.product_image[0]} alt=""  />
                         </div>
                         <div className="flex md:gap-5 pt-14 justify-center max-w-md">
-                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
-                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
-                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
-                            <img className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src="https://i.ibb.co.com/Rv4Nbps/b171e503e38e7b8c0a5fa03996d5d467.png" alt=""  />
+                          
+                            <img onClick={() => {
+                        handleImage(isFromFlashSalePage ? discount.product_image : products.product_image[0]);
+                    }}
+                    className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src={isFromFlashSalePage ? discount.product_image : products.product_image[0]} alt=""  />
+                      <img onClick={() => {handleImage(isFromFlashSalePage ? discount.product_image : products.product_image[1])}} className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src={isFromFlashSalePage ? discount.product_image : products.product_image[1]} alt=""  />
+                                                <img onClick={() => {
+                        handleImage(isFromFlashSalePage ? discount.product_image : products.product_image[2])
+                    }} className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src={isFromFlashSalePage ? discount.product_image : products.product_image[2]} alt=""  />
+                                                <img onClick={() => {
+                        handleImage(isFromFlashSalePage ? discount.product_image : products.product_image[3]);
+                    }} className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src={isFromFlashSalePage ? discount.product_image : products.product_image[3]} alt=""  />
                         </div>
                     </div>
                     <div className="w-full md:w-2/5 md:px-5">
