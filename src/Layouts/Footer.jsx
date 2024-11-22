@@ -4,7 +4,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react
 const Footer = () => {
   return (
     <footer className=" text-gray-600 py-2">
-      <div className="container mx-auto px-[67px]">
+      <div className="container mx-auto px-5 md:px-[67px]">
         <div className="flex bg-white px-5 py-12 flex-wrap justify-between">
           {/* Brand Section */}
           <div className="w-full md:w-1/4 mb-6 md:mb-0">

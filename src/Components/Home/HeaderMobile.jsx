@@ -1,24 +1,103 @@
-import  { useContext, useState } from 'react';
+import  { useContext, useEffect, useRef, useState } from 'react';
 import { FaCartPlus, FaHeart, FaUserAlt } from 'react-icons/fa';
 import { MdDashboard, MdMenu, MdMessage } from 'react-icons/md';
 import { RxCross2 } from "react-icons/rx";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Configs/AuthContext';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
+import axios from 'axios';
 
 
 const HeaderMobile = () => {
     const [menu, setMenu] = useState(false);
     const { user, logOut } = useContext(AuthContext);
     const [profileMenu, setProfielMenu] = useState(false);
-
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const navigate = useNavigate();
+    const containerRef = useRef(null);
 
     const handleLogOut = () =>{
         logOut()
         .then(() => {})
         .catch(console.error)
     }
+
+    const handleEnterPress = (e) => {
+      if (e.key === 'Enter' && searchQuery) {
+        const encodedQuery = encodeURIComponent(searchQuery);
+        navigate(`/result?q=${encodedQuery}`);
+        setShowSuggestions(false);
+      }
+    };
+
+    const handleSearchInput = (e) => {
+      setSearchQuery(e.target.value);
+    };
+
+    const handleShowFunction = () => {
+      if (searchQuery.trim()) {
+        setShowSuggestions(true);
+      }
+    };
+
+
+    const selectSuggestion = (suggestion) => {
+      setSearchQuery(suggestion);
+      setShowSuggestions(false);
+      const encodedQuery = encodeURIComponent(suggestion);
+      navigate(`/result?q=${encodedQuery}`);
+    };
+
+
+
+
+
+
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    const fetchSuggestions = async () => {
+      try {
+        const response = await axios.get('https://postgre-server.vercel.app/product');
+        const products = response.data.data;
+
+        const suggestions = products
+          .filter((product) =>
+            product.productname.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+          .map((product) => product.productname);
+
+        setFilteredSuggestions(suggestions);
+        setShowSuggestions(true);
+      } catch (error) {
+        console.error('Error fetching suggestions:', error);
+      }
+    };
+
+    fetchSuggestions();
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
+
     return (
         <div className="flex flex-col md:flex-row justify-between px-2 items-center lg:justify-between">
             {/* Logo name and icons */}
@@ -127,9 +206,25 @@ const HeaderMobile = () => {
 
             {/* Search input */}
             <div className="w-full px-2 mt-2 md:mt-0 md:w-auto">
-                <input type="text" placeholder="Search"
+                <input onClick={handleShowFunction}
+            onChange={handleSearchInput}
+            onKeyDown={handleEnterPress} type="text" placeholder="Search"
                     className="w-full lg:w-80 xl:max-w-full px-3 h-10 rounded-lg border-2 border-blue-500 focus:outline-none" />
             </div>
+             {/* Suggestions Dropdown */}
+        {showSuggestions && filteredSuggestions.length > 0 && (
+          <div className="absolute mt-[6rem] w-full bg-white border border-gray-300 mx-3 rounded-b-md shadow-lg z-10">
+            {filteredSuggestions.slice(0, 10).map((suggestion, index) => (
+              <div
+                key={index}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                onClick={() => selectSuggestion(suggestion)}
+              >
+                {suggestion}
+              </div>
+            ))}
+          </div>
+        )}
             <hr />
         </div>
     );

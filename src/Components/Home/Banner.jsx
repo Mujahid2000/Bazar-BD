@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Configs/AuthContext';
+
 const categories = [
     { "id": 1, "name": "Home Appliance", "color": "#3498db" },
     { "id": 2, "name": "Beauty Products", "color": "#d946ef" },
@@ -21,17 +22,22 @@ const Banner = () => {
     return (
         <div className="flex flex-col pt-32 px-7  md:flex-row justify-center md:justify-between lg:justify-center items-center">
             {/* category side */}
-            <div className='w-[23.8rem] rounded-l-md bg-white py-4 lg:w-auto scroll-m-0 overflow-x-auto px-1'>
-                <ul className=" md:space-y-2 flex flex-row md:flex-col ">
-                    {
-                        categories.map(cat => (
-                            <Link key={cat.id} to={`/categoryPage/${cat.name}`}><li><button className="w-[12.625rem] py-2 hover:bg-blue-100 mx-0 md:mx-1 text-left px-2 rounded-md font-semibold">{cat.name}</button></li></Link>
-                        ))
-                    }
-                    
-                
-                </ul>
-            </div>
+            <div
+  className="w-[23.8rem] rounded-l-md bg-white py-4 lg:w-auto scroll-m-0 overflow-x-auto px-1 custom-scrollbar"
+>
+  <ul className="md:space-y-2 flex flex-row md:flex-col">
+    {categories.map((cat) => (
+      <Link key={cat.id} to={`/categoryPage/${cat.name}`}>
+        <li>
+          <button className="w-[12.625rem] py-2 hover:bg-blue-100 mx-0 md:mx-1 text-left px-2 rounded-md font-semibold">
+            {cat.name}
+          </button>
+        </li>
+      </Link>
+    ))}
+  </ul>
+</div>
+
             {/* banner picture */}
             <div className="w-full bg-white py-[18px] lg:w-2/4">
             <div className="relative w-full h-full md:h-[420px] bg-teal-200 flex items-center justify-center">

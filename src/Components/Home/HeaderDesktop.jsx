@@ -1,6 +1,6 @@
-import { useContext, useEffect,  useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FaCartPlus, FaHeart, FaUserAlt } from 'react-icons/fa';
-import { MdDashboard,  MdMessage } from 'react-icons/md';
+import { MdDashboard, MdMessage } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Configs/AuthContext';
 import { AiOutlineLogout } from 'react-icons/ai';
@@ -14,53 +14,92 @@ const HeaderDesktop = () => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
+  const containerRef = useRef(null);
 
+  // Handle clicks outside the input or dropdown to hide suggestions
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
 
-  // fetch product suggestion
-  useEffect(() =>{
-    if(!searchQuery.trim()){
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
+  // Fetch product suggestions
+  useEffect(() => {
+    if (!searchQuery.trim()) {
       setFilteredSuggestions([]);
       setShowSuggestions(false);
       return;
-
     }
-    const fetchSuggesion = async() =>{
+
+    const fetchSuggestions = async () => {
       try {
         const response = await axios.get('https://postgre-server.vercel.app/product');
         const products = response.data.data;
 
-        const suggestion = products.filter((products) => products.productname.toLowerCase().includes(searchQuery.toLocaleLowerCase())).map((product) => product.productname);
+        const suggestions = products
+          .filter((product) =>
+            product.productname.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+          .map((product) => product.productname);
 
-        setFilteredSuggestions(suggestion);
-        setShowSuggestions(true)
+        setFilteredSuggestions(suggestions);
+        setShowSuggestions(true);
       } catch (error) {
-        console.error('show error',error)
+        console.error('Error fetching suggestions:', error);
       }
-    }
+    };
 
-    fetchSuggesion()
-  },[searchQuery])
+    fetchSuggestions();
+  }, [searchQuery]);
+
   // Handle input change
   const handleSearchInput = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Navigate when Enter is pressed
+  // Show suggestions when input is clicked and has a value
+  const handleShowFunction = () => {
+    if (searchQuery.trim()) {
+      setShowSuggestions(true);
+    }
+  };
+
+  // Navigate to result when Enter is pressed
   const handleEnterPress = (e) => {
     if (e.key === 'Enter' && searchQuery) {
       const encodedQuery = encodeURIComponent(searchQuery);
       navigate(`/result?q=${encodedQuery}`);
-      setShowSuggestions(false)
+      setShowSuggestions(false);
     }
   };
 
-  // Navigate when Search button is clicked
+  // Navigate to result when Search button is clicked
   const handleSearchClick = () => {
     if (searchQuery) {
       const encodedQuery = encodeURIComponent(searchQuery);
       navigate(`/result?q=${encodedQuery}`);
-      setShowSuggestions(false)
+      setShowSuggestions(false);
     }
+  };
+
+  // Handle profile menu toggle
+  const handleProfileMenu = () => {
+    setProfielMenu(!profileMenu);
+  };
+
+  // Select a suggestion and navigate
+  const selectSuggestion = (suggestion) => {
+    setSearchQuery(suggestion);
+    setShowSuggestions(false);
+    const encodedQuery = encodeURIComponent(suggestion);
+    navigate(`/result?q=${encodedQuery}`);
   };
 
   const handleLogOut = () => {
@@ -69,19 +108,8 @@ const HeaderDesktop = () => {
       .catch(console.error);
   };
 
-  const handleProfileMenu = () => {
-    setProfielMenu(!profileMenu);
-  };
-
-  const selectSuggestion = (suggestion) =>{
-    setSearchQuery(suggestion);
-    setShowSuggestions(false);
-    const encodedQuery = encodeURIComponent(suggestion);
-    navigate(`/result?q=${encodedQuery}`);
-  }
-
   return (
-    <div className="flex  flex-wrap justify-center gap-32 px-4 lg:px-8 items-center">
+    <div className="flex mx-auto justify-center gap-32 px-4 lg:px-8 items-center">
       {/* Logo Section */}
       <div className="flex items-center gap-3">
         <Link to={'/'}>
@@ -97,41 +125,41 @@ const HeaderDesktop = () => {
       </div>
 
       {/* Search Section */}
-      <div className="relative flex flex-col items-start w-full max-w-[800px]">
-      {/* Search Input */}
-      <div className="flex items-center w-full">
-        <input
-          onChange={handleSearchInput}
-          onKeyDown={handleEnterPress}
-          type="text"
-          value={searchQuery}
-          placeholder="Search"
-          className="flex-grow px-4 h-10 border-2 border-blue-500 rounded-l-lg focus:outline-none"
-        />
-        <button
-          onClick={handleSearchClick}
-          className="bg-blue-600 w-24 h-10 text-white rounded-r-lg"
-        >
-          Search
-        </button>
-      </div>
-
-      {/* Suggestions Dropdown */}
-      {showSuggestions && filteredSuggestions.length > 0 && (
-        <div className="absolute mt-10 w-full bg-white border border-gray-300 rounded-b-md shadow-lg z-10">
-          {filteredSuggestions.map((suggestion, index) => (
-            <div
-              key={index}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-              onClick={() => selectSuggestion(suggestion)}
-            >
-              {suggestion}
-            </div>
-          ))}
+      <div ref={containerRef} className="relative flex flex-col items-start w-full lg:max-w-[800px]">
+        {/* Search Input */}
+        <div className="flex items-center w-full">
+          <input
+            onClick={handleShowFunction}
+            onChange={handleSearchInput}
+            onKeyDown={handleEnterPress}
+            type="text"
+            value={searchQuery}
+            placeholder="Search"
+            className="flex-grow px-4 h-10 border-2 border-blue-500 rounded-l-md focus:outline-none"
+          />
+          <button
+            onClick={handleSearchClick}
+            className="bg-blue-600 w-24 h-10 text-white rounded-r-md"
+          >
+            Search
+          </button>
         </div>
-      )}
-    </div>
 
+        {/* Suggestions Dropdown */}
+        {showSuggestions && filteredSuggestions.length > 0 && (
+          <div className="absolute mt-[3.3rem] w-full bg-white border border-gray-300 rounded-b-md shadow-lg z-10">
+            {filteredSuggestions.slice(0, 10).map((suggestion, index) => (
+              <div
+                key={index}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                onClick={() => selectSuggestion(suggestion)}
+              >
+                {suggestion}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* User Actions Section */}
       <div className="flex gap-5 items-center text-center">

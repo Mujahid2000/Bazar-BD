@@ -165,7 +165,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
       <UserVerify>
         <React.StrictMode>
-          <div className='bg-[#F7FAFC]'>
+          <div className='bg-[#ffffff]'>
           <RouterProvider  router={router} />
           </div>
         </React.StrictMode>

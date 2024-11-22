@@ -35,7 +35,7 @@ const DiscountCard = () => {
   return (
     <div className='max-w-[1400px] mt-[1.8rem] px-10 lg:px-0 bg-white rounded-xl mx-auto flex flex-col lg:flex-row justify-between pl'>
       <CardTimer /> 
-      <div className={`w-[21.9rem] mx-auto  lg:w-auto scroll-m-1 overflow-x-auto px-auto lg:px-1 flex lg:gap-4 rounded-r-xl lg:border lg:border-t lg:border-b lg:border-l place-items-center`}>
+      <div className={`w-[20rem] mx-auto custom-scrollbar lg:w-auto scroll-m-1 overflow-x-auto px-auto lg:px-1 flex lg:gap-4 rounded-r-xl lg:border lg:border-t lg:border-b lg:border-l place-items-center`}>
         {cardsData.map((item, index) => (
           <div key={index} className={`w-[14rem] h-[14rem] flex flex-col justify-between items-center lg:border-r ${index === 4 ? 'lg:border-r-0' : ''} py-4 px-4`}>
             <img className="w-[8rem] h-[6] lg:h-[8rem] mx-auto py-3" src={item.image} alt={item.title} />
