@@ -1,4 +1,5 @@
 
+import { Button, Upload } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
@@ -6,9 +7,17 @@ import { toast, Toaster } from "sonner";
 
 const ProductUpolad = () => {
     const [productImage, setProductImage] = useState(null);
-    const handleImageChange = (e) => {
-        setProductImage(e.target.files[0]);
-    };
+    const [fileList, setFileList] = useState([]);
+
+    let image = [];
+
+    for (let index = 0; index < fileList.length; index++) {
+        const element = fileList[index];
+        image.push(element.name); // Add each element from fileList to the image array
+    }
+    
+
+   
 
     const handleProductData = async (e) => {
         e.preventDefault();
@@ -24,35 +33,39 @@ const ProductUpolad = () => {
         const shoppicture = form.get('shoppicture');
         const rating = form.get('rating');
         const color = form.get('color');
-        console.log({
-            productname, shopName, price, category, stock, description, productImage, shoppicture, rating, color
-        });
-        if (!productImage) {
+        // console.log({
+        //     productname, shopName, price, category, stock, description, productImage, shoppicture, rating, color
+        // });
+        if (fileList.length === 0 ) {
             toast.error("Please select an image to upload.");
             return;
         }
         try {
-            // Upload image to Cloudinary
-            const imageFormData = new FormData();
-            imageFormData.append('file', productImage);
-            imageFormData.append('upload_preset', 'jocqw4zs'); // Replace with your Cloudinary upload preset
-
-            // Replace with your Cloudinary API URL
-            const res = await axios.post(
-                `https://api.cloudinary.com/v1_1/dhfqokxun/image/upload`, // Replace `your_cloud_name` with your Cloudinary cloud name
-                imageFormData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
+            const imageUrls = [];
+            for (const file of fileList) {
+                // Upload image to Cloudinary
+                const imageFormData = new FormData();
+                imageFormData.append('file', file.originFileObj);
+                imageFormData.append('upload_preset', 'jocqw4zs'); // my Cloudinary upload preset
+    
+                // Replace with your Cloudinary API URL
+                const res = await axios.post(
+                    `https://api.cloudinary.com/v1_1/dhfqokxun/image/upload`, // Replace `your_cloud_name` with your Cloudinary cloud name
+                    imageFormData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        }
+                       
                     }
-                   
-                }
-            );
-
-            const imageUrl = res.data.secure_url; // Cloudinary URL
-            console.log(imageUrl);
+                );
+    
+                imageUrls.push(res.data.secure_url); // Cloudinary URL
+                
+                console.log(imageUrls);
+            }
 
             const newData = {
-                productname, shopName, price, category, stock, description, product_image: imageUrl, shoppicture, rating, color
+                productname, shopName, price, category, stock, description, product_image: imageUrls, shoppicture, rating, color
             };
 
             console.log(newData);
@@ -69,6 +82,26 @@ const ProductUpolad = () => {
             toast.error("Failed to add item. Please try again.");
         }
     };
+
+    
+      const onChange = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+      };
+      const onPreview = async (file) => {
+        let src = file.url;
+        if (!src) {
+          src = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj);
+            reader.onload = () => resolve(reader.result);
+          });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow?.document.write(image.outerHTML);
+      };
+
 
 
     return (
@@ -153,18 +186,18 @@ const ProductUpolad = () => {
     
                         {/* Shop Picture Input */}
                         <div className="col-span-3 w-full">
-                            <label className="block mb-2 py-3 text-sm font-medium text-gray-900">Product Picture</label>
-                            <label className="w-full flex justify-center mt-4 flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase cursor-pointer hover:bg-blue-500 hover:text-white">
-                                <IoCloudUploadOutline className="w-7 h-7"/>
-                                <span className="mt-2 text-base leading-normal">Select a file</span>
-                                <input 
-                                    required 
-                                    type="file" 
-                                    name="product_image" 
-                                    className="hidden w-full" 
-                                    onChange={handleImageChange} 
-                                />
+                            <label className="block mb-2 py-3 text-sm font-medium text-gray-900">
+                                Product Picture
                             </label>
+                            <Upload
+                                multiple
+                                listType="picture-card"
+                                fileList={fileList}
+                                onChange={onChange}
+                                onPreview={onPreview}
+                            >
+                                {fileList.length < 4 && "+ Upload"}
+                            </Upload>
                         </div>
                         
                         {/* Color Input */}
