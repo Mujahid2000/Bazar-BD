@@ -1,89 +1,82 @@
 
-import { Button, Upload } from "antd";
+import {  Upload } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import { IoCloudUploadOutline } from "react-icons/io5";
 import { toast, Toaster } from "sonner";
 
 const ProductUpolad = () => {
     const [productImage, setProductImage] = useState(null);
     const [fileList, setFileList] = useState([]);
 
-    let image = [];
-
-    for (let index = 0; index < fileList.length; index++) {
-        const element = fileList[index];
-        image.push(element.name); // Add each element from fileList to the image array
-    }
-    
-
-   
 
     const handleProductData = async (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
+        const productData = {
+            productname: form.get("productName"),
+            shopName: form.get("shopName"),
+            price: form.get("price"),
+            category: form.get("category"),
+            stock: form.get("stock"),
+            description: form.get("description"),
+            shoppicture: form.get("shoppicture"),
+            rating: form.get("rating"),
+            color: form.get("color"),
+          };
 
-        // Retrieve fields from form
-        const productname = form.get('productName');
-        const shopName = form.get('shopName');
-        const price = form.get('price');
-        const category = form.get('category');
-        const stock = form.get('stock');
-        const description = form.get('description');
-        const shoppicture = form.get('shoppicture');
-        const rating = form.get('rating');
-        const color = form.get('color');
-        // console.log({
-        //     productname, shopName, price, category, stock, description, productImage, shoppicture, rating, color
-        // });
         if (fileList.length === 0 ) {
             toast.error("Please select an image to upload.");
             return;
         }
         try {
-            const imageUrls = [];
-            for (const file of fileList) {
-                // Upload image to Cloudinary
-                const imageFormData = new FormData();
-                imageFormData.append('file', file.originFileObj);
-                imageFormData.append('upload_preset', 'jocqw4zs'); // my Cloudinary upload preset
-    
-                // Replace with your Cloudinary API URL
-                const res = await axios.post(
-                    `https://api.cloudinary.com/v1_1/dhfqokxun/image/upload`, // Replace `your_cloud_name` with your Cloudinary cloud name
-                    imageFormData, {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        }
-                       
-                    }
-                );
-    
-                imageUrls.push(res.data.secure_url); // Cloudinary URL
-                
-                console.log(imageUrls);
-            }
-
-            const newData = {
-                productname, shopName, price, category, stock, description, product_image: imageUrls, shoppicture, rating, color
+            const imageUrls = await uploadImage(fileList);
+            const newProductData = {
+                ...productData,
+                product_image: imageUrls
             };
 
-            console.log(newData);
-
+            await submitProductData(newProductData)
             // Send product data to your server
-            await axios.post('https://postgre-server.vercel.app/product', newData);
-            toast.success("Item added to cart!");
-
             // reset form if the product upload complete
             e.target.reset();
-        setProductImage(null);
+            setFileList([])
+            toast.success("Item added to cart!");
+            // setProductImage(null);
         } catch (error) {
             console.error("Image upload error:", error);
             toast.error("Failed to add item. Please try again.");
         }
     };
 
-    
+
+    const uploadImage = async(fileList) =>{
+        const imageUrls = [];
+        for (const file of fileList) {
+            // Upload image to Cloudinary
+            const formData = new FormData();
+            formData.append('file', file.originFileObj);
+            formData.append('upload_preset', 'jocqw4zs'); // my Cloudinary upload preset
+            // Replace with your Cloudinary API URL
+            const response = await axios.post(
+                `https://api.cloudinary.com/v1_1/dhfqokxun/image/upload`, // Replace `your_cloud_name` with your Cloudinary cloud name
+                formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                   
+                }
+            );
+            imageUrls.push(response.data.secure_url); // Cloudinary URL
+            console.log(imageUrls);
+        }
+        return imageUrls
+    }
+
+
+    const submitProductData = async(data) =>{
+        await axios.post("https://postgre-server.vercel.app/product", data);
+    }
+
       const onChange = ({ fileList: newFileList }) => {
         setFileList(newFileList);
       };
@@ -101,7 +94,6 @@ const ProductUpolad = () => {
         const imgWindow = window.open(src);
         imgWindow?.document.write(image.outerHTML);
       };
-
 
 
     return (
