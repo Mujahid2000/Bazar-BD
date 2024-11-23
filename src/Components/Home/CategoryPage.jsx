@@ -45,7 +45,7 @@ const CategoryPage = ({ categories }) => {
            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
           {filterData.map((item, index) => (
             <div key={index} className='bg-white border rounded-lg p-4 flex flex-col justify-between'>
-              <img className='w-full h-40 object-contain mb-4' src={item.product_image} alt={item.productName} />
+              <img className='w-full h-40 object-contain mb-4' src={item.product_image[0]} alt={item.productName} />
               <Link to={`/productDetails/${item.id}`}>
               <div>
                 <p className='text-lg font-semibold'>${item.price}</p>
