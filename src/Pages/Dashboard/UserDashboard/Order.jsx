@@ -66,7 +66,7 @@ const Order = () => {
               {order && Array.isArray(order)  && order.cart.map((item) => (
                 <div key={item.id} className="flex justify-between mb-4">
                   <div className="flex items-center gap-10">
-                    <img src={item.product_image || "https://via.placeholder.com/150"} alt={item.productname} className="w-20 h-20 rounded-xl" />
+                    <img src={item.product_image[0] || "https://via.placeholder.com/150"} alt={item.productname} className="w-20 h-20 rounded-xl" />
                     <div>
                       <h6 className="text-charcoal mb-2">
                         <a href="" className="text-charcoal">{1} x {item.productname}</a>

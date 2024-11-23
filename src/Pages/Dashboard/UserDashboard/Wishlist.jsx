@@ -63,7 +63,7 @@ const Wishlist = () => {
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-20 w-20">
                       <Link to={`/productDetails/${item.product_id}`}>
-                      <img className="h-20 w-20 rounded-full" src={item.product_image} alt="" />
+                      <img className="h-20 w-20 rounded-full" src={item.product_image[0]} alt="" />
                       </Link>
                     </div>
                     <div className="ml-4">

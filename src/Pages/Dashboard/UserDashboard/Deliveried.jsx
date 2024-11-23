@@ -107,7 +107,7 @@ const Deliveried = () => {
                     </thead>
                     <tbody className="[&amp;_tr:last-child]:border-0">
                         {
-                            orders.map((item) =>(
+                          Array.isArray(orders) && orders.map((item) =>(
                                 item.cart.map((nItem) =>(
                                     <tr key={nItem.id}
                                     className="border-b border-zinc-800 transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted px-6 "
@@ -120,7 +120,7 @@ const Deliveried = () => {
                                     <td
                                       className="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 w-max border-b-[1px] py-5 pl-5 pr-4 border-white/10"
                                     >
-                                     <img src={nItem.product_image} alt="" className="w-12 h-12"/>
+                                     <img src={nItem.product_image[0]} alt="" className="w-12 h-12"/>
                                         
                                       
                                     </td>
