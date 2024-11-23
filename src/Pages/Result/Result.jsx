@@ -237,7 +237,7 @@ const Result = () => {
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
                         min={0}
-                        max={999}
+                        max={1999}
                         disableSwap
                     />
                 </div>
