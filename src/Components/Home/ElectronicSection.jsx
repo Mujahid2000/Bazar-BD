@@ -85,7 +85,7 @@ const ElectronicSection = () => {
                alt={item.productname}
              />
              <div className='text-center'>
-               <h3 className='text-lg font-semibold'>{item.productname}</h3>
+               <h3 className='text-lg font-semibold'>{item.productname.slice(0,25)}</h3>
                <p className='text-gray-500'>{item.price}</p>
              </div>
            </div>
