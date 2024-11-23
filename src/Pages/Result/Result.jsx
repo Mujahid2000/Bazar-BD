@@ -167,7 +167,7 @@ const Result = () => {
                                {/* Product Image */}
                                <div className="flex items-center justify-center h-64 bg-gray-50 relative">
                                  <img
-                                   src={product.product_image}
+                                   src={product.product_image[0]}
                                    alt={product.productname}
                                    className="w-full h-full "
                                  />

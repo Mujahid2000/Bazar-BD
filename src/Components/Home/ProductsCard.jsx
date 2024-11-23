@@ -46,7 +46,7 @@ const ProductsCard = () => {
     >
         <img
             className='w-full h-40 object-contain mb-4'
-            src={item.product_image || 'default-image-url.jpg'}
+            src={item.product_image[0] || 'default-image-url.jpg'}
             alt={item.productname || 'Product'}
         />
         <Link to={`/productDetails/${item.id}`}>

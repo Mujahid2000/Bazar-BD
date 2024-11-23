@@ -246,7 +246,7 @@ const handleAddCart = (data) => {
            <div className="w-[20rem]  mx-auto rounded-lg  relative border  spacing" key={product.id} >
            
            <div className="flex items-center justify-center h-64 bg-white">
-               <img src={product.product_image} className="w-[12rem] h-[12rem] py-2"/>
+               <img src={product.product_image[0]} className="w-[12rem] h-[12rem] py-2"/>
            </div>
            
            <div className="p-7">
