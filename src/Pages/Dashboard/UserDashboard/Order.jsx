@@ -29,7 +29,7 @@ const Order = () => {
     <div className="mt-24 w-full">
       <h2 className="text-4xl font-semibold text-slate-500">Your Orders</h2>
 
-      {orders && orders.map((order, index) => (
+      {Array?.isArray(orders) && orders?.map((order, index) => (
         <div key={order.id} className="mb-8">
           {/* Order Details */}
           <div className="grid border border-gray-200 mt-3 grid-cols-5 gap-10 bg-gray-100 py-4 px-4 rounded-t-lg items-center">
@@ -63,7 +63,7 @@ const Order = () => {
               </div>
 
               {/* Display each item in the cart */}
-              {order && order.cart.map((item) => (
+              {order && Array.isArray(order)  && order.cart.map((item) => (
                 <div key={item.id} className="flex justify-between mb-4">
                   <div className="flex items-center gap-10">
                     <img src={item.product_image || "https://via.placeholder.com/150"} alt={item.productname} className="w-20 h-20 rounded-xl" />
