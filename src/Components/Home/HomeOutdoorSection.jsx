@@ -2,48 +2,48 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const cardsData = [
-  {
-    image: 'https://i.ibb.co/5hs2FhT/rasm.png',
-    title: 'Soft chairs',
-    price: 'From USD 19',
-  },
-  {
-    image: 'https://i.ibb.co/X546dSy/image-94.png',
-    title: 'Table lamp',
-    price: 'From USD 19',
-  },
-  {
-    image: 'https://i.ibb.co/nPgLPnp/da0ec19b2f735896bd129bb83cae628f.png',
-    title: 'Kitchen dishes',
-    price: 'From USD 19',
-  },
-  {
-    image: 'https://i.ibb.co/VYpYQMw/image-35.png',
-    title: 'Smart watches',
-    price: 'From USD 19',
-  },
-  {
-    image: 'https://i.ibb.co/HPPhtrQ/d628afe6f0f52ecee5cf9460f0d0d69d.png',
-    title: 'Kitchen mixer',
-    price: 'From USD 100',
-  },
-  {
-    image: 'https://www.proctorsilex.com/media/hub-products/53560-02.jpg',
-    title: 'Blenders',
-    price: 'From USD 39',
-  },
-  {
-    image: 'https://i.ibb.co/0VdwYM0/ff34eb5b476f6a97fc3fde243beb9597.jpg',
-    title: 'Home appliance',
-    price: 'From USD 19',
-  },
-  {
-    image: 'https://i.ibb.co/DzSPDcm/0c25ac335a1e2cc7d8d3584a3592fbbf.png',
-    title: 'Coffee maker',
-    price: 'From USD 10',
-  },
-];
+// const cardsData = [
+//   {
+//     image: 'https://i.ibb.co/5hs2FhT/rasm.png',
+//     title: 'Soft chairs',
+//     price: 'From USD 19',
+//   },
+//   {
+//     image: 'https://i.ibb.co/X546dSy/image-94.png',
+//     title: 'Table lamp',
+//     price: 'From USD 19',
+//   },
+//   {
+//     image: 'https://i.ibb.co/nPgLPnp/da0ec19b2f735896bd129bb83cae628f.png',
+//     title: 'Kitchen dishes',
+//     price: 'From USD 19',
+//   },
+//   {
+//     image: 'https://i.ibb.co/VYpYQMw/image-35.png',
+//     title: 'Smart watches',
+//     price: 'From USD 19',
+//   },
+//   {
+//     image: 'https://i.ibb.co/HPPhtrQ/d628afe6f0f52ecee5cf9460f0d0d69d.png',
+//     title: 'Kitchen mixer',
+//     price: 'From USD 100',
+//   },
+//   {
+//     image: 'https://www.proctorsilex.com/media/hub-products/53560-02.jpg',
+//     title: 'Blenders',
+//     price: 'From USD 39',
+//   },
+//   {
+//     image: 'https://i.ibb.co/0VdwYM0/ff34eb5b476f6a97fc3fde243beb9597.jpg',
+//     title: 'Home appliance',
+//     price: 'From USD 19',
+//   },
+//   {
+//     image: 'https://i.ibb.co/DzSPDcm/0c25ac335a1e2cc7d8d3584a3592fbbf.png',
+//     title: 'Coffee maker',
+//     price: 'From USD 10',
+//   },
+// ];
 
 const HomeOutdoorSection = () => {
   const [product, setProduct] = useState([]);
@@ -83,7 +83,7 @@ const HomeOutdoorSection = () => {
             >
               <img
                 className='w-28 h-28 object-contain mb-4'
-                src={item.product_image}
+                src={item.product_image[0]}
                 alt={item.productname}
               />
               <div className='text-center'>

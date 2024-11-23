@@ -81,7 +81,7 @@ const ElectronicSection = () => {
            >
              <img
                className='w-28 h-28 object-contain mb-4'
-               src={item.product_image}
+               src={item.product_image[0]}
                alt={item.productname}
              />
              <div className='text-center'>

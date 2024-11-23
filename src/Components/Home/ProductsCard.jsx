@@ -23,7 +23,7 @@ const ProductsCard = () => {
 
   useEffect(() => {
     AOS.init({
-        duration: 3000, // Animation duration in milliseconds
+        duration: 2000, // Animation duration in milliseconds
         easing: 'ease-in-out', // Easing function
         once: true, // Whether animation should happen only once
         offset: 50, // Trigger animation when the element is 50px in the viewport
