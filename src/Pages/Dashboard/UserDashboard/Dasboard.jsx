@@ -435,7 +435,7 @@ console.log(total)
       <td className="py-2 px-4 border-b border-b-gray-50">
         <div className="flex items-center">
           <img 
-            src={cartItem.product_image}
+            src={cartItem.product_image[0]}
             alt="" 
             className="w-8 h-8 rounded object-cover block" 
           />
