@@ -119,7 +119,7 @@ useEffect(() =>{
     cartDataDeleteAfterPayment(); // Call the function within the effect
   }, [token,cart,deliveryCharge, totalPrice, userId, email]); // Include email as a dependency if it changes
 
-  console.log(token);
+
 
   return (
     <div className="max-w-[1440px] mx-auto mt-20 lg:p-4 flex flex-col lg:flex-row gap-8">

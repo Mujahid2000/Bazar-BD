@@ -85,7 +85,7 @@ const Wishlist = () => {
                   <Rating stars={item.rating}/>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.description || "description"}
+                  {item.description.slice(0,50) || "description"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button

@@ -6,7 +6,7 @@ import axios from "axios";
 const Deliveried = () => {
     const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
- 
+
   const email = user?.email;
 
   const name = user?.displayName
@@ -108,7 +108,7 @@ const Deliveried = () => {
                     <tbody className="[&amp;_tr:last-child]:border-0">
                         {
                           Array.isArray(orders) && orders.map((item) =>(
-                                item.cart.map((nItem) =>(
+                            item.cart && Array.isArray(item.cart) &&  item.cart.map((nItem) =>(
                                     <tr key={nItem.id}
                                     className="border-b border-zinc-800 transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted px-6 "
                                   >
