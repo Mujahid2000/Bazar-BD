@@ -430,7 +430,7 @@ console.log(total)
                             </thead>
                             <tbody>
                             {order && order.map((orderItem, orderIndex) => (
-  orderItem.cart.map((cartItem, cartIndex) => (
+  Array.isArray(orderItem.cart) && orderItem.cart.map((cartItem, cartIndex) => (
     <tr key={`${orderIndex}-${cartIndex}`}> {/* Unique key using indices */}
       <td className="py-2 px-4 border-b border-b-gray-50">
         <div className="flex items-center">
