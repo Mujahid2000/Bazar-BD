@@ -155,7 +155,7 @@ useEffect(() =>{
               key={data.cart_id}
               className="flex p-2 w-[300px] lg:w-[600px] items-center bg-white lg:p-4 rounded-lg shadow-md gap-3 lg:gap-6"
             >
-              <img src={data.product_image} alt={data.productname} className="w-16 lg:w-24 h-16 lg:h-24 rounded-md" />
+              <img src={data.product_image[0]} alt={data.productname} className="w-16 lg:w-24 h-16 lg:h-24 rounded-md" />
               <div className="flex-1">
                 <h4 className="text-sm lg:text-lg font-medium">{data.productname}</h4>
                 <p className="text-sm text-gray-500">{data.category}</p>
