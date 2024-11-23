@@ -99,10 +99,10 @@ useEffect(() =>{
 
   useEffect(() => {
     const cartDataDeleteAfterPayment = async () => {
+      
       if (token) { // Check if the token is "true"
         try {
           console.log('Deleting cart data after payment');
-          console.log(cart);
           axios.post('https://postgre-server.vercel.app/order', {cart, email, totalPrice, deliveryCharge, userId})
           await axios.delete(`https://postgre-server.vercel.app/cart/all/${email}`);
           setCart(''); // Clear the cart state
