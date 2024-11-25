@@ -5,27 +5,27 @@ import { Link } from 'react-router-dom';
 
 const cardsData = [
   {
-    image: 'https://i.ibb.co/yybW9MG/image-23.png',
+    image: 'https://res.cloudinary.com/diez3alve/image/upload/v1732548072/image-23_tbudij.png',
     title: 'Mobile',
     discount: '-25%',
   },
   {
-    image: 'https://i.ibb.co/FxsKkRJ/image-28.png',
+    image: 'https://res.cloudinary.com/diez3alve/image/upload/v1732548072/image-34_mphvwh.png',
     title: 'Laptop',
     discount: '-15%',
   },
   {
-    image: 'https://i.ibb.co/JqWDSjK/image-29.png',
+    image: 'https://res.cloudinary.com/diez3alve/image/upload/v1732548072/image-35_l4yfxz.png',
     title: 'GoPro cameras',
     discount: '-40%',
   },
   {
-    image: 'https://i.ibb.co/gt2pxKW/image-34.png',
+    image: 'https://res.cloudinary.com/diez3alve/image/upload/v1732548072/image-29_krb4jo.png',
     title: 'Headphones',
     discount: '-25%',
   },
   {
-    image: 'https://i.ibb.co/VYpYQMw/image-35.png',
+    image: 'https://res.cloudinary.com/diez3alve/image/upload/v1732548072/image-28_zmns5x.png',
     title: 'Canon cameras',
     discount: '-25%',
   },

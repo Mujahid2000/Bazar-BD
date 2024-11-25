@@ -43,7 +43,7 @@ const Banner = () => {
             <div className="relative w-full h-full md:h-[420px] bg-teal-200 flex items-center justify-center">
             {/* Background Image */}
             <img
-                src="https://i.ibb.co/xGMnpjC/Banner-board-800x420-2.png"
+                src="https://res.cloudinary.com/diez3alve/image/upload/v1732547952/Banner-board-800x420-2_zzdo7u.png"
                 alt="Banner"
                 className="absolute inset-0 w-full h-full object-cover"
             />

@@ -71,7 +71,7 @@ const Dashboard = () => {
             menuVisible
               ? "translate-x-0 duration-300"
               : "-translate-x-full duration-300"
-          } bg-slate-800  w-56 min-h-screen fixed  rounded-none   z-50  `}
+          } bg-slate-800  w-56 h-screen fixed  rounded-none   z-50  `}
         >
           <div className="h-screen  ">
             <div className="flex justify-center items-center gap-3 bg-slate-900 py-4">

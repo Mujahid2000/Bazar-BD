@@ -106,7 +106,7 @@ const HeaderMobile = () => {
                     <button onClick={() => setMenu(!menu)} className="block md:hidden px-2 text-xl">
                         <MdMenu />
                     </button>
-                    <Link><img src="https://i.ibb.co/C1knfqQ/Screenshot-2024-06-29-180913-removebg-preview.png" alt="" className="w-9 h-8" /> </Link>
+                    <Link><img src="https://res.cloudinary.com/diez3alve/image/upload/v1732547841/Screenshot-2024-06-29-180913_xrifmm.png" alt="" className="w-9 h-8" /> </Link>
                     
                     <Link to={'/'}><h1 className="text-sky-400 text-base lg:text-2xl font-bold">Brand</h1></Link>
                 </div>

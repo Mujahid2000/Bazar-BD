@@ -62,19 +62,22 @@ const HomeOutdoorSection = () => {
   return (
     <div className='max-w-[1400px] mx-auto my-8'>
       <div className='grid grid-cols-1 lg:grid-cols-3'>
-        <div className='col-span-1 lg:col-span-1  rounded-lg  flex flex-col justify-between'>
-          <div className='absolute p-12'>
-            <h2 className='text-2xl text-[#1C1C1C] font-bold mb-4 text-center'>Home and   outdoor</h2>
-            <button className='bg-white ml-14 text-black text-center font-semibold py-2 px-4 rounded shadow'>
-              Source now
-            </button>
-          </div>
-          <img
-            className='rounded-l-md h-full w-full'
-            src='https://i.ibb.co/kHfNGf4/image-92.png'
-            alt='Home and outdoor'
-          />
-        </div>
+      <div className="col-span-1 lg:col-span-1 rounded-lg flex flex-col justify-between relative">
+  <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+    <h2 className="text-2xl text-[#1C1C1C] font-bold mb-4 text-center">
+      Home and outdoor
+    </h2>
+    <button className="bg-white text-black text-center font-semibold py-2 px-4 rounded shadow">
+      Source now
+    </button>
+  </div>
+  <img
+    className="rounded-l-md h-full w-full"
+    src="https://res.cloudinary.com/diez3alve/image/upload/v1732547760/image-92_zbpkqk.png"
+    alt="Home and outdoor"
+  />
+</div>
+
         <div className='col-span-2 gap-y-4 lg:col-span-2 grid grid-cols-2 lg:grid-cols-4 '>
           {product && product.slice(0, 8).map((item, index) => (
             <Link key={index} to={`/productDetails/${item.id}`}>

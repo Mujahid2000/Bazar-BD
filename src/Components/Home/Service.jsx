@@ -10,7 +10,7 @@ const Service = () => {
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
             <img className="hover:-translate-y-1 hover:scale-110 duration-300"
-            src="https://i.ibb.co/L1M0FFr/Webp-net-resizeimage.jpg" alt=""/>
+            src="https://res.cloudinary.com/diez3alve/image/upload/v1732548363/Webp-net-resizeimage_lbw24a.jpg" alt=""/>
             </div>
             </div>
             <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
@@ -27,7 +27,7 @@ const Service = () => {
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
             <img className="hover:-translate-y-1 hover:scale-110 duration-300"
-            src="https://i.ibb.co/Q8wkTpg/Webp-net-resizeimage-1.jpg" alt=""/>
+            src="https://res.cloudinary.com/diez3alve/image/upload/v1732548363/Webp-net-resizeimage-1_zgwwea.jpg" alt=""/>
             </div>
             </div>
             <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
@@ -44,7 +44,7 @@ const Service = () => {
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
             <img className="hover:-translate-y-1 hover:scale-110 duration-300"
-            src="https://i.ibb.co/26qT7mK/Webp-net-resizeimage-2.jpg" alt=""/>
+            src="https://res.cloudinary.com/diez3alve/image/upload/v1732548363/Webp-net-resizeimage-2_ncj8uw.jpg" alt=""/>
             </div>
             </div>
             <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
@@ -61,7 +61,7 @@ const Service = () => {
             <div className="h-auto overflow-hidden">
             <div className="h-36 overflow-hidden relative">
             <img className="hover:-translate-y-1 hover:scale-110 duration-300"
-            src="https://i.ibb.co/hLH715M/Webp-net-resizeimage-3.jpg" alt=""/>
+            src="https://res.cloudinary.com/diez3alve/image/upload/v1732548363/Webp-net-resizeimage-3_evo9lh.jpg" alt=""/>
             </div>
             </div>
             <div className="hover:bg-gray-200 hover:duration-500 absolute flex ml-64 mt-28 bg-white p-4 text-black rounded-full">
