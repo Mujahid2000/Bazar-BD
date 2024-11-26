@@ -313,7 +313,7 @@ const ProductDetails = () => {
                         </button>
                     </div>
                     <div className="px-5 py-3">
-                        <h3 className="text-gray-700 uppercase">{myData.productName}</h3>
+                        <h3 className="text-gray-700 uppercase">{myData.productname}</h3>
                         <span className="text-gray-500 mt-2">${myData.price}</span>
                     </div>
                 </div>
