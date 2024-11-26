@@ -24,7 +24,7 @@ const ProductDetails = () => {
     const [loading, setLoading] = useState(true)
     const [allProduct, setAllProducts] = useState()
     const [discount, setDiscount] = useState({})
-   console.log(image);
+
     const { user } = useContext(AuthContext);
     const email = user?.email;
 
@@ -127,9 +127,14 @@ const ProductDetails = () => {
       }
     };
 
-    const handleImage = (link) =>{
-      setImage(link)
-    }
+    useEffect(() =>{
+      const handleImage = (link) =>{
+        setImage(link)
+      }
+
+      handleImage()
+    },[image])
+    
 
     
 
@@ -169,7 +174,7 @@ const ProductDetails = () => {
                         <div className="flex md:gap-5 pt-14 justify-center max-w-md">
                           
                             <img onClick={() => {
-                        handleImage(isFromFlashSalePage ? discount.product_image : products.product_image[0]);
+                        handleImage(isFromFlashSalePage ? discount.product_image : products.product_image[0] );
                     }}
                     className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src={isFromFlashSalePage ? discount.product_image : products.product_image[0]} alt=""  />
                       <img onClick={() => {handleImage(isFromFlashSalePage ? discount.product_image : products.product_image[1])}} className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3" src={isFromFlashSalePage ? discount.product_image : products.product_image[1]} alt=""  />
