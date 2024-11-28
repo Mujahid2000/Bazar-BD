@@ -6,21 +6,20 @@ import { AuthContext } from "./AuthContext";
 export const VerifyContext = createContext();
 
 export const UserVerify = ({ children }) => {
-  // const [token, setNewToken] = useState(() => localStorage.getItem("access-token")); // Read from localStorage initially
   const { token, setToken } = useContext(AuthContext);
   const [isTokenVerified, setIsTokenVerified] = useState(false);
   const [isErrorHandled, setIsErrorHandled] = useState(false);
   const queryClient = useQueryClient();
 
-
-
+console.log(token);
 
   const fetchToken = async () => {
     if (!token) throw new Error("No token provided");
 
     try {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
       const response = await axios.post("https://postgre-server.vercel.app/verify-token");
+      console.log(response.data);
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 403) {
@@ -34,7 +33,7 @@ export const UserVerify = ({ children }) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["verifyToken", token],
     queryFn: fetchToken,
-    enabled: !token, // Only fetch if token exists
+    enabled: !token, 
     retry: false,
     onError: () => {
       if (!isErrorHandled) {
