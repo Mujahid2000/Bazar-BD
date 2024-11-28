@@ -112,7 +112,7 @@ useEffect(() =>{
           console.error("Error deleting cart:", error);
         }
       } else {
-        console.log('No token available');
+        console.log('No payment token available');
       }
     };
 

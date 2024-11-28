@@ -1,99 +1,108 @@
 import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import {app} from "./firebase.config"
-import { createContext, useEffect } from "react";
-import { useState } from "react";
+import { app } from "./firebase.config";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-export const AuthContext= createContext(null);
-const auth = getAuth(app)
+export const AuthContext = createContext(null);
+const auth = getAuth(app);
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState(localStorage.getItem("access-token")); // Track token state
+
     const googleProvider = new GoogleAuthProvider();
     const faceBookProvider = new FacebookAuthProvider();
-    
-    const createUser = (email, password) =>{
-        setLoading(true);
-        console.log("Email:", email); // Check if email is received correctly
-        console.log("Password:", password); // Check if password is received correctly
-        return createUserWithEmailAndPassword(auth, email, password)
-            .catch(error => {
-                console.error("Error creating user:", error); // Log any errors
-                throw error; // Rethrow the error to be caught by the caller
-            });
-    }
-    
 
-    const signIn = (email, password) =>{
+    // Create user with email and password
+    const createUser = async (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            return userCredential;
+        } catch (error) {
+            console.error("Error creating user:", error);
+            throw error;
+        }
+    };
 
-    const handleUpdateProfile = (name, photoURL) =>{
-        setLoading(true)
+    // Sign in with email and password
+    const signIn = async (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+
+    // Update user profile
+    const handleUpdateProfile = (name, photoURL) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photoURL
-        })
-    }
+            displayName: name,
+            photoURL: photoURL,
+        });
+    };
 
-    const googleLogin = (name, email) =>{
+    // Google login
+    const googleLogin = () => {
         return signInWithPopup(auth, googleProvider);
-    }
+    };
 
-    const faceBookLogin = (auth, ) =>{
-        return signInWithPopup(auth, faceBookProvider)
-    }
+    // Facebook login
+    const faceBookLogin = () => {
+        return signInWithPopup(auth, faceBookProvider);
+    };
 
-    const logOut = () =>{
+    // Log out user
+    const logOut = () => {
         setLoading(true);
-        return signOut(auth)
-    }
-    
+        localStorage.removeItem("access-token"); // Remove token from localStorage
+        setToken(null); // Clear token state
+        return signOut(auth);
+    };
 
-    useEffect(() =>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
-                setUser(currentUser);
-                if(currentUser){
-                    // token store
-                    const userInfo = {email: currentUser.email}
-                    axios.post('https://postgre-server.vercel.app/jwt', userInfo)
-                    .then(res => {
-                        
-                    if(res.data.token){
-                        localStorage.setItem('access-token', res.data.token);
-                        setLoading(false);
-                    } 
-                    })
-    
-                }else{
-                    // something doing
-                    localStorage.removeItem('access-token');
-                    setLoading(false);
+    // On auth state change
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            setUser(currentUser);
+
+            if (currentUser) {
+                // Generate and store token
+                const userInfo = { email: currentUser.email };
+                try {
+                    const res = await axios.post("https://postgre-server.vercel.app/jwt", userInfo);
+                    if (res.data.token) {
+                        localStorage.setItem("access-token", res.data.token);
+                        setToken(res.data.token); // Update token state immediately
+                    }
+                } catch (error) {
+                    console.error("Error generating token:", error);
                 }
-                
-            })
-            return () =>{
-                return unsubscribe();
+            } else {
+                localStorage.removeItem("access-token");
+                setToken(null); // Clear token state
             }
-        }, []);
 
+            setLoading(false);
+        });
 
-    const authInfo = { 
+        return () => unsubscribe();
+    }, []);
+
+    // Auth info
+    const authInfo = {
         user,
+        token, 
+        setToken,
         loading,
         createUser,
         signIn,
         logOut,
         handleUpdateProfile,
-        setLoading ,
-        googleLogin ,
-        faceBookLogin}
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+        setLoading,
+        googleLogin,
+        faceBookLogin,
+    };
+
+    return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

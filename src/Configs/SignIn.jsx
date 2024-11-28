@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import { Toaster, toast } from "sonner";
 import axios from "axios";
-import { RxCross1 } from "react-icons/rx";
+
 
 const SignIn = () => {
     const { googleLogin, user , signIn, setLoading} = useContext(AuthContext);
@@ -18,12 +18,12 @@ const handleLogin = (e) => {
     const form = new FormData(e.currentTarget);
     const email = form.get('email');
     const password = form.get('password');
-    console.log({ email, password });
+    // console.log({ email, password });
     signIn(email, password)
         .then(result => {
             const user = result.user;
             
-            console.log(user);
+            // console.log(user);
             toast.success('User has been created')
             setLoading(false)
             navigate(from , {replace: true});
