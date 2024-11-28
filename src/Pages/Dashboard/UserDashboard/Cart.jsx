@@ -10,8 +10,8 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);
-  const [token, setToken] = useState(localStorage.getItem("deleteCartAfterCheckout"));
-  const { user } = useContext(AuthContext);
+  const [payToken, setPayToken] = useState(localStorage.getItem("deleteCartAfterCheckout"));
+  const { user, token, setToken } = useContext(AuthContext);
   const email = user?.email;
   const [userData, setUserData] = useState(null);
   const itemCount = cart.length;
@@ -27,16 +27,22 @@ const Cart = () => {
 
 
 useEffect(() =>{
-  try {
-    const getData =async () =>{
-      const res = await axios.get(`https://postgre-server.vercel.app/user/${email}`);
-      (setUserData(res.data.data))
+  if(!token){
+    console.log('no token is here');
+    setToken(null)
+  }else{
+    try {
+      const getData =async () =>{
+        const res = await axios.get(`https://postgre-server.vercel.app/user/${email}`);
+        (setUserData(res.data.data))
+      }
+      getData()
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
     }
-    getData()
-  } catch (error) {
-    console.error("Error fetching cart data:", error);
   }
-},[email])
+ 
+},[email, setToken, token])
 
   // Fetch cart data
   useEffect(() => {
@@ -100,7 +106,7 @@ useEffect(() =>{
   useEffect(() => {
     const cartDataDeleteAfterPayment = async () => {
       
-      if (token) { // Check if the token is "true"
+      if (payToken) { // Check if the token is "true"
         try {
           console.log('Deleting cart data after payment');
           axios.post('https://postgre-server.vercel.app/order', {cart, email, totalPrice, deliveryCharge, userId})
@@ -117,7 +123,7 @@ useEffect(() =>{
     };
 
     cartDataDeleteAfterPayment(); // Call the function within the effect
-  }, [token,cart,deliveryCharge, totalPrice, userId, email]); // Include email as a dependency if it changes
+  }, [payToken,cart,deliveryCharge, totalPrice, userId, email]); // Include email as a dependency if it changes
 
 
 
