@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(localStorage.getItem("access-token")); // Track token state
-
+    console.log(token);
     const googleProvider = new GoogleAuthProvider();
     const faceBookProvider = new FacebookAuthProvider();
 
