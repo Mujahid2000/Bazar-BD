@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useCallback, useContext } from "react";
+import React, { createContext, useState, useEffect, useCallback, useContext } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "./AuthContext";
@@ -11,59 +11,72 @@ export const UserVerify = ({ children }) => {
   const [isErrorHandled, setIsErrorHandled] = useState(false);
   const queryClient = useQueryClient();
 
-console.log(token);
-
+  /**
+   * Function to verify the token by making a backend API request.
+   */
   const fetchToken = async () => {
     if (!token) throw new Error("No token provided");
-
     try {
       axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
       const response = await axios.post("https://postgre-server.vercel.app/verify-token");
-      console.log(response.data);
       return response.data;
     } catch (error) {
-      if (error.response && error.response.status === 403) {
-        console.error("Invalid token:", error.message);
-        throw new Error("Forbidden: Invalid token");
-      }
+      console.error("Token Verification Failed:", error.message);
       throw error;
     }
   };
 
+  /**
+   * React Query to handle token verification.
+   */
   const { data, error, isLoading } = useQuery({
     queryKey: ["verifyToken", token],
     queryFn: fetchToken,
-    enabled: !token, 
+    enabled: !!token, // Only run if token exists
     retry: false,
     onError: () => {
       if (!isErrorHandled) {
-        setIsErrorHandled(true);
-        setIsTokenVerified(false);
-        localStorage.removeItem("access-token");
-        setToken(null); // Clear the token state
+        handleTokenError();
       }
     },
   });
 
-  // React to token verification success or failure
+  /**
+   * Handles token verification failure by resetting states.
+   */
+  const handleTokenError = () => {
+    setIsErrorHandled(true);
+    setIsTokenVerified(false);
+    localStorage.removeItem("access-token");
+    setToken(null);
+  };
+
+  /**
+   * React to token verification success or failure.
+   */
   useEffect(() => {
- 
     if (data) {
       console.log("Token Verified:", data);
       setIsTokenVerified(true);
       setIsErrorHandled(false);
     } else if (error) {
       console.error("Token Verification Error:", error.message);
+      setIsTokenVerified(false);
     }
   }, [data, error]);
 
-  // Function to set token and trigger verification
+  /**
+   * Function to save a new token and trigger re-verification.
+   */
   const saveToken = (newToken) => {
-    localStorage.setItem("access-token", newToken); // Save to localStorage
-    setToken(newToken); // Update state and trigger verification
+    localStorage.setItem("access-token", newToken);
+    setToken(newToken);
     queryClient.invalidateQueries(["verifyToken"]); // Force re-fetch
   };
 
+  /**
+   * Callback to manually verify the token.
+   */
   const verifyToken = useCallback(() => {
     if (token) {
       queryClient.invalidateQueries(["verifyToken"]);
@@ -71,11 +84,22 @@ console.log(token);
     return fetchToken();
   }, [token, queryClient]);
 
+  /**
+   * Show a loading spinner when the token verification is in progress.
+   */
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <div className="w-10 h-10 animate-spin rounded-full border-4 border-r-[#3B9DF8] border-[#3b9df84b]"></div>
+  //     </div>
+  //   );
+  // }
+
   return (
     <VerifyContext.Provider
       value={{
         token,
-        setToken: saveToken, // Use saveToken to ensure synchronization
+        setToken: saveToken,
         verifyToken,
         isTokenVerified,
         isLoading,

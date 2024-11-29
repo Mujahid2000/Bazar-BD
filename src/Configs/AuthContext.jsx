@@ -9,10 +9,18 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(localStorage.getItem("access-token")); // Track token state
+    const [token, setToken] = useState(); // Track token state
     console.log(token);
     const googleProvider = new GoogleAuthProvider();
     const faceBookProvider = new FacebookAuthProvider();
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem("access-token");
+        if (storedToken) {
+          setToken(storedToken); // স্টেট আপডেট
+        }
+      }, []);
+      
 
     // Create user with email and password
     const createUser = async (email, password) => {
@@ -62,30 +70,30 @@ const AuthProvider = ({ children }) => {
     // On auth state change
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            setUser(currentUser);
-
-            if (currentUser) {
-                // Generate and store token
-                const userInfo = { email: currentUser.email };
-                try {
-                    const res = await axios.post("https://postgre-server.vercel.app/jwt", userInfo);
-                    if (res.data.token) {
-                        localStorage.setItem("access-token", res.data.token);
-                        setToken(res.data.token); // Update token state immediately
-                    }
-                } catch (error) {
-                    console.error("Error generating token:", error);
-                }
-            } else {
-                localStorage.removeItem("access-token");
-                setToken(null); // Clear token state
+          setUser(currentUser);
+      
+          if (currentUser) {
+            const userInfo = { email: currentUser.email };
+            try {
+              const res = await axios.post("https://postgre-server.vercel.app/jwt", userInfo);
+              if (res.data.token) {
+                localStorage.setItem("access-token", res.data.token);
+                setToken(res.data.token); // টোকেন স্টেট আপডেট
+              }
+            } catch (error) {
+              console.error("Error generating token:", error);
             }
-
-            setLoading(false);
+          } else {
+            localStorage.removeItem("access-token");
+            setToken(null);
+          }
+      
+          setLoading(false);
         });
-
+      
         return () => unsubscribe();
-    }, []);
+      }, []);
+      
 
     // Auth info
     const authInfo = {
