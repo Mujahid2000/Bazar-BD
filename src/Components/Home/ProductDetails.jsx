@@ -24,7 +24,7 @@ const ProductDetails = () => {
     const [loading, setLoading] = useState(true)
     const [allProduct, setAllProducts] = useState()
     const [discount, setDiscount] = useState({})
-console.log(discount);
+
     const { user } = useContext(AuthContext);
     const email = user?.email;
 
@@ -133,10 +133,11 @@ console.log(discount);
       }
 
 
-    
+      const handleImages = () =>{
+        setImage(null)
+      }
 
-    
-
+      
 
     return (
         <div className="max-w-[1440px] pt-32 mx-auto">
@@ -171,7 +172,7 @@ console.log(discount);
                             <img className="w-full h-full" src={image ? image : isFromFlashSalePage ? discount.product_image[0] : products.product_image[0]} alt=""  />
                         </div>
                         <div className="flex md:gap-5 pt-14 justify-center max-w-md">
-    {Array(4) // Assuming there are always 4 images in `product_image`
+    {Array(4)
       .fill(0)
       .map((_, index) => {
         const imageSrc = isFromFlashSalePage
@@ -311,7 +312,7 @@ console.log(discount);
         <div className="w-full max-w-full mx-auto rounded-md overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-7">
     {
         allProduct && allProduct.slice(0, 4).map(myData => (
-            <Link to={`/productDetails/${myData.id}`} key={myData.id}>
+            <Link onClick={handleImages} to={`/productDetails/${myData.id}`} key={myData.id}>
                 <div className="border">
                     <div className="flex items-end justify-end h-56 w-full bg-cover" style={{backgroundImage: `url(${myData.product_image[0]})`}}>
                         <button onClick={() => {handleAddCart(isFromFlashSalePage ? discount : products)}} className="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
