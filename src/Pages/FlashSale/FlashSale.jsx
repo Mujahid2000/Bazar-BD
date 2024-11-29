@@ -175,7 +175,7 @@ const FlashSale = () => {
             <div className="mt-5 max-w-[1440px] gap-3 mx-auto place-items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
   {products && products.map((myData) => (
     <div key={myData.id} className="w-[18.4375rem]  h-[25.3125rem] border mx-auto bg-white  rounded-lg overflow-hidden">
-    <img className="w-[15rem] h-[15rem]  py-5  mx-auto object-cover object-center" src={myData?.product_image} alt="Product" />
+    <img className="w-[15rem] h-[15rem]  py-5  mx-auto object-cover object-center" src={myData?.product_image[0]} alt="Product" />
   
    <div className="p-4 mt-7 flex justify-between items-start">
    <Link to={`/productDetails/${myData.id}?fromFlashSale=${location.pathname}`}>
