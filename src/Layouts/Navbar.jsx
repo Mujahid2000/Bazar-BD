@@ -18,6 +18,7 @@ const Navbar = () => {
     { name: "HOME", link: "/", id: 1 },
     { name: "SHOP", link: "/shop", id: 2 },
     { name: "FLASH SALE", link: "/flashSale", id: 3 },
+    { name: "About", link: "/about", id: 4 },
   ];
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -73,13 +74,23 @@ const Navbar = () => {
                   All Category
                 </li>
               </Link>
+              <Link to={"/shop"}>
+                <li className="font-semibold text-sm md:text-base">Shops</li>
+              </Link>
               <Link to={"/flashSale"}>
                 <li className="font-semibold text-sm md:text-base">
                   Flash Sale
                 </li>
               </Link>
-              <Link to={"/shop"}>
-                <li className="font-semibold text-sm md:text-base">Shops</li>
+              <Link to={"/about"}>
+                <li className="font-semibold text-sm md:text-base">
+                  About
+                </li>
+              </Link>
+              <Link to={"/contact"}>
+                <li className="font-semibold text-sm md:text-base">
+                  Contact
+                </li>
               </Link>
              
 

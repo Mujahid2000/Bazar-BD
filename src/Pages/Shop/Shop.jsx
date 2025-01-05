@@ -1,83 +1,122 @@
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import Rating from "../Result/Rating";
+import { Search } from "lucide-react";
+import BrandCard from "./BrandCard";
 
-
+const ShopSkeleton = () => (
+  <div className="animate-pulse">
+    <div className="bg-gray-200 h-48 w-full rounded-lg"></div>
+    <div className="mt-3">
+      <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
+    </div>
+  </div>
+);
 
 const Shop = () => {
-
   const [shop, setShop] = useState([]);
-  const [filter, setFilter] = useState([]);
-   
+  const [searchQuery, setSearchQuery] = useState(null);
+  const [topShop, setTopShop] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        axios.get('https://postgre-server.vercel.app/shop')
-            .then(res => setShop(res.data.data))
-            .catch(error => console.error(error));
-    }, []);
+  useEffect(() => {
+    setLoading(true);
+    axios.get('https://postgre-server.vercel.app/shop')
+      .then(res => {
+        const topRatedShops = res.data.data.filter(shop => shop.rating >= 4.0);
+        setTopShop(topRatedShops);
+        if(searchQuery === null){
+          setShop(res.data.data);
+          setSearchQuery(res.data.data);
+        } else {
+          const filter = res.data.data.filter((item) => 
+            item.shopname.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          setSearchQuery(filter);
+        }
+      })
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
+  }, [searchQuery]);
 
-    
-
-    return (
-        <div className="pt-32 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
-
-      {
-        shop.map(pro => (
-
-            <Link key={pro.id} to={`/shopDetail/${pro.shopname}`}>
-            
-            <section  className="container mx-auto p-10 md:p-20 antialiased ">
-    <article
-        className=" flex flex-wrap md:flex-nowrap shadow-lg mx-auto max-w-3xl group cursor-pointer transform duration-500 hover:-translate-y-1">
-        <img className="w-full max-h-[400px] object-cover md:w-52" src={pro.shoppicture} alt=""/>
-        <div className="">
-            <div className="p-5 pb-10">
-                <h1 className="text-2xl font-semibold text-gray-800 mt-4">
-                   {pro.shopName}
-                </h1>
-                <p className="text-xl text-gray-700 mt-2 leading-relaxed">
-                    One of the biggest online shopping Platform in Bangladesh
-                </p>
+  return (
+    <div className="pt-32">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Search Section */}
+        <div className="mb-12">
+          <div className="max-w-md mx-auto">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search The Shops"
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+              />
+              <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <Search className="w-5 h-5 text-gray-400" />
+              </button>
             </div>
-            <div className="bg-blue-50 p-5">
-                <div className="sm:flex sm:justify-between">
-                    <div>
-                        <div className="text-lg text-gray-700">
-                            <span className="text-gray-900 font-bold">Varified</span> from BazarBD
-                        </div>
-                        <div className="flex items-center">
-                            <div className="flex">
-                            <FaStar className="text-orange-500"/>
-
-                            <FaStar className="text-orange-500"/>
-
-                            <FaStar className="text-orange-500"/>
-
-                            <FaStar className="text-orange-500"/>
-
-                            <FaStar className="text-orange-500"/>
-
-                            </div>
-                            <div className="text-gray-600 ml-2 text-sm md:text-base mt-1">
-                                <p>16 reviews</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button className="relative h-12 w-40 overflow-hidden border border-orange-600 text-orange-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-orange-600 before:duration-300 before:ease-out hover:text-white hover:shadow-orange-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80">
-      <span className="relative z-10">Visit</span>
-    </button>
-                </div>
-                
-            </div>
+          </div>
         </div>
-    </article>
-    </section>
-            </Link>
-        ))
-      }
+
+        {/* Top Brands Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 place-items-center mb-16">
+          {loading ? (
+            // Skeleton loading for main grid
+            Array(8).fill(null).map((_, index) => (
+              <div key={index} className="w-full">
+                <ShopSkeleton />
+              </div>
+            ))
+          ) : (
+            searchQuery && Array.isArray(searchQuery) && searchQuery.map((brand, index) => (
+              <BrandCard key={index} name={brand.shopname} imageUrl={brand.shoppicture} />
+            ))
+          )}
+        </div>
+
+        {/* Popular Brands Section */}
+        <div className="bg-[#F4F5F3] py-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex justify-between items-center mb-8">
+              <div>
+                <p className="text-gray-500 uppercase tracking-wide">POPULAR</p>
+                <h2 className="text-2xl font-bold mt-1">Brands_to_follow</h2>
+              </div>
+              <button className="text-red-500 flex items-center gap-2 hover:text-red-600 transition-colors">
+                VIEW_MORE
+                <span className="text-lg">→</span>
+              </button>
+            </div>
+
+            {/* Brands Slider */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {loading ? (
+                // Skeleton loading for popular brands
+                Array(5).fill(null).map((_, index) => (
+                  <div key={index} className="bg-white p-6 rounded-lg">
+                    <div className="animate-pulse bg-gray-200 h-24 w-full rounded"></div>
+                  </div>
+                ))
+              ) : (
+                topShop && Array.isArray(topShop) && topShop.map((brand, index) => (
+                  <Link to={`/shopDetail/${brand.shopname}`} key={index} className="bg-white p-6 rounded-lg flex items-center justify-center">
+                    <img 
+                      src={brand.shoppicture} 
+                      alt={`Brand ${index + 1}`} 
+                      className="max-w-full max-h-24 object-contain" 
+                    />
+                  </Link>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    );
+  );
 };
 
 export default Shop;

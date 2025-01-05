@@ -28,6 +28,7 @@
     "firebase": "^10.9.0",
     "keep-react": "^1.2.0",
     "localforage": "^1.10.0",
+    "lucide-react": "^0.469.0",
     "match-sorter": "^6.3.4",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
@@ -45,7 +46,8 @@
     "sonner": "^1.7.0",
     "sort-by": "^1.2.0",
     "styled-components": "^6.1.8",
-    "sweetalert2": "^11.10.8"
+    "sweetalert2": "^11.10.8",
+    "swiper": "^11.2.0"
   },
   "devDependencies": {
     "@ag-media/react-pdf-table": "^2.0.0",

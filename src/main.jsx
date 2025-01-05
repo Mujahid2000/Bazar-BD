@@ -35,6 +35,8 @@ import AllProducts from './Components/Home/AllProducts';
 import Profile from './Components/Home/Profile';
 import UserVerify from './Configs/VerifyToken';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import About from './Components/About/About';
+import ContactForm from './Components/ContactForm/ContactForm';
 const queryClient = new QueryClient();
 
 
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: '/shop',
         element: <Shop/>
+      },
+      {
+        path: '/about',
+        element: <About/>
+      },
+      {
+        path: '/contact',
+        element: <ContactForm/>
       },
       {
         path: '/discount',
