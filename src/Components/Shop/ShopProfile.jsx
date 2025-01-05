@@ -12,7 +12,7 @@ const ShopProfile = ({ shop }) => {
   const { shopName } = useParams();
   const [products, setProducts] = useState([]);
   const [shopData, setShop] = useState([])
-
+console.log(shopData);
   const [name, setName] = useState([]);
   const { user } = useContext(AuthContext);
   const email = user?.email;
@@ -21,7 +21,7 @@ const ShopProfile = ({ shop }) => {
 
   const [userData] = useState({
     totalOrders: 52,
-    averageRating: 4.8,
+    averageRating:shopData.rating,
     responseTime: "1-2 business days",
   });
 
@@ -134,7 +134,7 @@ const handleAddCart = (data) => {
                 </div>
                 <div className="flex flex-col my-7">
                   <span className="text-secondary-inverse text-4xl tracking-[-0.115rem] font-bold">
-                    4.8
+                    {shopData[0]?.rating}
                   </span>
                   <div className="m-0">
                     <span className="font-medium text-secondary-dark text-lg/normal">
