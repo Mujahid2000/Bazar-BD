@@ -63,12 +63,12 @@ const Navbar = () => {
 
         <hr className="my-3" />
         {/* another side */}
-        <div className="pl-0 md:pl-9 lg:pl-0 xl:pl-0 px-auto bg-white hidden md:flex lg:gap-52 lg:justify-around">
+        <div className="pl-0 md:pl-9 lg:pl-0 xl:pl-0 px-auto bg-white hidden md:flex lg:gap-48 lg:justify-around">
           <div className="flex gap-2 items-center">
             <button>
               <MdMenu className="text-xl" />
             </button>
-            <ul className="flex gap-16 text-base">
+            <ul className="flex gap-5 text-base">
               <Link to="/">
                 <li className="font-semibold text-sm md:text-base">
                   All Category

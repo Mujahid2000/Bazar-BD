@@ -11,7 +11,6 @@ import Rating from "../../Pages/Result/Rating";
 import { FaCreditCard, FaShieldAlt } from "react-icons/fa";
 
 
-
 const ProductDetails = () => {
     const { id } = useParams();
     const location = useLocation();
@@ -19,11 +18,11 @@ const ProductDetails = () => {
     const fromFlashSale = searchParams.get('fromFlashSale');
     // console.log('From Flash Sale:', fromFlashSale);
     const [count, setCount] = useState(1);
-    const [image, setImage] = useState('')
     const [products, setProducts] = useState(null); 
     const [loading, setLoading] = useState(true)
     const [allProduct, setAllProducts] = useState()
     const [discount, setDiscount] = useState({})
+    const [image, setImage] = useState('')
 
     const { user } = useContext(AuthContext);
     const email = user?.email;
@@ -51,23 +50,28 @@ const ProductDetails = () => {
         },
       ];
    
-    useEffect(() => {
+      useEffect(() => {
         const fetchData = async () => {
-          if (!id) return; // Exit if no `id` is provided
-          
-          setLoading(true); // Start loading before data fetch
+          if (!id) return;
+          setLoading(true);
+      
           try {
             const res = await axios.get(`https://postgre-server.vercel.app/product/${id}`);
-            setProducts(res.data.data[0]); // Update product data
+            if (res.data?.data?.length) {
+              setProducts(res.data.data[0]);
+            } else {
+              console.error("Unexpected response structure", res.data);
+            }
           } catch (error) {
             console.error("Error fetching product data:", error);
           } finally {
-            setLoading(false); // Stop loading after fetch attempt
+            setLoading(false);
           }
         };
       
         fetchData();
       }, [id]);
+      
 
 
 
@@ -138,9 +142,16 @@ const ProductDetails = () => {
       }
 
       
+      const productImages = isFromFlashSalePage ? discount?.product_image || [] : products?.product_image || [];
+      const mainImage = image || productImages[0];
 
     return (
         <div className="max-w-[1440px] pt-32 mx-auto">
+
+
+
+
+          {/* product details section */}
             {loading? (
                
                 <div className="bg-white p-2 md:h-screen sm:p-4 sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">
@@ -169,25 +180,29 @@ const ProductDetails = () => {
                 <div className="md:flex items-start justify-between gap-8">
                     <div className="w-full items-center justify-center flex flex-col md:w-2/5 md:px-5 mb-10 md:mb-0">
                         <div>
-                            <img className="w-full h-full" src={image ? image : isFromFlashSalePage ? discount.product_image[0] : products.product_image[0]} alt=""  />
+                        {mainImage ? (
+      <img className="w-full h-full" src={mainImage} alt="Product" />
+    ) : (
+      <div>Loading...</div>
+    )}
+
                         </div>
                         <div className="flex md:gap-5 pt-14 justify-center max-w-md">
-    {Array(4)
-      .fill(0)
-      .map((_, index) => {
-        const imageSrc = isFromFlashSalePage
-          ? discount.product_image[index]
-          : products.product_image[index];
-        return (
-          <img
-            key={index}
-            onClick={() => handleImage(imageSrc)}
-            className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3"
-            src={imageSrc}
-            alt={`Thumbnail ${index + 1}`}
-          />
-        );
-      })}
+                        {Array(4).fill(0).map((_, index) => {
+  const imageSrc = isFromFlashSalePage
+    ? discount?.product_image?.[index]
+    : products?.product_image?.[index];
+
+  return imageSrc ? (
+    <img
+      key={index}
+      onClick={() => handleImage(imageSrc)}
+      className="w-24 h-24 hover:duration-300 cursor-pointer hover:bg-slate-200 p-3"
+      src={imageSrc}
+      alt={`Thumbnail ${index + 1}`}
+    />
+  ) : null;
+})}
   </div>
                     </div>
                     <div className="w-full md:w-2/5 md:px-5">
@@ -306,7 +321,7 @@ const ProductDetails = () => {
     </div>
 ))}
 
-
+{/* suggested product showing section */}
          <div className=" px-3 mb-9">
         <h3 className="text-gray-600 text-2xl font-medium mb-2">More Products</h3>
         <div className="w-full max-w-full mx-auto rounded-md overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-7">
