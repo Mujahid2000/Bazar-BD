@@ -163,7 +163,7 @@ if (user) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-2 gap-6">
         {products.map((product) => (
           <Link to={`/productDetails/${product.id}?fromFlashSale=${location.pathname}`} key={product.id} className="bg-gray-100 rounded-lg p-3">
             <div className="relative">
