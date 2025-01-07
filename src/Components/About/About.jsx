@@ -13,7 +13,7 @@ const About = () => {
                     <p className='text-lg py-3 text-justify'>Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a diverse assotment in categories ranging  from consumer.</p>
                 </div>
                 <div>
-                    <img src="https://i.ibb.co.com/PgVGdjh/Untitled-1.jpg" alt="" />
+                    <img src="https://res.cloudinary.com/dhfqokxun/image/upload/v1736271256/Untitled-1_oxcjk1.jpg" alt="" />
                 </div>
             </div>
             <MetricsDashboard/>
