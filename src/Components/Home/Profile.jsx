@@ -7,7 +7,7 @@ const Profile = () => {
     return (
         <div>
           
-<div className="mt-28 mb-5">
+<div className="pt-28 pb-5">
    <div className="md:grid grid-cols-4 grid-rows-2  bg-white gap-2 p-4 rounded-xl">
         <div className="md:col-span-1 h-48 shadow-xl ">
                 <div className="flex w-full h-full relative">
