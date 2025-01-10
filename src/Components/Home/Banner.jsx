@@ -40,12 +40,13 @@ const Banner = () => {
         <div className="flex flex-col pt-32 px-7 md:flex-row justify-center md:justify-between lg:justify-center items-center">
             {/* Preload the banner image */}
             <Helmet>
-                <link
-                    rel="preload"
-                    href="https://res.cloudinary.com/diez3alve/image/upload/v1736522849/detailed_gezp9o.webp"
-                    as="image"
-                />
-            </Helmet>
+    <link
+        rel="preload"
+        href="https://res.cloudinary.com/diez3alve/image/upload/v1736522849/detailed_gezp9o.webp"
+        as="image"
+    />
+</Helmet>
+
 
             {/* Category Section */}
             {/* Category Side */}
@@ -60,15 +61,17 @@ const Banner = () => {
                 <div className="relative w-full h-full md:h-[420px] bg-teal-200 flex items-center justify-center">
                     {/* Background Image */}
                     <img
-                        src="https://res.cloudinary.com/diez3alve/image/upload/v1736522849/detailed_gezp9o.webp"
-                        srcSet="
-                            https://res.cloudinary.com/diez3alve/image/upload/c_scale,w_768/v1736522849/detailed_gezp9o.webp 768w,
-                            https://res.cloudinary.com/diez3alve/image/upload/c_scale,w_1280/v1736522849/detailed_gezp9o.webp 1280w
-                        "
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        alt="Banner"
-                        className="absolute inset-0 w-full h-full object-cover"
-                    />
+    src="https://res.cloudinary.com/diez3alve/image/upload/v1736522849/detailed_gezp9o.webp"
+    srcSet="
+        https://res.cloudinary.com/diez3alve/image/upload/c_scale,w_768/v1736522849/detailed_gezp9o.webp 768w,
+        https://res.cloudinary.com/diez3alve/image/upload/c_scale,w_1280/v1736522849/detailed_gezp9o.webp 1280w
+    "
+    sizes="(max-width: 768px) 100vw, 50vw"
+    alt="Banner"
+    className="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+/>
+
                     {/* Overlay Content */}
                     <div className="relative z-10 text-center">
                         <h1 className="text-xl md:text-4xl font-bold my-4">Latest trending</h1>
