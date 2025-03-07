@@ -37,28 +37,32 @@ const HeaderDesktop = () => {
       setShowSuggestions(false);
       return;
     }
+    
+    const dibounce = setTimeout(() => {
+      const fetchSuggestions = async () => {
+        try {
+          const response = await axios.get('https://postgre-server.vercel.app/product');
+          const products = response.data.data;
+         
+          const suggestions = products
+            .filter((product) =>
+              product.productname.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+            .map((product) => product.productname);
+            
+          setFilteredSuggestions(suggestions);
+          setShowSuggestions(true);
+        } catch (error) {
+          console.error('Error fetching suggestions:', error);
+        }
+      };
+      fetchSuggestions();
+    }, 300);
 
-    const fetchSuggestions = async () => {
-      try {
-        const response = await axios.get('https://postgre-server.vercel.app/product');
-        const products = response.data.data;
-
-        const suggestions = products
-          .filter((product) =>
-            product.productname.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-          .map((product) => product.productname);
-
-        setFilteredSuggestions(suggestions);
-        setShowSuggestions(true);
-      } catch (error) {
-        console.error('Error fetching suggestions:', error);
-      }
-    };
-
-    fetchSuggestions();
+    return () => clearTimeout(dibounce)
   }, [searchQuery]);
 
+  
   // Handle input change
   const handleSearchInput = (e) => {
     setSearchQuery(e.target.value);
@@ -70,6 +74,7 @@ const HeaderDesktop = () => {
       setShowSuggestions(true);
     }
   };
+
 
   // Navigate to result when Enter is pressed
   const handleEnterPress = (e) => {
