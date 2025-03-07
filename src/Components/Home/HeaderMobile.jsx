@@ -53,36 +53,38 @@ const HeaderMobile = () => {
 
 
 
+useEffect(() => {
+  if (!searchQuery.trim()) {
+    setFilteredSuggestions([]);
+    setShowSuggestions(false);
+    return;
+  }
 
+const debounce = setTimeout(() => {
+  const fetchSuggestions = async () => {
+    try {
+      const response = await axios.get('https://postgre-server.vercel.app/product');
+      const products = response.data.data;
 
+      const suggestions = products
+        .filter((product) =>
+          product.productname.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .map((product) => product.productname);
 
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      setFilteredSuggestions([]);
-      setShowSuggestions(false);
-      return;
+      setFilteredSuggestions(suggestions);
+      setShowSuggestions(true);
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
     }
+  };
 
-    const fetchSuggestions = async () => {
-      try {
-        const response = await axios.get('https://postgre-server.vercel.app/product');
-        const products = response.data.data;
+  fetchSuggestions();
+}, 300);
 
-        const suggestions = products
-          .filter((product) =>
-            product.productname.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-          .map((product) => product.productname);
+return () => clearTimeout(debounce)
+}, [searchQuery]);
 
-        setFilteredSuggestions(suggestions);
-        setShowSuggestions(true);
-      } catch (error) {
-        console.error('Error fetching suggestions:', error);
-      }
-    };
-
-    fetchSuggestions();
-  }, [searchQuery]);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
