@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import MetricsDashboard from './MetricsCard';
 import Slider from './Slider';
 import FeaturesSection from './Delivery';
+import { useLocation } from 'react-router-dom';
 
 const About = () => {
+    
     return (
         <div className='max-w-7xl mx-auto pt-[11rem]'>
             <div className='flex flex-col lg:flex-row px-2 gap-10 items-center'>

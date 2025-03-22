@@ -11,7 +11,7 @@ const CategoryPage = ({ categories }) => {
     const [products, setProducts] = useState([]);
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
-
+    
 
 useEffect(() => {
   const fetchData = async () => {

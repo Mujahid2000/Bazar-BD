@@ -2,13 +2,13 @@ import React from 'react';
 import { Building, DollarSign, Gift, Wallet } from 'lucide-react';
 
 const MetricsCard = ({ icon: Icon, value, label, isHighlighted }) => (
-  <div className={`p-6 rounded-lg border ${isHighlighted ? 'bg-red-500 text-white' : 'bg-white'}`}>
+  <div className={`p-6 rounded-lg border ${isHighlighted ? 'bg-blue-500 text-white' : 'bg-white'}`}>
     <div className="flex flex-col items-center text-center space-y-2">
-      <div className={`p-3 rounded-full ${isHighlighted ? 'bg-red-400' : 'bg-gray-200'}`}>
+      <div className={`p-3 rounded-full ${isHighlighted ? 'bg-blue-400' : 'bg-gray-200'}`}>
         <Icon size={24} className={isHighlighted ? 'text-white' : 'text-gray-700'} />
       </div>
       <h2 className="text-2xl font-bold">{value}</h2>
-      <p className={`text-sm ${isHighlighted ? 'text-red-100' : 'text-gray-600'}`}>{label}</p>
+      <p className={`text-sm ${isHighlighted ? 'text-blue-100' : 'text-gray-600'}`}>{label}</p>
     </div>
   </div>
 );

@@ -37,6 +37,7 @@ import UserVerify from './Configs/VerifyToken';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import About from './Components/About/About';
 import ContactForm from './Components/ContactForm/ContactForm';
+import { ScrollProvider } from './Configs/ScrollTope';
 const queryClient = new QueryClient();
 
 
@@ -170,16 +171,18 @@ const router = createBrowserRouter([
 ]);
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-<QueryClientProvider client={queryClient}>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <UserVerify>
-        <React.StrictMode>
-          <div className='bg-[#ffffff]'>
-          <RouterProvider  router={router} />
-          </div>
-        </React.StrictMode>
+        <ScrollProvider> {/* Wrap everything inside ScrollProvider */}
+          <React.StrictMode>
+            <div className="bg-[#ffffff]">
+              <RouterProvider router={router} />
+            </div>
+          </React.StrictMode>
+        </ScrollProvider>
       </UserVerify>
     </AuthProvider>
   </QueryClientProvider>
-)
+);
